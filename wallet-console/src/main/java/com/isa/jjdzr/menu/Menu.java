@@ -17,7 +17,7 @@ public class Menu {
     public Menu() {
     }
 
-    public void chooseMenuOption() {
+    public void startMenu() {
         boolean keepWorking = true;
 
         System.out.println("Witamy w portfelu inwestycyjnym !!!");
