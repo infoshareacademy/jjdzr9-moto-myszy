@@ -1,13 +1,13 @@
 package com.isa.jjdzr;
 
-/**
- * Hello world!
- *
- */
-public class App 
+
+import com.isa.jjdzr.menu.Menu;
+
+public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Menu menu = new Menu();
+        menu.chooseMenuOption();
     }
 }
