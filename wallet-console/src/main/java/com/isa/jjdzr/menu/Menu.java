@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
-    private String[] options = {
+    private final String[] options = {
             "1. Utwórz użytkownika.",
             "2. Zaloguj",
             "3. Wczytaj portfel",
@@ -57,7 +57,7 @@ public class Menu {
         return num;
     }
 
-    public void printOption(int index) {
+    private void printOption(int index) {
         Scanner scan = new Scanner(System.in);
         System.out.println(options[index-1]);
         System.out.println("Funkcja w produkcji. Aby kontynuować naciśnij ENTER");
