@@ -6,11 +6,10 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class WalletAssets {
-    private String id;
-    private BigDecimal purchasePrice;
-    private BigDecimal purchasedQuantity;
-
-    private Assets asset;
+    private final String id;
+    private final BigDecimal purchasePrice;
+    private final BigDecimal purchasedQuantity;
+    private final Assets asset;
 
     public WalletAssets(Assets asset, double purchasedQuantity) {
         this.id = asset.getId();
