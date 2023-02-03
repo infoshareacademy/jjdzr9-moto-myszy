@@ -1,23 +1,26 @@
-package com.isa.jjdzr.walletAssets;
+package com.isa.jjdzr.wallet;
 
-import com.isa.jjdzr.assets.Assets;
+import com.isa.jjdzr.assets.Asset;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class WalletAssets {
+public class WalletAsset {
     private final String id;
     private final BigDecimal purchasePrice;
     private final BigDecimal purchasedQuantity;
-    private final Assets asset;
+    private final Asset asset;
 
-    public WalletAssets(Assets asset, double purchasedQuantity) {
+    public WalletAsset(Asset asset, double purchasedQuantity) {
         this.id = asset.getId();
         this.purchasePrice = BigDecimal.valueOf(asset.getCurrentPrice().doubleValue());
         this.purchasedQuantity = BigDecimal.valueOf(purchasedQuantity);
         this.asset = asset;
     }
 
+    public BigDecimal getCurrentValue() {
+        return asset.getCurrentPrice().multiply(purchasedQuantity);
+    }
     public String getId() {
         return id;
     }
@@ -30,7 +33,7 @@ public class WalletAssets {
         return purchasedQuantity;
     }
 
-    public Assets getAsset() {
+    public Asset getAsset() {
         return asset;
     }
 
@@ -38,12 +41,21 @@ public class WalletAssets {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WalletAssets that = (WalletAssets) o;
+        WalletAsset that = (WalletAsset) o;
         return id.equals(that.id) && purchasePrice.equals(that.purchasePrice) && asset.equals(that.asset);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, purchasePrice, asset);
+    }
+
+    @Override
+    public String toString() {
+        return "Nazwa: " + id +"\n"
+                + "Cena zakupu: " + purchasePrice + "\n"
+                + "Ilość: " + purchasedQuantity + "\n"
+                + "Aktualna cena: " + asset.getCurrentPrice() + "\n"
+                + "Aktualna wartość: " + getCurrentValue();
     }
 }

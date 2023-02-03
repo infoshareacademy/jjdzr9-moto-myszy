@@ -3,11 +3,11 @@ package com.isa.jjdzr.assets;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Assets {
+public class Asset {
     private String id;
     private BigDecimal currentPrice;
 
-    public Assets(String id, BigDecimal currentPrice) {
+    public Asset(String id, BigDecimal currentPrice) {
         this.id = id;
         this.currentPrice = currentPrice;
     }
@@ -32,12 +32,18 @@ public class Assets {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Assets assets = (Assets) o;
-        return id.equals(assets.id) && currentPrice.equals(assets.currentPrice);
+        Asset asset = (Asset) o;
+        return id.equals(asset.id) && currentPrice.equals(asset.currentPrice);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, currentPrice);
+    }
+
+    @Override
+    public String toString() {
+        return "Nazwa: " + id +"\n"
+                + "Aktualna cena: " + currentPrice;
     }
 }
