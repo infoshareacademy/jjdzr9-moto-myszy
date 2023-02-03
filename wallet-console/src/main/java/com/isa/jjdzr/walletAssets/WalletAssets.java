@@ -8,11 +8,14 @@ import java.util.Objects;
 public class WalletAssets {
     private String id;
     private BigDecimal purchasePrice;
+    private BigDecimal purchasedQuantity;
+
     private Assets asset;
 
-    public WalletAssets(Assets asset) {
+    public WalletAssets(Assets asset, double purchasedQuantity) {
         this.id = asset.getId();
         this.purchasePrice = BigDecimal.valueOf(asset.getCurrentPrice().doubleValue());
+        this.purchasedQuantity = BigDecimal.valueOf(purchasedQuantity);
         this.asset = asset;
     }
 
@@ -20,24 +23,16 @@ public class WalletAssets {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public BigDecimal getPurchasePrice() {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(BigDecimal purchasePrice) {
-        this.purchasePrice = purchasePrice;
+    public BigDecimal getPurchasedQuantity() {
+        return purchasedQuantity;
     }
 
     public Assets getAsset() {
         return asset;
-    }
-
-    public void setAsset(Assets asset) {
-        this.asset = asset;
     }
 
     @Override
