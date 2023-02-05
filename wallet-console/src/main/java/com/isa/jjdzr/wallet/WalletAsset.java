@@ -3,6 +3,7 @@ package com.isa.jjdzr.wallet;
 import com.isa.jjdzr.assets.Asset;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class WalletAsset {
@@ -11,10 +12,10 @@ public class WalletAsset {
     private final BigDecimal purchasedQuantity;
     private final Asset asset;
 
-    public WalletAsset(Asset asset, double purchasedQuantity) {
+    public WalletAsset(Asset asset, BigDecimal purchasedQuantity) {
         this.id = asset.getId();
-        this.purchasePrice = BigDecimal.valueOf(asset.getCurrentPrice().doubleValue());
-        this.purchasedQuantity = BigDecimal.valueOf(purchasedQuantity);
+        this.purchasePrice = new BigDecimal(String.valueOf(asset.getCurrentPrice()));
+        this.purchasedQuantity = purchasedQuantity.setScale(2, RoundingMode.HALF_EVEN);
         this.asset = asset;
     }
 
