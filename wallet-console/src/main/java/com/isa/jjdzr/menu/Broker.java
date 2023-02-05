@@ -1,5 +1,9 @@
 package com.isa.jjdzr.menu;
 
+import com.isa.jjdzr.assets.Asset;
+import com.isa.jjdzr.assets.AssetsList;
+import com.isa.jjdzr.wallet.Wallet;
+
 import java.util.ArrayList;
 
 public class Broker {
@@ -12,19 +16,20 @@ public class Broker {
 
     }
 
-    private int getAssetToBuy() {
+    private int getAssetIndex(AssetsList assetsList) {
         //ma pobierać od usera jaki aktyw chcemy kupić
+        //walidacja !
         return 0;
     }
 
-    private String getQuantityToBuy() {
+    private String getQuantityToBuy(Wallet wallet) {
         // ma pobierać ile chcemy go kupić
         // sprawdza czy wprowadzone dane mają tylko 0-9 i .
         // sprawdzic czy wystarczy nam kasy na zakup
         return "";
     }
 
-    private boolean checkCash(){
+    private boolean checkCash(Wallet wallet){
         //sprawdza czy wystarczy nam pieniedzy na zakup
         return true;
     }
@@ -37,19 +42,19 @@ public class Broker {
         //dodaje gotówkę (ilość sprzedana * aktualna cena)
     }
 
-    private int getAssetToSell() {
+    private int getWalletAssetIndex(Wallet wallet) {
         //ma pobierać od usera jaki aktyw chcemy sprzedać
         return 0;
     }
 
-    private String getQuantityToSell() {
+    private String getQuantityToSell(Wallet wallet, int index) {
         // ma pobierać ile chcemy go sprzedać
         // sprawdza czy wprowadzone dane mają tylko 0-9 i .
         //sprawdzić czy mamy taką ilość w Wallet
         return "";
     }
 
-    private boolean checkQuantity() {
+    private boolean checkQuantity(Wallet wallet, int index, String quantity) {
         //sprawdzić czy mamy taką ilość w Wallet
         return false;
     }
@@ -58,11 +63,4 @@ public class Broker {
         // sprawdza czy wprowadzone dane mają tylko 0-9 i .
         return false;
     }
-
-    private void showAssets(ArrayList assetList){
-        //pokazuje assety na podstawie zadaniej listy
-        //potrzebna metoda drukująca aktywa
-
-    }
-
 }
