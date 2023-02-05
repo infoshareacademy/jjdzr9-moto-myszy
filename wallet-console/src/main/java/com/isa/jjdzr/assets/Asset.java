@@ -7,9 +7,9 @@ public class Asset {
     private String id;
     private BigDecimal currentPrice;
 
-    public Asset(String id, BigDecimal currentPrice) {
+    public Asset(String id, String currentPrice) {
         this.id = id;
-        this.currentPrice = currentPrice;
+        this.currentPrice = new BigDecimal(currentPrice);
     }
 
     public String getId() {
@@ -41,9 +41,5 @@ public class Asset {
         return Objects.hash(id, currentPrice);
     }
 
-    @Override
-    public String toString() {
-        return "Nazwa: " + id +"\n"
-                + "Aktualna cena: " + currentPrice;
-    }
+
 }

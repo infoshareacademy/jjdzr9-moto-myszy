@@ -7,23 +7,19 @@ import java.math.RoundingMode;
 import java.util.Objects;
 
 public class WalletAsset {
-    private final String id;
+
     private final BigDecimal purchasePrice;
     private final BigDecimal purchasedQuantity;
     private final Asset asset;
 
-    public WalletAsset(Asset asset, BigDecimal purchasedQuantity) {
-        this.id = asset.getId();
+    public WalletAsset(Asset asset, String purchasedQuantity) {
         this.purchasePrice = new BigDecimal(String.valueOf(asset.getCurrentPrice()));
-        this.purchasedQuantity = purchasedQuantity.setScale(2, RoundingMode.HALF_EVEN);
+        this.purchasedQuantity = new BigDecimal(purchasedQuantity);
         this.asset = asset;
     }
 
     public BigDecimal getCurrentValue() {
         return asset.getCurrentPrice().multiply(purchasedQuantity);
-    }
-    public String getId() {
-        return id;
     }
 
     public BigDecimal getPurchasePrice() {
@@ -43,20 +39,12 @@ public class WalletAsset {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WalletAsset that = (WalletAsset) o;
-        return id.equals(that.id) && purchasePrice.equals(that.purchasePrice) && asset.equals(that.asset);
+        return purchasePrice.equals(that.purchasePrice) && purchasedQuantity.equals(that.purchasedQuantity) && asset.equals(that.asset);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, purchasePrice, asset);
+        return Objects.hash(purchasePrice, purchasedQuantity, asset);
     }
 
-    @Override
-    public String toString() {
-        return "Nazwa: " + id +"\n"
-                + "Cena zakupu: " + purchasePrice + "\n"
-                + "Ilość: " + purchasedQuantity + "\n"
-                + "Aktualna cena: " + asset.getCurrentPrice() + "\n"
-                + "Aktualna wartość: " + getCurrentValue();
-    }
 }
