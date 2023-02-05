@@ -1,9 +1,7 @@
-package com.isa.jjdzr.buyAndSell;
+package com.isa.jjdzr.brokerLogic;
 
 import com.isa.jjdzr.assets.Asset;
 import com.isa.jjdzr.wallet.Wallet;
-
-import java.math.BigDecimal;
 
 public class BrokerLogicBuy {
 
