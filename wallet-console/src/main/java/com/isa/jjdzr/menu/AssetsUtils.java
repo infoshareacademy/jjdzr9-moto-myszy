@@ -14,7 +14,7 @@ public class AssetsUtils {
 
     }
 
-    public void printAssetList(ArrayList<Asset> assetList) {
+    public void printAssetToBuyList(ArrayList<Asset> assetList) {
 
     }
 

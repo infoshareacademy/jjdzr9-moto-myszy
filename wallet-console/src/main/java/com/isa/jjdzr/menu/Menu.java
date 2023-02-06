@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Menu {
     private final String[] options = {
             "1. Utwórz portfel.",
-            "2. Wczytaj portfel",
+            "2. Wczytaj/Zapisz portfel",
             "3. Wyświetl portfel",
             "4. Dokonaj zakupu",
             "5. Dokonaj sprzedaży",
