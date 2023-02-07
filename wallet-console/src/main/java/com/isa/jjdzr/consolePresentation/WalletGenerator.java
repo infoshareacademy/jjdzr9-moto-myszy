@@ -20,7 +20,7 @@ class WalletGenerator {
         System.out.println("Podaj jaką kwotą chcesz zasilić portfel: ");
         cash = scan.nextLine();
         while (isInvalid(cash)) {
-            System.out.println("Nieprawidłowa wartość. Podaj kwotę: ");
+            System.err.println("Nieprawidłowa wartość. Podaj kwotę: ");
             cash = scan.nextLine();
         }
         System.out.println("Portfel zasilony kwotą: " + cash);
