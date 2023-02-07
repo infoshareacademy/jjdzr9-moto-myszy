@@ -19,9 +19,11 @@ class WalletGenerator {
         String cash;
         System.out.println("Podaj jaką kwotą chcesz zasilić portfel: ");
         cash = scan.nextLine();
+        cash = replaceComma(cash);
         while (isInvalid(cash)) {
             System.err.println("Nieprawidłowa wartość. Podaj kwotę: ");
             cash = scan.nextLine();
+            cash = replaceComma(cash);
         }
         System.out.println("Portfel zasilony kwotą: " + cash);
         System.out.println("Powrót do menu głównego.");
@@ -30,7 +32,15 @@ class WalletGenerator {
     }
 
     private boolean isInvalid(String str) {
+        int countDots = (int) str.chars().filter(ch -> ch == '.').count();
+        if (countDots > 1) {
+            return false;
+        }
         String validSymbols = "[0-9.]*";
         return !Pattern.matches(validSymbols, str);
+    }
+
+    private String replaceComma(String str){
+        return str.replace(',','.');
     }
 }
