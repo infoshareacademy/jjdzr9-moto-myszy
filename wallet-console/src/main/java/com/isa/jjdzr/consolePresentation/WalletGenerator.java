@@ -34,10 +34,17 @@ class WalletGenerator {
     private boolean isInvalid(String str) {
         int countDots = (int) str.chars().filter(ch -> ch == '.').count();
         if (countDots > 1) {
-            return false;
+            return true;
+        } else if (str.length() > 20) {
+            System.err.println("Zbyt duża kwota!");
+            return true;
+        } else if (str.charAt(0) == ('0')) {
+            System.err.println("Kwota nie może zaczynać się od 0!");
+            return true;
+        } else {
+            String validSymbols = "[0-9.]*";
+            return !Pattern.matches(validSymbols, str);
         }
-        String validSymbols = "[0-9.]*";
-        return !Pattern.matches(validSymbols, str);
     }
 
     private String replaceComma(String str){

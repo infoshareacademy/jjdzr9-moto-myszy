@@ -8,32 +8,30 @@ import java.util.regex.Pattern;
 public class WalletGenView {
     public Wallet start(Wallet wallet) {
         System.out.println("Witam w generatorze portfela inwestycyjnego.");
-        printDoYouWantToContinue();
-        if (nazwaFunkcji()) {
+        if (doYouWantToContinue()) {
             printDontCreateMessage();
-            return wallet;
         } else {
             if (wallet != null) {
                 System.out.println("Portfel nie jest pusty. Utworzenie nowego spowoduje utratę niezapisanych zmian.");
-                printDoYouWantToContinue();
-                if (nazwaFunkcji()) {
+                if (doYouWantToContinue()) {
                     printDontCreateMessage();
                     return wallet;
                 }
             }
             wallet = new WalletGenerator().generateWallet();
-            return wallet;
         }
+        return wallet;
     }
 
-    private boolean nazwaFunkcji() { //sprawdza czy chcesz kontynuowac i jesli tak to wywala flase
+    private boolean doYouWantToContinue() { //sprawdza czy chcesz kontynuowac i jesli tak to wywala false
         Scanner scan = new Scanner(System.in);
+        System.out.println("Czy chcesz kontynuować [T/N]?");
         String decision = scan.nextLine();
         while (isInvalid(decision)) {
             System.err.println("Zła wartość, podaj T lub N:");
             decision = scan.nextLine();
         }
-        return !decision.equals("T");
+        return !decision.equalsIgnoreCase("T");
     }
 
     private boolean isInvalid(String str) {
@@ -46,7 +44,5 @@ public class WalletGenView {
         System.out.println("Powrót do menu głównego");
     }
 
-    private void printDoYouWantToContinue() {
-        System.out.println("Czy chcesz kontynuować [T/N]?");
-    }
+
 }
