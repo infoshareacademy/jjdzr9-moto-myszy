@@ -1,22 +1,15 @@
-package com.isa.jjdzr.menu;
+package com.isa.jjdzr.consolePresentation;
 
-import com.isa.jjdzr.assets.Asset;
-import com.isa.jjdzr.assets.AssetsList;
-import com.isa.jjdzr.wallet.Wallet;
+import com.isa.jjdzr.assets.Market;
+import com.isa.jjdzr.dto.Wallet;
 
-import java.util.ArrayList;
-
-public class Broker {
+class Broker {
     public void buy() {
-        // ma pobierać jaki aktyw chcemy kupić
-        // ma pobierać ile chcemy go kupić
-        // sprawdzic czy wystarczy nam kasy na zakup
-        // na podstawie tych danych tworzy nowy obiekt WalletAsset
-        // dodaje ten obiekt do Wallet
+
 
     }
 
-    private int getAssetIndex(AssetsList assetsList) {
+    private int getAssetIndex(Market market) {
         //ma pobierać od usera jaki aktyw chcemy kupić
         //walidacja !
         return 0;

@@ -1,8 +1,8 @@
-package com.isa.jjdzr.menu;
+package com.isa.jjdzr.consolePresentation;
 
-import com.isa.jjdzr.wallet.Wallet;
+import com.isa.jjdzr.dto.Wallet;
 
-public class WalletViewer {
+class WalletViewer {
     private final String[] options = {
             "1. Wyświetl listę posiadanych aktyw",
             "2. Wyświetl wybrane aktywa",

@@ -1,15 +1,13 @@
 package com.isa.jjdzr.brokerLogic;
 
-import com.isa.jjdzr.assets.Asset;
-import com.isa.jjdzr.assets.AssetsList;
-import com.isa.jjdzr.wallet.Wallet;
-
-import java.util.ArrayList;
+import com.isa.jjdzr.dto.Asset;
+import com.isa.jjdzr.assets.Market;
+import com.isa.jjdzr.dto.Wallet;
 
 public class BrokerLogicBuy {
 
-    private Asset getAssetToBuy(AssetsList assetsList, int index) {
-        //ma pobierać od usera jaki aktyw chcemy kupić
+    private Asset getAssetToBuy(Market market, int index) {
+
         return new Asset("a", "0");
     }
     public void createWalletAsset(Wallet wallet, Asset asset, String quantity) {

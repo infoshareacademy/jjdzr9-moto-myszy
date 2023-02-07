@@ -1,11 +1,11 @@
-package com.isa.jjdzr.menu;
+package com.isa.jjdzr.consolePresentation;
 
-import com.isa.jjdzr.assets.Asset;
-import com.isa.jjdzr.wallet.WalletAsset;
+import com.isa.jjdzr.dto.Asset;
+import com.isa.jjdzr.dto.WalletAsset;
 
 import java.util.ArrayList;
 
-public class AssetsUtils {
+class AssetsViewer {
     public void printAsset(Asset asset){
 
     }

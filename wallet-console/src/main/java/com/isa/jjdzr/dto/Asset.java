@@ -1,4 +1,4 @@
-package com.isa.jjdzr.assets;
+package com.isa.jjdzr.dto;
 
 import java.math.BigDecimal;
 import java.util.Objects;

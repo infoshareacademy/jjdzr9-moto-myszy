@@ -1,4 +1,4 @@
-package com.isa.jjdzr.menu;
+package com.isa.jjdzr.consolePresentation;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -50,7 +50,7 @@ public class Menu {
             try {
                 num = scan.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Zła wartość, spróbuj ponownie: ");
+                System.err.println("Zła wartość, spróbuj ponownie: ");
                 scan.next();
             }
         }

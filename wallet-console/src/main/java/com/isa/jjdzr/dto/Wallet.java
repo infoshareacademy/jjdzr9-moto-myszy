@@ -1,10 +1,11 @@
-package com.isa.jjdzr.wallet;
+package com.isa.jjdzr.dto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Wallet {
-    private ArrayList<WalletAsset> wallet;
+    private List<WalletAsset> wallet;
     private BigDecimal cash;
 
     public Wallet() {
@@ -28,7 +29,7 @@ public class Wallet {
         this.cash = this.cash.subtract(cash);
     }
 
-    public ArrayList<WalletAsset> getWallet() {
+    public List<WalletAsset> getWallet() {
         return wallet;
     }
 

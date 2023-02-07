@@ -1,6 +1,6 @@
 package com.isa.jjdzr.brokerLogic;
 
-import com.isa.jjdzr.wallet.Wallet;
+import com.isa.jjdzr.dto.Wallet;
 
 public class BrokerLogicSell {
 
