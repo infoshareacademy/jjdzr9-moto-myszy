@@ -1,7 +1,7 @@
 package com.isa.jjdzr.brokerLogic;
 
 import com.isa.jjdzr.dto.Asset;
-import com.isa.jjdzr.assets.Market;
+import com.isa.jjdzr.market.Market;
 import com.isa.jjdzr.dto.Wallet;
 
 public class BrokerLogicBuy {

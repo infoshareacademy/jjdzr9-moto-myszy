@@ -1,4 +1,4 @@
-package com.isa.jjdzr.assets;
+package com.isa.jjdzr.market;
 
 import com.isa.jjdzr.dto.Asset;
 
@@ -15,8 +15,9 @@ public class Market {
     public List<Asset> availableAssets(){
         return repository.retrieveAssets();
     }
-//metoda generująca listę assetow z narzuconej tablicy nazw i dodajace losowe ceny z zakresu
-    //metoda aktualizująca ceny o +/- 5% (z wykorzystaniem randoma)
+
+
+
 
 
 }

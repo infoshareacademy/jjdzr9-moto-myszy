@@ -3,7 +3,7 @@ package com.isa.jjdzr.consolePresentation;
 import com.isa.jjdzr.dto.Wallet;
 
 class WalletViewer {
-    private final String[] options = {
+    private final String[] options = { //Maciek
             "1. Wyświetl listę posiadanych aktyw",
             "2. Wyświetl wybrane aktywa",
             "3. Wyświetl wszystkie aktywa",

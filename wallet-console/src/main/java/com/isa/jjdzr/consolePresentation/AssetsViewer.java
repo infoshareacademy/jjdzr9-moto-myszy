@@ -5,7 +5,7 @@ import com.isa.jjdzr.dto.WalletAsset;
 
 import java.util.ArrayList;
 
-class AssetsViewer {
+class AssetsViewer { //Andrzej
     public void printAsset(Asset asset){
 
     }

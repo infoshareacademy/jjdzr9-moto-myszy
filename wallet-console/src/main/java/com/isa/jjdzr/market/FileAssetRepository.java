@@ -1,4 +1,4 @@
-package com.isa.jjdzr.assets;
+package com.isa.jjdzr.market;
 
 import com.isa.jjdzr.dto.Asset;
 
