@@ -23,6 +23,8 @@ class WalletGenerator {
             System.out.println("Nieprawidłowa wartość. Podaj kwotę: ");
             cash = scan.nextLine();
         }
+        System.out.println("Portfel zasilony kwotą: " + cash);
+        System.out.println("Powrót do menu głównego.");
 
         return cash;
     }

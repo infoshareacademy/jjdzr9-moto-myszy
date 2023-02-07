@@ -1,5 +1,7 @@
 package com.isa.jjdzr.consolePresentation;
 
+import com.isa.jjdzr.dto.Wallet;
+
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -19,6 +21,7 @@ public class Menu {
 
     public void startMenu() {
         boolean keepWorking = true;
+        Wallet wallet = null;
 
         System.out.println("Witamy w portfelu inwestycyjnym !!!");
 
@@ -27,7 +30,8 @@ public class Menu {
             printMenuOptions();
             int option = getOptionNumber();
             switch(option) {
-                case 1,2,3,4,5: printOption(option); break;
+                case 1: wallet = new WalletGenView().start(wallet); break;
+                case 2,3,4,5: printOption(option); break;
                 case 6: keepWorking = false; break;
                 default:
                     System.out.println("Nie ma takiej opcji.");
