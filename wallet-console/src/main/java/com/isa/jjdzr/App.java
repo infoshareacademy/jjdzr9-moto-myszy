@@ -1,6 +1,6 @@
 package com.isa.jjdzr;
 
-import com.isa.jjdzr.consolePresentation.Menu;
+import com.isa.jjdzr.consolepresentation.Menu;
 
 public class App
 {

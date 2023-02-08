@@ -1,4 +1,4 @@
-package com.isa.jjdzr.consolePresentation;
+package com.isa.jjdzr.consolepresentation;
 
 import com.isa.jjdzr.market.Market;
 import com.isa.jjdzr.dto.Wallet;

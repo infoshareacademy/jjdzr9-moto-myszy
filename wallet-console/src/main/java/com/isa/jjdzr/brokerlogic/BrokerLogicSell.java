@@ -1,4 +1,4 @@
-package com.isa.jjdzr.brokerLogic;
+package com.isa.jjdzr.brokerlogic;
 
 import com.isa.jjdzr.dto.Wallet;
 
