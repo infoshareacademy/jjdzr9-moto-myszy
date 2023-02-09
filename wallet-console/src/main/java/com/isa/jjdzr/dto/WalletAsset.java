@@ -16,6 +16,12 @@ public class WalletAsset {
 
     }
 
+    public WalletAsset(String id, BigDecimal purchasePrice, BigDecimal purchasedQuantity) {
+        this.id = id;
+        this.purchasePrice = purchasePrice;
+        this.purchasedQuantity = purchasedQuantity;
+    }
+
     public String getId() {
         return id;
     }

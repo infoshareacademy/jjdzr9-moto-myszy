@@ -1,6 +1,7 @@
 package com.isa.jjdzr;
 
 import com.isa.jjdzr.consolepresentation.Menu;
+import com.isa.jjdzr.datareadandwrite.WalletLoader;
 import com.isa.jjdzr.datareadandwrite.WalletSaver;
 import com.isa.jjdzr.dto.Asset;
 import com.isa.jjdzr.dto.Wallet;
@@ -22,7 +23,7 @@ public class App
         wallet.addAsset(ws3);
         wallet.addCash("10000");
         new WalletSaver().saveWallet(wallet);
-
+        Wallet wallet2 = new WalletLoader().loadWallet();
         //new Menu().startMenu();
     }
 }
