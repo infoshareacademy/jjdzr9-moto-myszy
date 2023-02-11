@@ -36,18 +36,6 @@ public class WalletAsset {
         return purchasedQuantity;
     }
 
-//    public void setId(String id) {
-//        this.id = id;
-//    }
-//
-//    public void setPurchasePrice(BigDecimal purchasePrice) {
-//        this.purchasePrice = purchasePrice;
-//    }
-//
-//    public void setPurchasedQuantity(BigDecimal purchasedQuantity) {
-//        this.purchasedQuantity = purchasedQuantity;
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
