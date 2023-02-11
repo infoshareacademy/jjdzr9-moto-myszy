@@ -1,5 +1,7 @@
 package com.isa.jjdzr.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -8,18 +10,18 @@ public class WalletAsset {
     private final BigDecimal purchasePrice;
     private final BigDecimal purchasedQuantity;
 
+    @JsonCreator
+    public WalletAsset() {
+        this.id = "id";
+        this.purchasePrice = new BigDecimal("0");
+        this.purchasedQuantity = new BigDecimal("0");
+    }
 
     public WalletAsset(Asset asset, String purchasedQuantity) {
         this.id = asset.getId();
         this.purchasePrice = new BigDecimal(String.valueOf(asset.getCurrentPrice()));
         this.purchasedQuantity = new BigDecimal(purchasedQuantity);
 
-    }
-
-    public WalletAsset(String id, BigDecimal purchasePrice, BigDecimal purchasedQuantity) {
-        this.id = id;
-        this.purchasePrice = purchasePrice;
-        this.purchasedQuantity = purchasedQuantity;
     }
 
     public String getId() {
@@ -33,6 +35,18 @@ public class WalletAsset {
     public BigDecimal getPurchasedQuantity() {
         return purchasedQuantity;
     }
+
+//    public void setId(String id) {
+//        this.id = id;
+//    }
+//
+//    public void setPurchasePrice(BigDecimal purchasePrice) {
+//        this.purchasePrice = purchasePrice;
+//    }
+//
+//    public void setPurchasedQuantity(BigDecimal purchasedQuantity) {
+//        this.purchasedQuantity = purchasedQuantity;
+//    }
 
     @Override
     public boolean equals(Object o) {
