@@ -13,9 +13,9 @@ public class WalletLoader {
     public Wallet loadWallet(){
 
         ObjectMapper objectMapper = new ObjectMapper();
-        WalletAsset[] wa;
+        Wallet wallet;
 
-        Path path = Path.of("src","main","resources", "walletassets.txt");
+        Path path = Path.of("src","main","resources", "wallet.txt");
         String s = null;
         try {
             s = Files.readString(path);
@@ -23,32 +23,10 @@ public class WalletLoader {
             throw new RuntimeException(e);
         }
         try {
-            wa = objectMapper.readValue(s, WalletAsset[].class);
+            wallet = objectMapper.readValue(s, Wallet.class);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-
-        String cash = new String();
-        Path path2 = Path.of("src","main","resources", "cash.txt");
-        String s2 = null;
-        try {
-            s2 = Files.readString(path2);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            cash = objectMapper.readValue(s2, String.class);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-        Wallet wallet = new Wallet();
-
-        for (WalletAsset w : wa) {
-            wallet.addAsset(w);
-        }
-        wallet.addCash(cash);
-
 
     return wallet;
 

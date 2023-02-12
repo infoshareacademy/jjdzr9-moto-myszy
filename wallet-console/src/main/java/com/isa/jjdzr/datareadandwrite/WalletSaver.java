@@ -15,36 +15,17 @@ public class WalletSaver {
     public void saveWallet(Wallet wallet)  {
         ObjectMapper objectMapper = new ObjectMapper();
         String s = null;
-        WalletAsset[] wa = new WalletAsset[wallet.getWallet().size()];
-        for (int i = 0; i < wallet.getWallet().size(); i++) {
-            wa[i] = wallet.getWallet().get(i);
-        }
         try {
             s = objectMapper
                     .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(wa);
+                    .writeValueAsString(wallet);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
 
-        Path path = Path.of("src", "main", "resources", "walletassets.txt");
+        Path path = Path.of("src", "main", "resources", "wallet.txt");
         try {
             Files.writeString(path, s);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            s = objectMapper
-                    .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(wallet.getCash());
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-        Path pathb = Path.of("src", "main", "resources", "cash.txt");
-        try {
-            Files.writeString(pathb, s);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
