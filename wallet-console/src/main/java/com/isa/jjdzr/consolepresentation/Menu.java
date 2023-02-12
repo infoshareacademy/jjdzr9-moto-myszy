@@ -1,5 +1,6 @@
 package com.isa.jjdzr.consolepresentation;
 
+import com.isa.jjdzr.datareadandwrite.WalletLoader;
 import com.isa.jjdzr.dto.Wallet;
 
 import java.util.Arrays;
@@ -9,11 +10,12 @@ import java.util.Scanner;
 public class Menu {
     private final String[] options = {
             "1. Utwórz portfel.",
-            "2. Wczytaj/Zapisz portfel",
-            "3. Wyświetl portfel",
-            "4. Dokonaj zakupu",
-            "5. Dokonaj sprzedaży",
-            "6. Zakończ"
+            "2. Wczytaj portfel",
+            "3. Zapisz portfel",
+            "4. Wyświetl portfel",
+            "5. Dokonaj zakupu",
+            "6. Dokonaj sprzedaży",
+            "7. Zakończ"
     };
 
     public Menu() {
@@ -31,8 +33,10 @@ public class Menu {
             int option = getOptionNumber();
             switch(option) {
                 case 1: wallet = new WalletGenView().start(wallet); break;
-                case 2,3,4,5: printOption(option); break;
-                case 6: keepWorking = false; break;
+                case 2: wallet = new LoadViewer().load(); break;
+                case 3: new SaveViewer().save(wallet); break;
+                case 4,5,6: printOption(option); break;
+                case 7: keepWorking = false; break;
                 default:
                     System.out.println("Nie ma takiej opcji.");
             }
@@ -41,9 +45,7 @@ public class Menu {
     }
 
     private void printMenuOptions() {
-        Arrays.asList(options).forEach(option -> {
-            System.out.println(option);
-        });
+        Arrays.asList(options).forEach(System.out::println);
     }
 
     private int getOptionNumber() {
@@ -66,6 +68,10 @@ public class Menu {
         System.out.println(options[index-1]);
         System.out.println("Funkcja w produkcji. Aby kontynuować naciśnij ENTER");
         scan.nextLine();
+    }
+
+    private boolean isWalletNull(Wallet wallet) {
+        return wallet == null;
     }
 
 }
