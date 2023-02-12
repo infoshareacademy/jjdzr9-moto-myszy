@@ -1,6 +1,7 @@
 package com.isa.jjdzr.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.isa.jjdzr.market.Market;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -23,7 +24,9 @@ public class WalletAsset {
         this.purchasedQuantity = new BigDecimal(purchasedQuantity);
 
     }
-
+    public BigDecimal getCurrentPrice(Market market) {
+        return null;
+    }
     public String getId() {
         return id;
     }
@@ -35,6 +38,7 @@ public class WalletAsset {
     public BigDecimal getPurchasedQuantity() {
         return purchasedQuantity;
     }
+
 
     @Override
     public boolean equals(Object o) {
