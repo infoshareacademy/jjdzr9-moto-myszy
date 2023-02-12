@@ -11,7 +11,7 @@ import java.nio.file.Path;
 
 public class WalletLoader {
     public Wallet loadWallet(){
-        //zrobic loader wczytujacy tablice wallet assetow i kasy, a potem robiacy z tego nowy wallet
+
         ObjectMapper objectMapper = new ObjectMapper();
         WalletAsset[] wa;
 
@@ -22,7 +22,6 @@ public class WalletLoader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(s);
         try {
             wa = objectMapper.readValue(s, WalletAsset[].class);
         } catch (JsonProcessingException e) {
@@ -37,7 +36,6 @@ public class WalletLoader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(s);
         try {
             cash = objectMapper.readValue(s2, String.class);
         } catch (JsonProcessingException e) {

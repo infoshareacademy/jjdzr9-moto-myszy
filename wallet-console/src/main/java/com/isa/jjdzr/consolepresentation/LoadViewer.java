@@ -10,16 +10,17 @@ class LoadViewer {
     public Wallet load() {
         Scanner scan = new Scanner(System.in);
         Wallet wallet = null;
-        System.out.println("Czy chcesz wczytać swój portfel [T/N] ?");
+        System.out.println("Za chwilę nastąpi wczytanie portfela.");
         if (doYouWantToContinue()) {
             wallet = new WalletLoader().loadWallet();
+            System.out.println("Wczytanie zakończone sukcesem.");
         }
         System.out.println("Aby powrócić do menu głównego naciśnij ENTER: ");
-        scan.next();
+        scan.nextLine();
         return wallet;
     }
 
-    private boolean doYouWantToContinue() { //sprawdza czy chcesz kontynuowac i jesli tak to wywala false
+    private boolean doYouWantToContinue() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Czy chcesz kontynuować [T/N]?");
         String decision = scan.nextLine();
@@ -27,7 +28,7 @@ class LoadViewer {
             System.err.println("Zła wartość, podaj T lub N:");
             decision = scan.nextLine();
         }
-        return !decision.equalsIgnoreCase("T");
+        return decision.equalsIgnoreCase("T");
     }
 
     private boolean isInvalid(String str) {

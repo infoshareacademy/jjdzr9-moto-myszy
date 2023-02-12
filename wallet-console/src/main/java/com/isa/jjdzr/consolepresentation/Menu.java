@@ -1,6 +1,5 @@
 package com.isa.jjdzr.consolepresentation;
 
-import com.isa.jjdzr.datareadandwrite.WalletLoader;
 import com.isa.jjdzr.dto.Wallet;
 
 import java.util.Arrays;

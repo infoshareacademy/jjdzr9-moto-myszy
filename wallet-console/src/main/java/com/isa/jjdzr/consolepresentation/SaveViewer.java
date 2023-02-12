@@ -9,15 +9,16 @@ import java.util.regex.Pattern;
 class SaveViewer {
     public void save(Wallet wallet) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Czy chcesz zapisać swój portfel [T/N] ?");
+        System.out.println("Za chwilę nastąpi zapis portfela do pliku.");
         if (doYouWantToContinue()) {
             new WalletSaver().saveWallet(wallet);
+            System.out.println("Zapis zakończony sukcesem.");
         }
         System.out.println("Aby powrócić do menu głównego naciśnij ENTER: ");
         scan.next();
     }
 
-    private boolean doYouWantToContinue() { //sprawdza czy chcesz kontynuowac i jesli tak to wywala false
+    private boolean doYouWantToContinue() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Czy chcesz kontynuować [T/N]?");
         String decision = scan.nextLine();
@@ -25,7 +26,7 @@ class SaveViewer {
             System.err.println("Zła wartość, podaj T lub N:");
             decision = scan.nextLine();
         }
-        return !decision.equalsIgnoreCase("T");
+        return decision.equalsIgnoreCase("T");
     }
 
     private boolean isInvalid(String str) {

@@ -11,7 +11,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        Wallet wallet = new Wallet();
+/*        Wallet wallet = new Wallet();
         Asset ass1 = new Asset("ass1", "200");
         Asset ass2 = new Asset("ass2", "120");
         Asset ass3 = new Asset("ass3", "212");
@@ -23,7 +23,7 @@ public class App
         wallet.addAsset(ws3);
         wallet.addCash("10000");
         new WalletSaver().saveWallet(wallet);
-        Wallet wallet2 = new WalletLoader().loadWallet();
-        //new Menu().startMenu();
+        Wallet wallet2 = new WalletLoader().loadWallet();*/
+        new Menu().startMenu();
     }
 }
