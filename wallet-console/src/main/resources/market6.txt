@@ -1,0 +1,16 @@
+[ {
+  "id" : "CD Projekt",
+  "currentPrice" : 143.56
+}, {
+  "id" : "JSW",
+  "currentPrice" : 50.12
+}, {
+  "id" : "Coca-Cola",
+  "currentPrice" : 259.43
+}, {
+  "id" : "KGHM",
+  "currentPrice" : 143.42
+}, {
+  "id" : "ING",
+  "currentPrice" : 143.41
+} ]

@@ -7,6 +7,9 @@ public class Asset {
     private String id;
     private BigDecimal currentPrice;
 
+    public Asset() {
+    }
+
     public Asset(String id, String currentPrice) {
         this.id = id;
         this.currentPrice = new BigDecimal(currentPrice);

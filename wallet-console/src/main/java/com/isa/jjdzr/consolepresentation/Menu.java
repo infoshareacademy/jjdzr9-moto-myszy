@@ -1,6 +1,7 @@
 package com.isa.jjdzr.consolepresentation;
 
 import com.isa.jjdzr.dto.Wallet;
+import com.isa.jjdzr.market.Market;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -23,6 +24,7 @@ public class Menu {
     public void startMenu() {
         boolean keepWorking = true;
         Wallet wallet = null;
+        Market market = new Market();
 
         System.out.println("Witamy w portfelu inwestycyjnym !!!");
 
