@@ -63,12 +63,13 @@ class WalletViewer {
         Scanner scan = new Scanner(System.in);
         int index = -1;
         System.out.println("Który aktyw chcesz zobaczyć ?");
-        System.out.println("Podaj wartość od 1 do " + wallet.getWallet().size());
+
         while (checkWAIndex(wallet, index)) {
             try {
+                System.out.println("Podaj wartość od 1 do " + wallet.getWallet().size());
                 index = scan.nextInt();
             } catch (InputMismatchException e) {
-                System.err.println("Zła wartość, spróbuj ponownie: ");
+                System.err.println("Zła wartość, spróbuj ponownie.");
                 scan.next();
             }
         }
