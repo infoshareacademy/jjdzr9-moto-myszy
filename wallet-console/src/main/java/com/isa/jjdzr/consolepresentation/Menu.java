@@ -1,5 +1,6 @@
 package com.isa.jjdzr.consolepresentation;
 
+import com.isa.jjdzr.api.ApiNbp;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.market.Market;
 
@@ -39,7 +40,8 @@ public class Menu {
                 case 2: wallet = new LoadViewer().load(); break;
                 case 3: new SaveViewer().save(wallet); break;
                 case 4: new WalletViewer().startViewer(wallet); break;
-                case 5,6,7,8: printOption(option); break;
+                case 5,6,7: printOption(option); break;
+                case 8: new ApiNbp().printExchangeRates(); break;
                 case 9: keepWorking = false; break;
                 default:
                     System.out.println("Nie ma takiej opcji.");
