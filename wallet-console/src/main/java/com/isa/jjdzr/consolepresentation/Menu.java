@@ -32,15 +32,43 @@ public class Menu {
         System.out.println("Witamy w portfelu inwestycyjnym !!!");
 
         while(keepWorking) {
-            System.out.println("\nUżytkownik: Guest"); //bedzie wyświetlać nazwę użytkownika
+            System.out.println("\nUżytkownik: Guest\n"); //bedzie wyświetlać nazwę użytkownika
             printMenuOptions();
             int option = getOptionNumber();
             switch(option) {
-                case 1: wallet = new WalletGenView().start(wallet); break;
+                case 1:
+                    if (isWalletNull(wallet)) {
+                        wallet = new WalletGenView().start(wallet);
+                        break;
+                    } else {
+                        System.err.println("Masz już wczytany portfel, nie możesz utworzyć nowego.");
+                        break;
+                    }
                 case 2: wallet = new LoadViewer().load(); break;
-                case 3: new SaveViewer().save(wallet); break;
-                case 4: new WalletViewer().startViewer(wallet); break;
-                case 5,6,7: printOption(option); break;
+                case 3:
+                    if (isWalletNull(wallet)) {
+                        System.err.println("Nie można zapisać nieistniejącego portfela!");
+                        break;
+                    } else {
+                        new SaveViewer().save(wallet);
+                        break;
+                    }
+                case 4:
+                    if (isWalletNull(wallet)) {
+                        System.err.println("Brak portfela do wyświetlenia. Wczytaj lub utwórz nowy.");
+                        break;
+                    } else {
+                        new WalletViewer().startViewer(wallet);
+                        break;
+                    }
+                case 5,6,7:
+                    if (isWalletNull(wallet)) {
+                        System.err.println("Nie można wykonać operacji na nieistniejącym portfelu!");
+                        break;
+                    } else {
+                        printOption(option);
+                        break;
+                    }
                 case 8: new ApiNbp().printExchangeRates(); break;
                 case 9: keepWorking = false; break;
                 default:
