@@ -39,36 +39,39 @@ public class Menu {
                 case 1:
                     if (isWalletNull(wallet)) {
                         wallet = new WalletGenView().start(wallet);
-                        break;
                     } else {
                         System.err.println("Masz już wczytany portfel, nie możesz utworzyć nowego.");
-                        break;
                     }
+                    break;
                 case 2: wallet = new LoadViewer().load(); break;
                 case 3:
                     if (isWalletNull(wallet)) {
                         System.err.println("Nie można zapisać nieistniejącego portfela!");
-                        break;
                     } else {
                         new SaveViewer().save(wallet);
-                        break;
                     }
+                    break;
                 case 4:
                     if (isWalletNull(wallet)) {
                         System.err.println("Brak portfela do wyświetlenia. Wczytaj lub utwórz nowy.");
-                        break;
                     } else {
                         new WalletViewer().startViewer(wallet);
-                        break;
                     }
-                case 5,6,7:
+                    break;
+                case 5,6:
                     if (isWalletNull(wallet)) {
                         System.err.println("Nie można wykonać operacji na nieistniejącym portfelu!");
-                        break;
                     } else {
                         printOption(option);
-                        break;
                     }
+                    break;
+                case 7:
+                    if (isWalletNull(wallet)) {
+                        System.err.println("Nie można wykonać operacji na nieistniejącym portfelu!");
+                    } else {
+                        new WalletGenView().addCash(wallet);
+                    }
+                    break;
                 case 8: new ApiNbp().printExchangeRates(); break;
                 case 9: keepWorking = false; break;
                 default:

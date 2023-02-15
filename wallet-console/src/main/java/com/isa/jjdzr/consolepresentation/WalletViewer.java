@@ -12,7 +12,8 @@ class WalletViewer {
             "1. Wyświetl listę posiadanych aktyw",
             "2. Wyświetl wybrane aktywa",
             "3. Wyświetl wszystkie aktywa",
-            "4. Zakończ"
+            "4. Wyświetl gotówkę",
+            "5. Zakończ"
     };
 
     public void startViewer(Wallet wallet) {
@@ -25,7 +26,9 @@ class WalletViewer {
                 case 1: new AssetsViewer().printWalletList(wallet.getWallet()); break;
                 case 2: printSingleWalletAsset(wallet); break;
                 case 3: new AssetsViewer().printWallet(wallet.getWallet()); break;
-                case 4: keepWorking = false; break;
+                case 4:
+                    System.out.println("Posiadana gotówka: " + wallet.getCash() + "PLN"); break;
+                case 5: keepWorking = false; break;
                 default:
                     System.out.println("Nie ma takiej opcji.");
             }
