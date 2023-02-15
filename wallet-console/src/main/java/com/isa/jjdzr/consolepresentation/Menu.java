@@ -15,7 +15,9 @@ public class Menu {
             "4. Wyświetl portfel",
             "5. Dokonaj zakupu",
             "6. Dokonaj sprzedaży",
-            "7. Zakończ"
+            "7. Dodaj gotówkę",
+            "8. Kursy walut",
+            "9. Zakończ"
     };
 
     public Menu() {
@@ -36,8 +38,9 @@ public class Menu {
                 case 1: wallet = new WalletGenView().start(wallet); break;
                 case 2: wallet = new LoadViewer().load(); break;
                 case 3: new SaveViewer().save(wallet); break;
-                case 4,5,6: printOption(option); break;
-                case 7: keepWorking = false; break;
+                case 4: new WalletViewer().startViewer(wallet); break;
+                case 5,6,7,8: printOption(option); break;
+                case 9: keepWorking = false; break;
                 default:
                     System.out.println("Nie ma takiej opcji.");
             }

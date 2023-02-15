@@ -5,6 +5,7 @@ import com.isa.jjdzr.dto.Wallet;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 class WalletViewer {
     private final String[] options = { //Maciek
@@ -14,14 +15,16 @@ class WalletViewer {
             "4. Zakończ"
     };
 
-    public void startViewer() {
+    public void startViewer(Wallet wallet) {
         boolean keepWorking = true;
 
         while(keepWorking) {
             printOptions();
             int option = getOptionNumber();
             switch(option) {
-                case 1,2,3: printOption(option); break;
+                case 1: new AssetsViewer().printWalletList(wallet.getWallet()); break;
+                case 2: printSingleWalletAsset(wallet); break;
+                case 3: new AssetsViewer().printWallet(wallet.getWallet()); break;
                 case 4: keepWorking = false; break;
                 default:
                     System.out.println("Nie ma takiej opcji.");
@@ -53,39 +56,24 @@ class WalletViewer {
         return num;
     }
 
-    private void printAssetList(){
-        System.out.println("Lista posiadanych aktyw");
-    }
-
-    private void printSingleAsset(){
-        System.out.println("Wybrane aktywa");
-    }
-
-    private void printAllAssets(){
-        System.out.println("Wszystkie aktywa");
-    }
-
-    private void printOption(int option) {
+    private void printSingleWalletAsset(Wallet wallet) {
         Scanner scan = new Scanner(System.in);
-        switch (option) {
-            case 1:
-                printAssetList();
-                System.out.println("Aby wyjść wciśnij ENTER");
-                scan.nextLine();
-                break;
-            case 2:
-                printSingleAsset();
-                System.out.println("Aby wyjść wciśnij ENTER");
-                scan.nextLine();
-                break;
-            case 3:
-                printAllAssets();
-                System.out.println("Aby wyjść wciśnij ENTER");
-                scan.nextLine();
-                break;
-            default:
-                System.out.println("Zła wartość, spróbuj ponownie: ");
-                break;
+        int index = -1;
+        System.out.println("Który aktyw chcesz zobaczyć ?");
+        System.out.println("Podaj wartość od 1 do " + wallet.getWallet().size());
+        while (checkWAIndex(wallet, index)) {
+            try {
+                index = scan.nextInt();
+            } catch (InputMismatchException e) {
+                System.err.println("Zła wartość, spróbuj ponownie: ");
+                scan.next();
+            }
         }
+        new AssetsViewer().printWalletAsset(wallet.getWallet().get(index-1));
     }
+
+    private boolean checkWAIndex (Wallet wallet, int i) {
+        return !Pattern.matches("[1-" + wallet.getWallet().size() +"]", String.valueOf(i));
+    }
+
 }

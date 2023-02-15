@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.isa.jjdzr.market.Market;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 public class WalletAsset {
@@ -25,8 +26,15 @@ public class WalletAsset {
 
     }
     public BigDecimal getCurrentPrice(Market market) {
+        List<Asset> assetList = market.availableAssets();
+        for (Asset a : assetList) {
+            if (a.getId().equals(this.id)) {
+                return a.getCurrentPrice();
+            }
+        }
         return null;
     }
+
     public String getId() {
         return id;
     }
