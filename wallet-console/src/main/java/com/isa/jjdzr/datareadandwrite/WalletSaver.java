@@ -24,7 +24,7 @@ public class WalletSaver {
             throw new RuntimeException(e);
         }
 
-        Path path = Path.of("src", "main", "resources", "wallet.txt");
+        Path path = Path.of("wallet.txt");
         try {
             Files.writeString(path, s);
         } catch (IOException e) {
