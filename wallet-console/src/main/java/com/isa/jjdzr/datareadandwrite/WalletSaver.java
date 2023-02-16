@@ -3,8 +3,6 @@ package com.isa.jjdzr.datareadandwrite;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isa.jjdzr.dto.Wallet;
-import com.isa.jjdzr.dto.WalletAsset;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
