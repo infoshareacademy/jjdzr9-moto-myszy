@@ -102,6 +102,7 @@ public class Menu {
                     break;
             }
         }
+        clearScreen();
         System.out.println("Do widzenia!!!");
     }
 
@@ -145,7 +146,7 @@ public class Menu {
         scan.nextLine();
     }
 
-    private static void clearScreen() {
+    private void clearScreen() {
         System.out.print("\033\143");
         System.out.flush();
     }

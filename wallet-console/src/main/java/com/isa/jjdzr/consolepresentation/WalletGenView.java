@@ -62,7 +62,7 @@ class WalletGenView {
             cash = scan.nextLine();
             cash = replaceComma(cash);
         }
-        System.out.println("Portfel zasilony kwotą: " + cash);
+        System.out.println("Portfel zasilony kwotą: " + cash + "PLN");
         System.out.println("Powrót do menu głównego.");
 
         return cash;
