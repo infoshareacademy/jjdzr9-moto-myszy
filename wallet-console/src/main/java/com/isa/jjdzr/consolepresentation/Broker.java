@@ -1,34 +1,25 @@
 
 package com.isa.jjdzr.consolepresentation;
+import com.isa.jjdzr.brokerlogic.BrokerLogicBuy;
 import com.isa.jjdzr.dto.Asset;
 import com.isa.jjdzr.dto.WalletAsset;
 import com.isa.jjdzr.market.Market;
 import com.isa.jjdzr.dto.Wallet;
 
-import javax.management.MXBean;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
     class Broker {
-        public void buy() {
-            Scanner scanner = new Scanner(System.in);
-            getAssetIndex(new Market());
+        public void buy(Wallet wallet) {
 
-        /* ma pobierać jaki aktyw chcemy kupić
-         ma pobierać ile chcemy go kupić
-         sprawdzic czy wystarczy nam kasy na zakup
-         na podstawie tych danych tworzy nowy obiekt WalletAsset
-         dodaje ten obiekt do Wallet*/
+            Asset asset = getAsset(new Market());
+            String quantity = getQuantityToBuy(wallet, asset);
+            new BrokerLogicBuy().buy(asset, wallet,quantity);
+
         }
 
-        private int getAssetIndex(Market market) {
-
-            //Łukasz
-            //ma pobierać od usera jaki aktyw chcemy kupić
-            //walidacja !
-
+        private Asset getAsset(Market market) {
 
             Scanner scanner = new Scanner(System.in);
             List<Asset> assets = market.availableAssets();
@@ -36,7 +27,7 @@ import java.util.Scanner;
 
             System.out.println("Jaki aktyw chcesz kupić?");
             for (int i = 0; i < assetCount; i++) {
-                System.out.println(i + 1 + ". " + assets.get(i).getId());
+                System.out.println(i + 1 + ". " + assets.get(i).getId() + "\nAktualna cena: " + assets.get(i).getCurrentPrice());
             }
 
             int assetIndex = -1;
@@ -53,21 +44,17 @@ import java.util.Scanner;
                 }
             }
 
-            return assetIndex;
+            return assets.get(assetIndex);
 
         }
 
         private String getQuantityToBuy(Wallet wallet, Asset asset) {
-            //Łukasz
-        /* ma pobierać ile chcemy go kupić
-         sprawdza czy wprowadzone dane mają tylko 0-9 i .
-         sprawdzic czy wystarczy nam kasy na zakup*/
 
             Scanner sc = new Scanner(System.in);
             System.out.print("Podaj ilość jaką chcesz kupić: ");
             String input = sc.nextLine();
 
-            while (!input.matches("[0-9]")) { //?
+            while (!input.matches("[0-9]*")) {
                 System.out.println("Błąd. Wprowadź cyfrę.");
                 input = sc.nextLine();
             }
@@ -92,11 +79,7 @@ import java.util.Scanner;
         }
 
         public void sell() {
-        /*ma pobierać jaki aktyw chcemy sprzedać
-        ma pobierać ile chcemy go sprzedać
-        sprawdzić czy mamy taką ilość w Wallet
-        na podstawie tych danych modyfikuje nam obiekt WalletAsset wyciągnięty z listy
-        dodaje gotówkę (ilość sprzedana * aktualna cena)*/
+
         }
 
         private int getWalletAssetIndex(Wallet wallet) {

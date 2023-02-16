@@ -58,7 +58,14 @@ public class Menu {
                         new WalletViewer().startViewer(wallet);
                     }
                     break;
-                case 5,6:
+                case 5:
+                    if (isWalletNull(wallet)) {
+                        System.err.println("Nie można wykonać operacji na nieistniejącym portfelu!");
+                    } else {
+                        new Broker().buy(wallet);
+                    }
+                    break;
+                case 6:
                     if (isWalletNull(wallet)) {
                         System.err.println("Nie można wykonać operacji na nieistniejącym portfelu!");
                     } else {
@@ -75,7 +82,7 @@ public class Menu {
                 case 8: new ApiNbp().printExchangeRates(); break;
                 case 9: keepWorking = false; break;
                 default:
-                    System.out.println("Nie ma takiej opcji.");
+                    break;
             }
         }
         System.out.println("Do widzenia!!!");
@@ -92,6 +99,10 @@ public class Menu {
         while (num == null) {
             try {
                 num = scan.nextInt();
+                if (num > 9 || num < 1) {
+                    System.err.println("Nie ma takiej opcji, spróbuj ponownie: ");
+                    num = null;
+                }
             } catch (InputMismatchException e) {
                 System.err.println("Zła wartość, spróbuj ponownie: ");
                 scan.next();
