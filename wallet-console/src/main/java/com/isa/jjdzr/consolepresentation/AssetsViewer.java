@@ -4,6 +4,7 @@ import com.isa.jjdzr.dto.Asset;
 import com.isa.jjdzr.dto.WalletAsset;
 import com.isa.jjdzr.market.Market;
 
+import java.math.BigDecimal;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,12 @@ class AssetsViewer {
 
     public void printWalletAsset(WalletAsset walletAsset) {
         System.out.println("ID: " + walletAsset.getId());
-        System.out.println("Cena zakupu: " + walletAsset.getPurchasePrice());
+        System.out.println("Cena zakupu: " + walletAsset.getPurchasePrice() + "PLN");
         System.out.println("Ilość: " + walletAsset.getPurchasedQuantity());
-        System.out.println("Aktualna cena: " + walletAsset.getCurrentPrice(new Market()));
+        System.out.println("Wartość w momencie zakupu: " +walletAsset.getPurchasedQuantity().multiply(walletAsset.getPurchasePrice()) + "PLN");
+        BigDecimal cp = walletAsset.getCurrentPrice(new Market());
+        System.out.println("Aktualna cena: " + cp + "PLN");
+        System.out.println("Aktualna wartość: " + cp.multiply(walletAsset.getPurchasedQuantity()) + "PLN");
         System.out.println();
     }
 

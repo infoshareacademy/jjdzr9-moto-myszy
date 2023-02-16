@@ -38,48 +38,65 @@ public class Menu {
             switch(option) {
                 case 1:
                     if (isWalletNull(wallet)) {
+                        clearScreen();
                         wallet = new WalletGenView().start(wallet);
                     } else {
                         System.err.println("Masz już wczytany portfel, nie możesz utworzyć nowego.");
                     }
+                    cont();
+                    clearScreen();
                     break;
-                case 2: wallet = new LoadViewer().load(); break;
+                case 2: clearScreen(); wallet = new LoadViewer().load(); cont(); break;
                 case 3:
                     if (isWalletNull(wallet)) {
                         System.err.println("Nie można zapisać nieistniejącego portfela!");
                     } else {
                         new SaveViewer().save(wallet);
                     }
+                    cont();
+                    clearScreen();
                     break;
                 case 4:
                     if (isWalletNull(wallet)) {
                         System.err.println("Brak portfela do wyświetlenia. Wczytaj lub utwórz nowy.");
                     } else {
+                        clearScreen();
                         new WalletViewer().startViewer(wallet);
                     }
+                    cont();
+                    clearScreen();
                     break;
                 case 5:
                     if (isWalletNull(wallet)) {
                         System.err.println("Nie można wykonać operacji na nieistniejącym portfelu!");
                     } else {
+                        clearScreen();
                         new Broker().buy(wallet);
                     }
+                    cont();
+                    clearScreen();
                     break;
                 case 6:
                     if (isWalletNull(wallet)) {
                         System.err.println("Nie można wykonać operacji na nieistniejącym portfelu!");
                     } else {
-                        printOption(option);
+                        clearScreen();
+                        new Broker().sell(wallet);
                     }
+                    cont();
+                    clearScreen();
                     break;
                 case 7:
                     if (isWalletNull(wallet)) {
                         System.err.println("Nie można wykonać operacji na nieistniejącym portfelu!");
                     } else {
+                        clearScreen();
                         new WalletGenView().addCash(wallet);
                     }
+                    cont();
+                    clearScreen();
                     break;
-                case 8: new ApiNbp().printExchangeRates(); break;
+                case 8: clearScreen(); new ApiNbp().printExchangeRates(); cont(); clearScreen(); break;
                 case 9: keepWorking = false; break;
                 default:
                     break;
@@ -120,6 +137,17 @@ public class Menu {
 
     private boolean isWalletNull(Wallet wallet) {
         return wallet == null;
+    }
+
+    private void cont() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Aby kontynuować naciśnij ENTER");
+        scan.nextLine();
+    }
+
+    private static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
 }

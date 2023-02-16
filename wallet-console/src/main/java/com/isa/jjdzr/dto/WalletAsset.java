@@ -10,7 +10,7 @@ import java.util.Objects;
 public class WalletAsset {
     private final String id;
     private final BigDecimal purchasePrice;
-    private final BigDecimal purchasedQuantity;
+    private BigDecimal purchasedQuantity;
 
     @JsonCreator
     public WalletAsset() {
@@ -47,7 +47,9 @@ public class WalletAsset {
         return purchasedQuantity;
     }
 
-
+    public void reduceAsset(String quantity) {
+        this.purchasedQuantity = purchasedQuantity.subtract(new BigDecimal(quantity));
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

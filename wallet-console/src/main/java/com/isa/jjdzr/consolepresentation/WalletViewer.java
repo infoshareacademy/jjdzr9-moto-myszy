@@ -13,7 +13,7 @@ class WalletViewer {
             "2. Wyświetl wybrane aktywa",
             "3. Wyświetl wszystkie aktywa",
             "4. Wyświetl gotówkę",
-            "5. Zakończ"
+            "5. Powród do menu"
     };
 
     public void startViewer(Wallet wallet) {
