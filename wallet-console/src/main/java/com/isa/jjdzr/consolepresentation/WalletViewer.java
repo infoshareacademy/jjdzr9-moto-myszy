@@ -61,19 +61,23 @@ class WalletViewer {
 
     private void printSingleWalletAsset(Wallet wallet) {
         Scanner scan = new Scanner(System.in);
-        int index = -1;
-        System.out.println("Który aktyw chcesz zobaczyć ?");
+        if (wallet.getWallet().size() == 0) {
+            System.out.println("Brak aktyw do wyświetlenia");
+        } else {
+            int index = -1;
+            System.out.println("Który aktyw chcesz zobaczyć ?");
 
-        while (checkWAIndex(wallet, index)) {
-            try {
-                System.out.println("Podaj wartość od 1 do " + wallet.getWallet().size());
-                index = scan.nextInt();
-            } catch (InputMismatchException e) {
-                System.err.println("Zła wartość, spróbuj ponownie.");
-                scan.next();
+            while (checkWAIndex(wallet, index)) {
+                try {
+                    System.out.println("Podaj wartość od 1 do " + wallet.getWallet().size());
+                    index = scan.nextInt();
+                } catch (InputMismatchException e) {
+                    System.err.println("Zła wartość, spróbuj ponownie.");
+                    scan.next();
+                }
             }
+            new AssetsViewer().printWalletAsset(wallet.getWallet().get(index - 1));
         }
-        new AssetsViewer().printWalletAsset(wallet.getWallet().get(index-1));
     }
 
     private boolean checkWAIndex (Wallet wallet, int i) {
