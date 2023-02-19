@@ -23,11 +23,11 @@ class WalletViewer {
             printOptions();
             int option = getOptionNumber();
             switch(option) {
-                case 1: new AssetsViewer().printWalletList(wallet.getWallet()); break;
-                case 2: printSingleWalletAsset(wallet); break;
-                case 3: new AssetsViewer().printWallet(wallet.getWallet()); break;
+                case 1: new AssetsViewer().printWalletList(wallet.getWallet()); cont(); break;
+                case 2: printSingleWalletAsset(wallet); cont(); break;
+                case 3: new AssetsViewer().printWallet(wallet.getWallet()); cont(); break;
                 case 4:
-                    System.out.println("Posiadana gotówka: " + wallet.getCash() + "PLN"); break;
+                    System.out.println("Posiadana gotówka: " + wallet.getCash() + "PLN"); cont(); break;
                 case 5: keepWorking = false; break;
                 default:
                     System.out.println("Nie ma takiej opcji.");
@@ -84,4 +84,9 @@ class WalletViewer {
         return !Pattern.matches("[1-" + wallet.getWallet().size() +"]", String.valueOf(i));
     }
 
+    private void cont() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Aby kontynuować naciśnij ENTER");
+        scan.nextLine();
+    }
 }
