@@ -22,7 +22,7 @@ public class WalletSaver {
             throw new RuntimeException(e);
         }
 
-        Path path = Path.of("wallet.txt");
+        Path path = Path.of("classes","wallet.txt");
         try {
             Files.writeString(path, s);
         } catch (IOException e) {

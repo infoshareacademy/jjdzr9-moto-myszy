@@ -38,18 +38,26 @@ class AssetsViewer {
     }
 
     public void printWallet(List<WalletAsset> wallet) {
-        System.out.println("W skład Twojego portfela wchodzą:");
-        for (WalletAsset walletAsset : wallet) {
-            printWalletAsset(walletAsset);
+        if (wallet.size() == 0) {
+            System.out.println("Brak aktyw do wyświetlenia");
+        } else {
+            System.out.println("W skład Twojego portfela wchodzą:");
+            for (WalletAsset walletAsset : wallet) {
+                printWalletAsset(walletAsset);
+            }
         }
     }
 
     public void printWalletList(List<WalletAsset> wallet) {
-        int i = 1;
-        System.out.println("Lista twoich aktyw: ");
-        for (WalletAsset walletAsset : wallet) {
-            System.out.println(i + ". " + walletAsset.getId());
-            i++;
+        if (wallet.size() == 0) {
+            System.out.println("Brak aktyw do wyświetlenia");
+        } else {
+            int i = 1;
+            System.out.println("Lista twoich aktyw: ");
+            for (WalletAsset walletAsset : wallet) {
+                System.out.println(i + ". " + walletAsset.getId());
+                i++;
+            }
         }
         System.out.println();
     }

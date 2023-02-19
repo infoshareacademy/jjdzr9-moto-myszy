@@ -13,7 +13,7 @@ public class WalletLoader {
         ObjectMapper objectMapper = new ObjectMapper();
         Wallet wallet;
 
-        Path path = Path.of("wallet.txt");
+        Path path = Path.of("classes","wallet.txt");
         String s = null;
         try {
             s = Files.readString(path);
