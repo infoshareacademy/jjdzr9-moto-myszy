@@ -13,7 +13,11 @@ class LoadViewer {
         System.out.println("Za chwilę nastąpi wczytanie portfela.");
         if (doYouWantToContinue()) {
             wallet = new WalletLoader().loadWallet();
-            System.out.println("Wczytanie zakończone sukcesem.");
+            if (wallet == null) {
+                System.out.println("Nie udało się wczytać portfela.");
+            } else {
+                System.out.println("Wczytanie zakończone sukcesem.");
+            }
         }
         return wallet;
     }

@@ -39,7 +39,7 @@ class AssetsViewer {
 
     public void printWallet(List<WalletAsset> wallet) {
         if (wallet.size() == 0) {
-            System.out.println("Brak aktyw do wyświetlenia");
+            System.out.println("Brak aktywów do wyświetlenia");
         } else {
             System.out.println("W skład Twojego portfela wchodzą:");
             for (WalletAsset walletAsset : wallet) {
@@ -50,7 +50,7 @@ class AssetsViewer {
 
     public void printWalletList(List<WalletAsset> wallet) {
         if (wallet.size() == 0) {
-            System.out.println("Brak aktyw do wyświetlenia");
+            System.out.println("Brak aktywów do wyświetlenia");
         } else {
             int i = 1;
             System.out.println("Lista twoich aktyw: ");

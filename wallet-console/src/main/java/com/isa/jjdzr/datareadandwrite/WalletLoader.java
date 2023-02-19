@@ -18,7 +18,9 @@ public class WalletLoader {
         try {
             s = Files.readString(path);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("Brak portfela do wczytania. Najpierw zapisz jakiś.");
+            System.err.println("Powrót do menu głównego.");
+            return null;
         }
         try {
             wallet = objectMapper.readValue(s, Wallet.class);
