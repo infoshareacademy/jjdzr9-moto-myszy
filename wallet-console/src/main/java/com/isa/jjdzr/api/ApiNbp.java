@@ -72,7 +72,7 @@ public class ApiNbp {
 
     private void countDown() {
         try {
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(1);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
