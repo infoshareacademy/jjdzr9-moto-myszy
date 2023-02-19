@@ -82,13 +82,18 @@ import java.util.Scanner;
         }
 
         public void sell(Wallet wallet) {
-            int waIndex = getWalletAssetIndex(wallet);
-            String quantity = getQuantityToSell(wallet, waIndex);
-            BigDecimal currentPrice = wallet.getWallet().get(waIndex).getCurrentPrice(new Market());
-            System.out.println("Aktualna cena pojedynczej sztuki: " + currentPrice + "PLN");
-            new BrokerLogicSell().sell(wallet, waIndex,quantity, currentPrice);
-            System.out.println("Sprzedaż zakończona sukcesem.");
-            System.out.println("Portfel zasilono kwotą: " + new BigDecimal(quantity).multiply(currentPrice) + "PLN");
+            if (wallet.getWallet().size() == 0) {
+                System.out.println("Brak aktywów do sprzedania.");
+                System.out.println("Powrót do menu.");
+            } else {
+                int waIndex = getWalletAssetIndex(wallet);
+                String quantity = getQuantityToSell(wallet, waIndex);
+                BigDecimal currentPrice = wallet.getWallet().get(waIndex).getCurrentPrice(new Market());
+                System.out.println("Aktualna cena pojedynczej sztuki: " + currentPrice + "PLN");
+                new BrokerLogicSell().sell(wallet, waIndex, quantity, currentPrice);
+                System.out.println("Sprzedaż zakończona sukcesem.");
+                System.out.println("Portfel zasilono kwotą: " + new BigDecimal(quantity).multiply(currentPrice) + "PLN");
+            }
         }
 
         private int getWalletAssetIndex(Wallet wallet) {
