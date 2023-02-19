@@ -26,6 +26,11 @@ class WalletGenView {
         return wallet;
     }
 
+    public void addCash(Wallet wallet) {
+        String cash = getCashAmount();
+        wallet.addCash(cash);
+    }
+
     private boolean doYouWantToContinue() { //sprawdza czy chcesz kontynuowac i jesli tak to wywala false
         Scanner scan = new Scanner(System.in);
         System.out.println("Czy chcesz kontynuować [T/N]?");
@@ -57,7 +62,7 @@ class WalletGenView {
             cash = scan.nextLine();
             cash = replaceComma(cash);
         }
-        System.out.println("Portfel zasilony kwotą: " + cash);
+        System.out.println("Portfel zasilony kwotą: " + cash + "PLN");
         System.out.println("Powrót do menu głównego.");
 
         return cash;
@@ -67,7 +72,7 @@ class WalletGenView {
         int countDots = (int) str.chars().filter(ch -> ch == '.').count();
         if (countDots > 1) {
             return true;
-        } else if (str.length() > 20) {
+        } else if (str.length() > 10) {
             System.err.println("Zbyt duża kwota!");
             return true;
         } else if (str.charAt(0) == ('0')) {

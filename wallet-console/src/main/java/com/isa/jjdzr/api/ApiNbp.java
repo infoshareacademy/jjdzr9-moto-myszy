@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -13,7 +15,7 @@ public class ApiNbp {
     private static final String URL = "http://api.nbp.pl/api/exchangerates/tables/A/";
 
     // Metoda do pobierania danych z API NBP i wypisywania informacji o kursach walut
-    public static void printExchangeRates() {
+    public void printExchangeRates() {
         try {
             // Pobierz dane z API NBP
             String json = getJsonFromUrl(URL);
@@ -31,6 +33,7 @@ public class ApiNbp {
                 String code = rate.getString("code");
                 double mid = rate.getDouble("mid");
                 System.out.printf("%s %s: %.4f%n", code, currency, mid);
+                countDown();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,7 +41,7 @@ public class ApiNbp {
     }
 
     // Metoda do pobierania danych z API NBP
-    public static String getJsonFromUrl(String url) {
+    private String getJsonFromUrl(String url) {
         String json = "";
         try {
             // Utwórz obiekt URL na podstawie adresu URL
@@ -67,8 +70,11 @@ public class ApiNbp {
         return json;
     }
 
-    // Metoda main wywołująca metodę printExchangeRates
-    public static void main(String[] args) {
-        printExchangeRates();
+    private void countDown() {
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 }

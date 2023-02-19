@@ -3,8 +3,6 @@ package com.isa.jjdzr.datareadandwrite;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isa.jjdzr.dto.Wallet;
-import com.isa.jjdzr.dto.WalletAsset;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,7 +13,7 @@ public class WalletLoader {
         ObjectMapper objectMapper = new ObjectMapper();
         Wallet wallet;
 
-        Path path = Path.of("src","main","resources", "wallet.txt");
+        Path path = Path.of("classes","wallet.txt");
         String s = null;
         try {
             s = Files.readString(path);

@@ -14,8 +14,6 @@ class SaveViewer {
             new WalletSaver().saveWallet(wallet);
             System.out.println("Zapis zakończony sukcesem.");
         }
-        System.out.println("Aby powrócić do menu głównego naciśnij ENTER: ");
-        scan.next();
     }
 
     private boolean doYouWantToContinue() {

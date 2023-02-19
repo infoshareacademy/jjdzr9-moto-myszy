@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.isa.jjdzr.market.Market;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 public class WalletAsset {
     private final String id;
     private final BigDecimal purchasePrice;
-    private final BigDecimal purchasedQuantity;
+    private BigDecimal purchasedQuantity;
 
     @JsonCreator
     public WalletAsset() {
@@ -25,8 +26,15 @@ public class WalletAsset {
 
     }
     public BigDecimal getCurrentPrice(Market market) {
+        List<Asset> assetList = market.availableAssets();
+        for (Asset a : assetList) {
+            if (a.getId().equals(this.id)) {
+                return a.getCurrentPrice();
+            }
+        }
         return null;
     }
+
     public String getId() {
         return id;
     }
@@ -39,7 +47,9 @@ public class WalletAsset {
         return purchasedQuantity;
     }
 
-
+    public void reduceAsset(String quantity) {
+        this.purchasedQuantity = purchasedQuantity.subtract(new BigDecimal(quantity));
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

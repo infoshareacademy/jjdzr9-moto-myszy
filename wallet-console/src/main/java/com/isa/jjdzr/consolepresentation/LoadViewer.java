@@ -15,8 +15,6 @@ class LoadViewer {
             wallet = new WalletLoader().loadWallet();
             System.out.println("Wczytanie zakończone sukcesem.");
         }
-        System.out.println("Aby powrócić do menu głównego naciśnij ENTER: ");
-        scan.nextLine();
         return wallet;
     }
 
