@@ -7,7 +7,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-class WalletViewer {
+public class WalletViewer {
     private final String[] options = { //Maciek
             "1. Wyświetl listę posiadanych aktyw",
             "2. Wyświetl wybrane aktywa",

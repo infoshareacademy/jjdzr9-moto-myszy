@@ -1,6 +1,7 @@
-package com.isa.jjdzr.consolepresentation;
+package com.isa.jjdzr.console;
 
 import com.isa.jjdzr.api.ApiNbp;
+import com.isa.jjdzr.consolepresentation.*;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.market.Market;
 
@@ -8,7 +9,7 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Menu {
+public class Menu implements Printable{
     private final String[] options = {
             "1. Utwórz portfel.",
             "2. Wczytaj portfel",
@@ -149,6 +150,19 @@ public class Menu {
     private void clearScreen() {
         System.out.print("\033\143");
         System.out.flush();
+    }
+    @Override
+    public void printActualLine(String line){
+        System.out.println(line);
+    }
+    @Override
+    public void printIncomindCash(String cash) {
+        System.out.println("Portfel zasilony kwotą: " + cash + "PLN");
+    }
+
+    @Override
+    public void printError(String error) {
+
     }
 
 }

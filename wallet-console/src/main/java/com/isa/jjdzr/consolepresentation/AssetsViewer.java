@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class AssetsViewer {
+public class AssetsViewer {
 
     public void printAsset(Asset asset) {
         System.out.println("Asset ID: " + asset.getId());

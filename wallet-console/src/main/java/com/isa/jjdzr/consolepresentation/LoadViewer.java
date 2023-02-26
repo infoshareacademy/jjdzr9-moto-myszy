@@ -1,16 +1,20 @@
 package com.isa.jjdzr.consolepresentation;
 
+import com.isa.jjdzr.console.Menu;
+import com.isa.jjdzr.console.Menu2;
+import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.datareadandwrite.WalletLoader;
 import com.isa.jjdzr.dto.Wallet;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-class LoadViewer {
+public class LoadViewer {
+    private Printable menu = new Menu2();
     public Wallet load() {
         Scanner scan = new Scanner(System.in);
         Wallet wallet = null;
-        System.out.println("Za chwilę nastąpi wczytanie portfela.");
+        menu.printActualLine("Za chwilę nastąpi wczytanie portfela.");
         if (doYouWantToContinue()) {
             wallet = new WalletLoader().loadWallet();
             if (wallet == null) {

@@ -6,7 +6,7 @@ import com.isa.jjdzr.dto.Wallet;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-class SaveViewer {
+public class SaveViewer {
     public void save(Wallet wallet) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Za chwilę nastąpi zapis portfela do pliku.");

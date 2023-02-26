@@ -1,12 +1,15 @@
 package com.isa.jjdzr.consolepresentation;
 
+import com.isa.jjdzr.console.Menu;
+import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.walletgenerator.WalletGenerator;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-class WalletGenView {
+public class WalletGenView {
+    private Printable menu = new Menu();
     public Wallet start(Wallet wallet) {
         System.out.println("Witam w generatorze portfela inwestycyjnego.");
         if (doYouWantToContinue()) {
@@ -62,7 +65,7 @@ class WalletGenView {
             cash = scan.nextLine();
             cash = replaceComma(cash);
         }
-        System.out.println("Portfel zasilony kwotą: " + cash + "PLN");
+        menu.printIncomindCash(cash);
         System.out.println("Powrót do menu głównego.");
 
         return cash;

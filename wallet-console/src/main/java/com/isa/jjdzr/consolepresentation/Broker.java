@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
-    class Broker {
+    public class Broker {
         public void buy(Wallet wallet) {
 
             Asset asset = getAsset(new Market());
