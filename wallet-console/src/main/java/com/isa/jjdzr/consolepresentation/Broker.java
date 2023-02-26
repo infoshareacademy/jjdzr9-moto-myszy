@@ -62,8 +62,13 @@ import java.util.Scanner;
                 input = sc.nextLine();
             }
 
-            int quantity = Integer.parseInt(input);
-            BigDecimal cost = new BigDecimal(quantity).multiply(asset.getCurrentPrice());
+            try {
+                int quantity = Integer.parseInt(input);
+            } catch (Exception e) {
+                System.out.println("Zła wartość, spróbuj ponownie.");
+                return getQuantityToBuy(wallet, asset);
+            }
+            BigDecimal cost = new BigDecimal(input).multiply(asset.getCurrentPrice());
 
             if (cost.compareTo(wallet.getCash()) < 0) {
                 System.out.println("Gratulacje, właśnie dokonałeś zakupu");
