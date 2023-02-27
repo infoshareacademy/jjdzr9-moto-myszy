@@ -1,9 +1,10 @@
 package com.isa.jjdzr.console;
 
-import java.io.IOException;
+import java.util.List;
 
 public interface Printable {
     void printActualLine(String line);
-    void printIncomindCash(String cash);
+    void printIncomingCash(String cash);
     void printError(String error);
+    void printMenuOptions(List<String> options);
 }

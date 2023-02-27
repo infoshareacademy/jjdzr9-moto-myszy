@@ -1,17 +1,17 @@
-package com.isa.jjdzr.console;
+package com.isa.jjdzr.consolepresentation;
 
 import com.isa.jjdzr.api.ApiNbp;
-import com.isa.jjdzr.consolepresentation.*;
+import com.isa.jjdzr.console.Printable;
+import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.market.Market;
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
-public class Menu implements Printable{
-    private final String[] options = {
-            "1. Utwórz portfel.",
+public class Menu  {
+    private Printable printer = new Printer();
+    private final List<String> options = new ArrayList<>(
+            List.of("1. Utwórz portfel.",
             "2. Wczytaj portfel",
             "3. Zapisz portfel",
             "4. Wyświetl portfel",
@@ -19,8 +19,7 @@ public class Menu implements Printable{
             "6. Dokonaj sprzedaży",
             "7. Dodaj gotówkę",
             "8. Kursy walut",
-            "9. Zakończ"
-    };
+            "9. Zakończ"));
 
     public Menu() {
     }
@@ -30,11 +29,11 @@ public class Menu implements Printable{
         Wallet wallet = null;
         Market market = new Market();
 
-        System.out.println("Witamy w portfelu inwestycyjnym !!!");
+        printer.printActualLine("Witamy w portfelu inwestycyjnym !!!");
 
         while(keepWorking) {
-            System.out.println("\nUżytkownik: Guest\n"); //bedzie wyświetlać nazwę użytkownika
-            printMenuOptions();
+            printer.printActualLine("\nUżytkownik: Guest\n"); //bedzie wyświetlać nazwę użytkownika
+            printer.printMenuOptions(options);
             int option = getOptionNumber();
             switch(option) {
                 case 1:
@@ -42,7 +41,7 @@ public class Menu implements Printable{
                         clearScreen();
                         wallet = new WalletGenView().start(wallet);
                     } else {
-                        System.err.println("Masz już wczytany portfel, nie możesz utworzyć nowego.");
+                        printer.printError("Masz już wczytany portfel, nie możesz utworzyć nowego.");
                     }
                     cont();
                     clearScreen();
@@ -50,7 +49,7 @@ public class Menu implements Printable{
                 case 2: clearScreen(); wallet = new LoadViewer().load(); cont(); break;
                 case 3:
                     if (isWalletNull(wallet)) {
-                        System.err.println("Nie można zapisać nieistniejącego portfela!");
+                        printer.printError("Nie można zapisać nieistniejącego portfela!");
                     } else {
                         new SaveViewer().save(wallet);
                     }
@@ -59,7 +58,7 @@ public class Menu implements Printable{
                     break;
                 case 4:
                     if (isWalletNull(wallet)) {
-                        System.err.println("Brak portfela do wyświetlenia. Wczytaj lub utwórz nowy.");
+                        printer.printError("Brak portfela do wyświetlenia. Wczytaj lub utwórz nowy.");
                     } else {
                         clearScreen();
                         new WalletViewer().startViewer(wallet);
@@ -69,27 +68,27 @@ public class Menu implements Printable{
                     break;
                 case 5:
                     if (isWalletNull(wallet)) {
-                        System.err.println("Nie można wykonać operacji na nieistniejącym portfelu!");
+                        printer.printError("Nie można wykonać operacji na nieistniejącym portfelu!");
                     } else {
                         clearScreen();
-                        new Broker().buy(wallet);
+                        new BrokerBuy().buy(wallet);
                     }
                     cont();
                     clearScreen();
                     break;
                 case 6:
                     if (isWalletNull(wallet)) {
-                        System.err.println("Nie można wykonać operacji na nieistniejącym portfelu!");
+                        printer.printError("Nie można wykonać operacji na nieistniejącym portfelu!");
                     } else {
                         clearScreen();
-                        new Broker().sell(wallet);
+                        new BrokerSell().sell(wallet);
                     }
                     cont();
                     clearScreen();
                     break;
                 case 7:
                     if (isWalletNull(wallet)) {
-                        System.err.println("Nie można wykonać operacji na nieistniejącym portfelu!");
+                        printer.printError("Nie można wykonać operacji na nieistniejącym portfelu!");
                     } else {
                         clearScreen();
                         new WalletGenView().addCash(wallet);
@@ -104,37 +103,26 @@ public class Menu implements Printable{
             }
         }
         clearScreen();
-        System.out.println("Do widzenia!!!");
-    }
-
-    private void printMenuOptions() {
-        Arrays.asList(options).forEach(System.out::println);
+        printer.printActualLine("Do widzenia!!!");
     }
 
     private int getOptionNumber() {
         Scanner scan = new Scanner(System.in);
         Integer num = null;
-        System.out.println("Podaj opcję, którą chcesz wybrać: ");
+        printer.printActualLine("Podaj opcję, którą chcesz wybrać: ");
         while (num == null) {
             try {
                 num = scan.nextInt();
                 if (num > 9 || num < 1) {
-                    System.err.println("Nie ma takiej opcji, spróbuj ponownie: ");
+                    printer.printError("Nie ma takiej opcji, spróbuj ponownie: ");
                     num = null;
                 }
             } catch (InputMismatchException e) {
-                System.err.println("Zła wartość, spróbuj ponownie: ");
+                printer.printError("Zła wartość, spróbuj ponownie: ");
                 scan.next();
             }
         }
         return num;
-    }
-
-    private void printOption(int index) {
-        Scanner scan = new Scanner(System.in);
-        System.out.println(options[index-1]);
-        System.out.println("Funkcja w produkcji. Aby kontynuować naciśnij ENTER");
-        scan.nextLine();
     }
 
     private boolean isWalletNull(Wallet wallet) {
@@ -143,26 +131,14 @@ public class Menu implements Printable{
 
     private void cont() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Aby kontynuować naciśnij ENTER");
+        printer.printActualLine("Aby kontynuować naciśnij ENTER");
         scan.nextLine();
     }
 
     private void clearScreen() {
-        System.out.print("\033\143");
+        printer.printActualLine("\033\143");
         System.out.flush();
     }
-    @Override
-    public void printActualLine(String line){
-        System.out.println(line);
-    }
-    @Override
-    public void printIncomindCash(String cash) {
-        System.out.println("Portfel zasilony kwotą: " + cash + "PLN");
-    }
 
-    @Override
-    public void printError(String error) {
-
-    }
 
 }

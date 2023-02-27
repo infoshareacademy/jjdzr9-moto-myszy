@@ -4,12 +4,12 @@ import com.isa.jjdzr.dto.Wallet;
 
 public class BrokerCreatorImpl implements BrokerCreator{
     @Override
-    public Broker createBroker() {
-        return new Broker();
+    public BrokerBuy createBroker() {
+        return new BrokerBuy();
     }
 
     @Override
-    public Broker createBrokerWithWallet(Wallet wallet) {
+    public BrokerBuy createBrokerWithWallet(Wallet wallet) {
         return null;
     }
 }
