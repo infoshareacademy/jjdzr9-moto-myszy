@@ -7,7 +7,6 @@ import com.isa.jjdzr.dto.WalletAsset;
 import com.isa.jjdzr.market.Market;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,7 +31,7 @@ public class AssetsViewer {
         printer.printEmptyLine();
     }
 
-    public void printAssetToBuyList(ArrayList<Asset> assetList) {
+    public void printAssetsToBuyList(List<Asset> assetList) {
         printer.printActualLine("Lista aktyw do kupna:");
         int i = 0;
         for (Asset asset : assetList) {

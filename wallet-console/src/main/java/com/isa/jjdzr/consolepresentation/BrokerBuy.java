@@ -2,9 +2,9 @@
 package com.isa.jjdzr.consolepresentation;
 
 import com.isa.jjdzr.brokerlogic.BrokerLogicBuy;
-import com.isa.jjdzr.brokerlogic.BrokerLogicSell;
+import com.isa.jjdzr.console.Printable;
+import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Asset;
-import com.isa.jjdzr.dto.WalletAsset;
 import com.isa.jjdzr.market.Market;
 import com.isa.jjdzr.dto.Wallet;
 
@@ -13,12 +13,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BrokerBuy {
+    private Printable printer = new Printer();
+    private AssetsViewer assetsViewer = new AssetsViewer();
     public void buy(Wallet wallet) {
 
         Asset asset = getAsset(new Market());
         String quantity = getQuantityToBuy(wallet, asset);
         new BrokerLogicBuy().buy(asset, wallet,quantity);
-        System.out.println("Zapłaciłeś: " + asset.getCurrentPrice().multiply(new BigDecimal(quantity)) + "PLN");
+        printer.printActualLine("Zapłaciłeś: " + asset.getCurrentPrice().multiply(new BigDecimal(quantity)) + "PLN");
 
     }
     //FIXME: make working validation
@@ -28,61 +30,59 @@ public class BrokerBuy {
         List<Asset> assets = market.availableAssets();
         int assetCount = assets.size();
 
-        System.out.println("Jaki aktyw chcesz kupić?");
-        for (int i = 0; i < assetCount; i++) {
-            System.out.println(i + 1 + ". " + assets.get(i).getId() + "\nAktualna cena: " + assets.get(i).getCurrentPrice());
-        }
+        printer.printActualLine("Jaki aktyw chcesz kupić?");
+        assetsViewer.printAssetsToBuyList(assets);
 
         int assetIndex = -1;
         while (assetIndex < 0 || assetIndex >= assetCount) {
-            System.out.print("Wybierz opcję pomiędzy 1, a " + assetCount + ": ");
+            printer.printActualLine("Wybierz opcję pomiędzy 1, a " + assetCount + ": ");
             try {
                 assetIndex = Integer.parseInt(scanner.nextLine()) - 1;
             } catch (NumberFormatException e) {
-                System.out.println("Błąd. Proszę, wprowadź liczbę.");
+                printer.printError("Błąd. Proszę, wprowadź liczbę.");
             }
 
             if (assetIndex < 0 || assetIndex >= assetCount) {
-                System.out.println("Błąd. Wybierz opcję pomiędzy 1, a  " + assetCount + ".");
+                printer.printError("Błąd. Wybierz opcję pomiędzy 1, a  " + assetCount + ".");
             }
         }
 
         return assets.get(assetIndex);
 
     }
-    //FIXME:
+    //FIXME: repair validation
     private String getQuantityToBuy(Wallet wallet, Asset asset) {
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Posiadane środki: " + wallet.getCash() +"PLN");
-        System.out.print("Podaj ilość jaką chcesz kupić: ");
-        String input = sc.nextLine();
+        printer.printActualLine("Posiadane środki: " + wallet.getCash() +"PLN");
+        printer.printActualLine("Podaj ilość jaką chcesz kupić: ");
+        String quantityToBuy = sc.nextLine();
 
-        while (!input.matches("[0-9]*")) {
-            System.out.println("Błąd. Wprowadź cyfrę.");
-            input = sc.nextLine();
+        while (!quantityToBuy.matches("[0-9]*")) {
+            printer.printError("Błąd. Wprowadź cyfrę.");
+            quantityToBuy = sc.nextLine();
         }
 
         try {
-            int quantity = Integer.parseInt(input);
+            int quantity = Integer.parseInt(quantityToBuy);
         } catch (Exception e) {
-            System.out.println("Zła wartość, spróbuj ponownie.");
+            printer.printError("Zła wartość, spróbuj ponownie.");
             return getQuantityToBuy(wallet, asset);
         }
-        BigDecimal cost = new BigDecimal(input).multiply(asset.getCurrentPrice());
+        BigDecimal cost = new BigDecimal(quantityToBuy).multiply(asset.getCurrentPrice());
 
         if (cost.compareTo(wallet.getCash()) < 0) {
-            System.out.println("Gratulacje, właśnie dokonałeś zakupu");
+            printer.printActualLine("Gratulacje, właśnie dokonałeś zakupu");
         } else if (cost.compareTo(wallet.getCash()) == 0) {
-            System.out.println("Gratulacje, właśnie dokonałeś zakupu");
+            printer.printActualLine("Gratulacje, właśnie dokonałeś zakupu");
         } else {
-            System.out.println("Niewystarczająca ilość środków w portfelu. Proszę, podaj mniejszą ilość.");
+            printer.printActualLine("Niewystarczająca ilość środków w portfelu. Proszę, podaj mniejszą ilość.");
             return getQuantityToBuy(wallet, asset);
         }
-        return input;
+        return quantityToBuy;
 
     }
-
+    //TODO: put this in some validating class
     private boolean checkCash(Wallet wallet, BigDecimal cost){
         return wallet.getCash().compareTo(cost) >= 0;
     }

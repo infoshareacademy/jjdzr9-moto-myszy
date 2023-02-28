@@ -11,7 +11,7 @@ public class BrokerLogicSell {
         changeWalletAsset(wallet, index, quantity);
         addCash(wallet, quantity, currentPrice);
     }
-
+    //TODO: put this in wallet service
     private void changeWalletAsset(Wallet wallet, int index, String quantity) {
         //na podstawie tych danych modyfikuje nam obiekt WalletAsset, który chcemy sprzedać lub będzie go usuwać z listy jeśli sprzedamy całosć
         if (wallet.getWallet().get(index).getPurchasedQuantity().compareTo(new BigDecimal(quantity)) == 0) {
@@ -20,6 +20,7 @@ public class BrokerLogicSell {
             wallet.getWallet().get(index).reduceAsset(quantity);
         }
     }
+    //TODO: put this in wallet service
     private void addCash(Wallet wallet,String quantity, BigDecimal currentPrice) {
         wallet.addCash(new BigDecimal(quantity).multiply(currentPrice));
     }
