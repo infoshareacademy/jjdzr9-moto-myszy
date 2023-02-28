@@ -1,62 +1,54 @@
 package com.isa.jjdzr.consolepresentation;
 
+import com.isa.jjdzr.console.MenuService;
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
+import com.isa.jjdzr.console.Service;
 import com.isa.jjdzr.dto.Wallet;
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class WalletViewer {
     private Printable printer = new Printer();
+    private Service menuService = new MenuService();
     private AssetsViewer assetsViewer = new AssetsViewer();
-    private final String[] options = { //Maciek
-            "1. Wyświetl listę posiadanych aktywów",
+    private final List<String> options = new ArrayList<>(
+            List.of("1. Wyświetl listę posiadanych aktywów",
             "2. Wyświetl wybrane aktywa",
             "3. Wyświetl wszystkie aktywa",
             "4. Wyświetl gotówkę",
-            "5. Powrót do menu"
-    };
+            "5. Powrót do menu"));
+
 
     public void startViewer(Wallet wallet) {
         boolean keepWorking = true;
 
         while(keepWorking) {
-            printOptions();
+            printer.printMenuOptions(options);
             int option = getOptionNumber();
             switch(option) {
-                case 1: assetsViewer.printWalletList(wallet.getWallet()); cont(); break;
-                case 2: printSingleWalletAsset(wallet); cont(); break;
-                case 3: assetsViewer.printWallet(wallet.getWallet()); cont(); break;
+                case 1: assetsViewer.printWalletList(wallet.getWallet()); menuService.cont(); break;
+                case 2: printSingleWalletAsset(wallet); menuService.cont(); break;
+                case 3: assetsViewer.printWallet(wallet.getWallet()); menuService.cont(); break;
                 case 4:
-                    System.out.println("Posiadana gotówka: " + wallet.getCash() + "PLN"); cont(); break;
+                    printer.printActualLine("Posiadana gotówka: " + wallet.getCash() + "PLN"); menuService.cont(); break;
                 case 5: keepWorking = false; break;
                 default:
-                    System.out.println("Nie ma takiej opcji.");
+                    printer.printActualLine("Nie ma takiej opcji.");
             }
         }
     }
 
-
-    private void printOptions() {
-        Arrays.asList(options).forEach(option -> {
-            System.out.println(option);
-        });
-    }
-
-
-
     private int getOptionNumber() {
         Scanner scan = new Scanner(System.in);
         Integer num = null;
-        System.out.println("Podaj opcje: ");
+        printer.printActualLine("Podaj opcje: ");
         while (num == null) {
             try {
                 num = scan.nextInt();
             } catch (InputMismatchException e) {
-                System.err.println("Zła wartość, spróbuj ponownie: ");
+                printer.printError("Zła wartość, spróbuj ponownie: ");
                 scan.next();
             }
         }
@@ -66,31 +58,25 @@ public class WalletViewer {
     private void printSingleWalletAsset(Wallet wallet) {
         Scanner scan = new Scanner(System.in);
         if (wallet.getWallet().size() == 0) {
-            System.out.println("Brak aktywów do wyświetlenia");
+            printer.printActualLine("Brak aktywów do wyświetlenia");
         } else {
             int index = -1;
-            System.out.println("Który aktyw chcesz zobaczyć ?");
+            printer.printActualLine("Który aktyw chcesz zobaczyć ?");
 
             while (checkWAIndex(wallet, index)) {
                 try {
-                    System.out.println("Podaj wartość od 1 do " + wallet.getWallet().size());
+                    printer.printActualLine("Podaj wartość od 1 do " + wallet.getWallet().size());
                     index = scan.nextInt();
                 } catch (InputMismatchException e) {
-                    System.err.println("Zła wartość, spróbuj ponownie.");
+                    printer.printError("Zła wartość, spróbuj ponownie.");
                     scan.next();
                 }
             }
-            new AssetsViewer().printWalletAsset(wallet.getWallet().get(index - 1));
+            assetsViewer.printWalletAsset(wallet.getWallet().get(index - 1));
         }
     }
     //TODO: put this in other class like validator
     private boolean checkWAIndex (Wallet wallet, int i) {
-        return !Pattern.matches("[1-" + wallet.getWallet().size() +"]", String.valueOf(i));
-    }
-    //TODO: put this on in other class
-    private void cont() {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Aby kontynuować naciśnij ENTER");
-        scan.nextLine();
+        return !Pattern.matches("[1-" + wallet.getWallet().size() + "]", String.valueOf(i));
     }
 }
