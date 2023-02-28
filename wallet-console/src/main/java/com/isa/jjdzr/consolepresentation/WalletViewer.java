@@ -26,8 +26,7 @@ public class WalletViewer {
 
         while(keepWorking) {
             printer.printMenuOptions(options);
-            int option = getOptionNumber();
-            switch(option) {
+            switch(menuService.getMenuOption(options.size())) {
                 case 1:
                     assetsViewer.printWalletList(wallet.getWallet());
                     menuService.cont();
@@ -53,21 +52,7 @@ public class WalletViewer {
         }
     }
 
-    private int getOptionNumber() {
-        Scanner scan = new Scanner(System.in);
-        Integer num = null;
-        printer.printActualLine("Podaj opcje: ");
-        while (num == null) {
-            try {
-                num = scan.nextInt();
-            } catch (InputMismatchException e) {
-                printer.printError("Zła wartość, spróbuj ponownie: ");
-                scan.next();
-            }
-        }
-        return num;
-    }
-    //TODO: remake this ??
+    //TODO: remake this - three parts 1. validation if wallet is empty, 2.'getAssetToPrint' and 3. printing actual asset
     private void printSingleWalletAsset(Wallet wallet) {
         Scanner scan = new Scanner(System.in);
         if (wallet.getWallet().size() == 0) {
@@ -88,7 +73,7 @@ public class WalletViewer {
             assetsViewer.printWalletAsset(wallet.getWallet().get(index - 1));
         }
     }
-    //TODO: put this in other class like validator
+    //TODO: put this in other class like validator and remake it
     private boolean checkWAIndex (Wallet wallet, int i) {
         return !Pattern.matches("[1-" + wallet.getWallet().size() + "]", String.valueOf(i));
     }
