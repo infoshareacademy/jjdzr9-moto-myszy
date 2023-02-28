@@ -21,7 +21,7 @@ public class BrokerBuy {
         System.out.println("Zapłaciłeś: " + asset.getCurrentPrice().multiply(new BigDecimal(quantity)) + "PLN");
 
     }
-    //FIXME:
+    //FIXME: make working validation
     private Asset getAsset(Market market) {
 
         Scanner scanner = new Scanner(System.in);

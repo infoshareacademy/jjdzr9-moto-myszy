@@ -11,15 +11,14 @@ import java.util.regex.Pattern;
 public class LoadViewer {
     private Printable printer = new Printer();
     public Wallet load() {
-        Scanner scan = new Scanner(System.in);
         Wallet wallet = null;
         printer.printActualLine("Za chwilę nastąpi wczytanie portfela.");
         if (doYouWantToContinue()) {
             wallet = new WalletLoader().loadWallet();
             if (wallet == null) {
-                System.out.println("Nie udało się wczytać portfela.");
+                printer.printActualLine("Nie udało się wczytać portfela.");
             } else {
-                System.out.println("Wczytanie zakończone sukcesem.");
+                printer.printActualLine("Wczytanie zakończone sukcesem.");
             }
         }
         return wallet;
@@ -27,15 +26,15 @@ public class LoadViewer {
 
     private boolean doYouWantToContinue() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Czy chcesz kontynuować [T/N]?");
+        printer.printActualLine("Czy chcesz kontynuować [T/N]?");
         String decision = scan.nextLine();
         while (isInvalid(decision)) {
-            System.err.println("Zła wartość, podaj T lub N:");
+            printer.printError("Zła wartość, podaj T lub N:");
             decision = scan.nextLine();
         }
         return decision.equalsIgnoreCase("T");
     }
-
+    //TODO: put in other class
     private boolean isInvalid(String str) {
         String validSymbols = "[TN]?";
         return !Pattern.matches(validSymbols, str.toUpperCase());

@@ -1,5 +1,7 @@
 package com.isa.jjdzr.consolepresentation;
 
+import com.isa.jjdzr.console.Printable;
+import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Wallet;
 
 import java.util.Arrays;
@@ -8,8 +10,10 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class WalletViewer {
+    private Printable printer = new Printer();
+    private AssetsViewer assetsViewer = new AssetsViewer();
     private final String[] options = { //Maciek
-            "1. Wyświetl listę posiadanych aktyw",
+            "1. Wyświetl listę posiadanych aktywów",
             "2. Wyświetl wybrane aktywa",
             "3. Wyświetl wszystkie aktywa",
             "4. Wyświetl gotówkę",
@@ -23,9 +27,9 @@ public class WalletViewer {
             printOptions();
             int option = getOptionNumber();
             switch(option) {
-                case 1: new AssetsViewer().printWalletList(wallet.getWallet()); cont(); break;
+                case 1: assetsViewer.printWalletList(wallet.getWallet()); cont(); break;
                 case 2: printSingleWalletAsset(wallet); cont(); break;
-                case 3: new AssetsViewer().printWallet(wallet.getWallet()); cont(); break;
+                case 3: assetsViewer.printWallet(wallet.getWallet()); cont(); break;
                 case 4:
                     System.out.println("Posiadana gotówka: " + wallet.getCash() + "PLN"); cont(); break;
                 case 5: keepWorking = false; break;
@@ -58,11 +62,11 @@ public class WalletViewer {
         }
         return num;
     }
-
+    //TODO: remake this ??
     private void printSingleWalletAsset(Wallet wallet) {
         Scanner scan = new Scanner(System.in);
         if (wallet.getWallet().size() == 0) {
-            System.out.println("Brak aktyw do wyświetlenia");
+            System.out.println("Brak aktywów do wyświetlenia");
         } else {
             int index = -1;
             System.out.println("Który aktyw chcesz zobaczyć ?");
@@ -79,11 +83,11 @@ public class WalletViewer {
             new AssetsViewer().printWalletAsset(wallet.getWallet().get(index - 1));
         }
     }
-
+    //TODO: put this in other class like validator
     private boolean checkWAIndex (Wallet wallet, int i) {
         return !Pattern.matches("[1-" + wallet.getWallet().size() +"]", String.valueOf(i));
     }
-
+    //TODO: put this on in other class
     private void cont() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Aby kontynuować naciśnij ENTER");

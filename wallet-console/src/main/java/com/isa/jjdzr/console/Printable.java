@@ -7,4 +7,6 @@ public interface Printable {
     void printIncomingCash(String cash);
     void printError(String error);
     void printMenuOptions(List<String> options);
+    void printEmptyLine();
+    void printDontCreateMessage();
 }

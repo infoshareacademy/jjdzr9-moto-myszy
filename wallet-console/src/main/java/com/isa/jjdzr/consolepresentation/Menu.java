@@ -105,7 +105,7 @@ public class Menu  {
         clearScreen();
         printer.printActualLine("Do widzenia!!!");
     }
-
+    //TODO: remake it as multipurpose and put in other class
     private int getOptionNumber() {
         Scanner scan = new Scanner(System.in);
         Integer num = null;
@@ -124,17 +124,17 @@ public class Menu  {
         }
         return num;
     }
-
+    //TODO: put this in other class (validator)
     private boolean isWalletNull(Wallet wallet) {
         return wallet == null;
     }
-
+    //TODO: put this in other class
     private void cont() {
         Scanner scan = new Scanner(System.in);
         printer.printActualLine("Aby kontynuować naciśnij ENTER");
         scan.nextLine();
     }
-
+    //TODO: put this in other class
     private void clearScreen() {
         printer.printActualLine("\033\143");
         System.out.flush();

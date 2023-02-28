@@ -10,7 +10,7 @@ public class Printer implements Printable{
     }
     @Override
     public void printIncomingCash(String cash) {
-        System.out.println("Portfel zasilony kwotą: " + cash + "PLN");
+        printActualLine("Portfel zasilony kwotą: " + cash + "PLN");
     }
 
     @Override
@@ -20,5 +20,16 @@ public class Printer implements Printable{
     @Override
     public void printMenuOptions(List<String> options) {
         options.forEach(this::printActualLine);
+    }
+
+    @Override
+    public void printEmptyLine() {
+        printActualLine("");
+    }
+
+    @Override
+    public void printDontCreateMessage() {
+        printActualLine("Portfel nie zostanie utworzony.");
+        printActualLine("Powrót do menu głównego");
     }
 }

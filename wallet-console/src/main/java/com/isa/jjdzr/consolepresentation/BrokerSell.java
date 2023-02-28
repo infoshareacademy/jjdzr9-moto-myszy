@@ -57,7 +57,7 @@ public class BrokerSell {
 
         return walletAssetIndex;
     }
-    //FIXME:
+    //FIXME: make working validation
     private String getQuantityToSell(Wallet wallet, int index) {
 
         Scanner input = new Scanner(System.in);
