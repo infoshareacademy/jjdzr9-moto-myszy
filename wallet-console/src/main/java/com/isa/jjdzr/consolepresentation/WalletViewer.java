@@ -28,12 +28,25 @@ public class WalletViewer {
             printer.printMenuOptions(options);
             int option = getOptionNumber();
             switch(option) {
-                case 1: assetsViewer.printWalletList(wallet.getWallet()); menuService.cont(); break;
-                case 2: printSingleWalletAsset(wallet); menuService.cont(); break;
-                case 3: assetsViewer.printWallet(wallet.getWallet()); menuService.cont(); break;
+                case 1:
+                    assetsViewer.printWalletList(wallet.getWallet());
+                    menuService.cont();
+                    break;
+                case 2:
+                    printSingleWalletAsset(wallet);
+                    menuService.cont();
+                    break;
+                case 3:
+                    assetsViewer.printWallet(wallet.getWallet());
+                    menuService.cont();
+                    break;
                 case 4:
-                    printer.printActualLine("Posiadana gotówka: " + wallet.getCash() + "PLN"); menuService.cont(); break;
-                case 5: keepWorking = false; break;
+                    printer.printActualLine("Posiadana gotówka: " + wallet.getCash() + "PLN");
+                    menuService.cont();
+                    break;
+                case 5:
+                    keepWorking = false;
+                    break;
                 default:
                     printer.printActualLine("Nie ma takiej opcji.");
             }
