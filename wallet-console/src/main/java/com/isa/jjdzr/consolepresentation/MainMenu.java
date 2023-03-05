@@ -8,7 +8,8 @@ import com.isa.jjdzr.console.Service;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.market.Market;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainMenu implements Menu {
     private Printable printer = new Printer();
