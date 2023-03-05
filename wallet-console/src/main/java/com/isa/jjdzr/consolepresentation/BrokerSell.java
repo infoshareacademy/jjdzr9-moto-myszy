@@ -1,9 +1,7 @@
 
 package com.isa.jjdzr.consolepresentation;
 
-import com.isa.jjdzr.brokerlogic.BrokerLogicBuy;
 import com.isa.jjdzr.brokerlogic.BrokerLogicSell;
-import com.isa.jjdzr.dto.Asset;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.dto.WalletAsset;
 import com.isa.jjdzr.market.Market;
