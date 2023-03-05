@@ -1,89 +1,90 @@
 package com.isa.jjdzr.consolepresentation;
 
+import com.isa.jjdzr.console.Printable;
+import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.walletgenerator.WalletGenerator;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-class WalletGenView {
+public class WalletGenView {
+    private Printable printer = new Printer();
     public Wallet start(Wallet wallet) {
-        System.out.println("Witam w generatorze portfela inwestycyjnego.");
+        printer.printActualLine("Witam w generatorze portfela inwestycyjnego.");
         if (doYouWantToContinue()) {
-            printDontCreateMessage();
+            printer.printDontCreateMessage();
         } else {
             if (wallet != null) {
-                System.out.println("Portfel nie jest pusty. Utworzenie nowego spowoduje utratę niezapisanych zmian.");
+                printer.printActualLine("Portfel nie jest pusty. Utworzenie nowego spowoduje utratę niezapisanych zmian.");
                 if (doYouWantToContinue()) {
-                    printDontCreateMessage();
+                    printer.printDontCreateMessage();
                     return wallet;
                 }
             }
-            System.out.println("Utworzymy teraz nowy portfel inwestycyjny.");
+            printer.printActualLine("Utworzymy teraz nowy portfel inwestycyjny.");
             String cash = getCashAmount();
             wallet = new WalletGenerator().generateWallet(cash);
         }
         return wallet;
     }
-
+    //TODO: put this in other class (wallet generator/updater)
     public void addCash(Wallet wallet) {
         String cash = getCashAmount();
         wallet.addCash(cash);
     }
-
+    //TODO: put this in other class
     private boolean doYouWantToContinue() { //sprawdza czy chcesz kontynuowac i jesli tak to wywala false
         Scanner scan = new Scanner(System.in);
-        System.out.println("Czy chcesz kontynuować [T/N]?");
+        printer.printActualLine("Czy chcesz kontynuować [T/N]?");
         String decision = scan.nextLine();
         while (isInvalid(decision)) {
-            System.err.println("Zła wartość, podaj T lub N:");
+            printer.printError("Zła wartość, podaj T lub N:");
             decision = scan.nextLine();
         }
         return !decision.equalsIgnoreCase("T");
     }
-
+    //TODO: put this in other class like validator and rename
     private boolean isInvalid(String str) {
         String validSymbols = "[TN]?";
         return !Pattern.matches(validSymbols, str.toUpperCase());
     }
 
-    private void printDontCreateMessage() {
-        System.out.println("Portfel nie zostanie utworzony.");
-        System.out.println("Powrót do menu głównego");
-    }
+
     private String getCashAmount() {
         Scanner scan = new Scanner(System.in);
         String cash;
-        System.out.println("Podaj jaką kwotą chcesz zasilić portfel: ");
+        printer.printActualLine("Podaj jaką kwotą chcesz zasilić portfel: ");
         cash = scan.nextLine();
         cash = replaceComma(cash);
         while (isInvalidCash(cash)) {
-            System.err.println("Nieprawidłowa wartość. Podaj kwotę: ");
+            printer.printError("Nieprawidłowa wartość. Podaj kwotę: ");
             cash = scan.nextLine();
             cash = replaceComma(cash);
         }
-        System.out.println("Portfel zasilony kwotą: " + cash + "PLN");
-        System.out.println("Powrót do menu głównego.");
+        printer.printIncomingCash(cash);
+        printer.printActualLine("Powrót do menu głównego.");
 
         return cash;
     }
-
+//    TODO: put validation in other class
+//          FIXME: remake this validation with regex
     private boolean isInvalidCash(String str) {
         int countDots = (int) str.chars().filter(ch -> ch == '.').count();
         if (countDots > 1) {
             return true;
         } else if (str.length() > 10) {
-            System.err.println("Zbyt duża kwota!");
+            printer.printError("Zbyt duża kwota!");
             return true;
         } else if (str.charAt(0) == ('0')) {
-            System.err.println("Kwota nie może zaczynać się od 0!");
+            printer.printError("Kwota nie może zaczynać się od 0!");
             return true;
         } else {
             String validSymbols = "[0-9.]*";
             return !Pattern.matches(validSymbols, str);
         }
     }
-
+// TODO: put in other class
     private String replaceComma(String str){
         return str.replace(',','.');
     }

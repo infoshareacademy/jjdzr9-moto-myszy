@@ -12,12 +12,12 @@ public class BrokerLogicBuy {
         createWalletAsset(wallet, asset, quantity);
         spendCash(wallet, asset, quantity);
     }
-
+    //TODO: put this in wallet service
     private void createWalletAsset(Wallet wallet, Asset asset, String quantity) {
         WalletAsset wa = new WalletAsset(asset, quantity);
         wallet.addAsset(wa);
     }
-
+    //TODO: put this in wallet service
     private void spendCash(Wallet wallet, Asset asset, String quantity) {
         BigDecimal cashToSpend = new BigDecimal(quantity).multiply(asset.getCurrentPrice());
         wallet.spendCash(cashToSpend);

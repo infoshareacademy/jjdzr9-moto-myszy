@@ -12,7 +12,7 @@ public class Wallet {
         this.wallet = new ArrayList<>();
         this.cash = new BigDecimal(0);
     }
-
+    //TODO: put those in wallet service
     public void addAsset(WalletAsset asset) {
         wallet.add(asset);
     }
