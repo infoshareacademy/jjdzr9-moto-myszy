@@ -20,4 +20,9 @@ public class MenuController {
     public String getMarket(){
         return "market";
     }
+
+    @GetMapping("/register")
+    public String getRegPage(){
+        return "register";
+    }
 }

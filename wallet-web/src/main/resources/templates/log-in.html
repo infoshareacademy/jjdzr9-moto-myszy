@@ -8,60 +8,73 @@
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body class="p-3 mb-2 bg-body-secondary">
-    <div class="layout">
-        <header class="header">
-            <div>
-                <h1 class="h1">WalletApp by moto-myszy</h1>
-            </div>
+<div class="layout">
+    <header class="header">
+        <div>
+            <h1 class="h1">WalletApp by moto-myszy</h1>
+        </div>
 
-        </header>
+    </header>
     <!-- As a link -->
-        <nav class="nav" >
-            <div class="">
-                <a th:href="@{/}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">HOME</a>
-            </div>
-            <div class="">
-                <a th:href="@{/market}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">MARKET</a>
-            </div>
-            <div class="">
-                <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
-            </div>
-            <div class="">
-                <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
-            </div>
-            <div class="">
-                <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
-            </div>
-            <div class="">
-                <a th:href="@{/login}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">Log in</a>
-            </div>
-        </nav>
-        <aside class="aside" >
-            <div>
-                <h5>Side menu</h5>    
-            </div>
-            <div class="">
-                <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
-            </div>
-            <div class="">
-                <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
-            </div>
-            <div class="">
-                <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
-            </div>
-            <div class="">
-                <a th:href="@{/login}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
-            </div>
-        </aside>
-        <section class="section">
+    <nav class="nav" >
+        <div class="">
+            <a th:href="@{/}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">HOME</a>
+        </div>
+        <div class="">
+            <a th:href="@{/market}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">MARKET</a>
+        </div>
+        <div class="">
+            <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+        </div>
+        <div class="">
+            <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+        </div>
+        <div class="">
+            <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+        </div>
+        <div class="">
+            <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">Log in</a>
+        </div>
+    </nav>
+    <aside class="aside" >
+        <div>
+            <h3>User </h3>
+        </div>
+        <div>
+            <h5>Side menu</h5>
+        </div>
+        <div class="">
+            <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+        </div>
+        <div class="">
+            <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+        </div>
+        <div class="">
+            <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+        </div>
+        <div class="">
+            <a th:href="@{/login}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+        </div>
+    </aside>
+    <section class="section">
 
-            <div>
-                <h1>Log-in page</h1>
-            </div>
-        </section>
-        <footer class="footer">
+        <div>
+            <h1>Log-in page</h1>
+        </div>
+        <div>
+            <form method="post" >
+                <label for="username">Username:</label>
+                <input type="text" id="username" >
+                <label for="pass">Password:</label>
+                <input type="password" id="pass" >
+                <input type="submit" class="btn btn-outline-dark" value="Log In">
+                <a th:href="@{/register}" type="button" class="btn btn-outline-danger">Register</a>
+            </form>
+        </div>
+    </section>
+    <footer class="footer">
 
-        </footer>
-    </div>
+    </footer>
+</div>
 </body>
 </html>
