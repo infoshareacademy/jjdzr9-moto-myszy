@@ -17,7 +17,6 @@
                 <h2>Wallet view</h2>
             </div>
         </header>
-    <!-- As a link -->
         <nav class="nav" >
             <div class="">
                 <a th:href="@{/}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">HOME</a>
@@ -39,6 +38,9 @@
             </div>
         </nav>
         <aside class="aside" >
+            <div>
+                <h3>User <span th:text="${currentUser}"></span></h3>
+            </div>
             <div>
                 <h5>Side menu</h5>    
             </div>

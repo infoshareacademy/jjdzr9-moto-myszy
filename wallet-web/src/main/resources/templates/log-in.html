@@ -15,7 +15,6 @@
         </div>
 
     </header>
-    <!-- As a link -->
     <nav class="nav" >
         <div class="">
             <a th:href="@{/}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">HOME</a>
@@ -38,7 +37,7 @@
     </nav>
     <aside class="aside" >
         <div>
-            <h3>User </h3>
+            <h3>User <span th:text="${currentUser}"></span></h3>
         </div>
         <div>
             <h5>Side menu</h5>
@@ -62,11 +61,11 @@
             <h1>Log-in page</h1>
         </div>
         <div>
-            <form method="post" >
+            <form method="post" th:object="${user}" th:action="@{/handleLogin}">
                 <label for="username">Username:</label>
-                <input type="text" id="username" >
+                <input type="text" id="username" th:field="*{username}">
                 <label for="pass">Password:</label>
-                <input type="password" id="pass" >
+                <input type="password" id="pass" th:field="*{password}">
                 <input type="submit" class="btn btn-outline-dark" value="Log In">
                 <a th:href="@{/register}" type="button" class="btn btn-outline-danger">Register</a>
             </form>
