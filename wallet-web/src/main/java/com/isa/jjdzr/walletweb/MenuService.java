@@ -12,4 +12,8 @@ public class MenuService {
             return model.addAttribute("currentUser", "GUESS");
         }
     }
+
+    public Model addNewUser(Model model){
+        return model.addAttribute("user", new User());
+    }
 }

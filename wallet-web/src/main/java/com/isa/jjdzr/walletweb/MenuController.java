@@ -21,7 +21,7 @@ public class MenuController {
 
     @GetMapping("/login")
     public String getLogin(Model model){
-        model.addAttribute("user", new User());
+        menuService.addNewUser(model);
         menuService.addCurrentUser(model, currentUser);
         return "log-in";
     }
@@ -34,7 +34,7 @@ public class MenuController {
 
     @GetMapping("/register")
     public String getRegpage(Model model){
-        model.addAttribute("user", new User());
+        menuService.addNewUser(model);
         menuService.addCurrentUser(model, currentUser);
         return "register";
     }
