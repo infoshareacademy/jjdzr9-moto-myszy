@@ -9,5 +9,15 @@ public class MenuController {
     @GetMapping("/")
     public String getHomepage(){
         return "index";
-        }
+    }
+
+    @GetMapping("/login")
+    public String getLogIn(){
+        return "log-in";
+    }
+
+    @GetMapping("/market")
+    public String getMarket(){
+        return "market";
+    }
 }
