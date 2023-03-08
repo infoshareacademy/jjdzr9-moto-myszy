@@ -57,17 +57,25 @@
     </aside>
     <section class="section">
 
-        <div>
-            <h1>Log-in page</h1>
+        <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'success'">
+            <span class="btn btn-outline-success">REGISTRATION SUCCESSFUL</span>
         </div>
-        <div>
+        <div class="d-flex align-items-center justify-content-center">
             <form method="post" th:object="${user}" th:action="@{/handleLogin}">
+                <h4>Log-in page</h4>
                 <label for="username">Username:</label>
+                <br>
                 <input type="text" id="username" th:field="*{username}">
+                <br><br>
                 <label for="pass">Password:</label>
+                <br>
                 <input type="password" id="pass" th:field="*{password}">
-                <input type="submit" class="btn btn-outline-dark" value="Log In">
-                <a th:href="@{/register}" type="button" class="btn btn-outline-danger">Register</a>
+                <br>
+                <br>
+                <div class="d-flex align-items-center justify-content-between">
+                    <input type="submit" class="btn btn-outline-dark" value="Log-In">
+                    <a th:href="@{/register}" type="button" class="btn btn-outline-danger">Register</a>
+                </div>
             </form>
         </div>
     </section>

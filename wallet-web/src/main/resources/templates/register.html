@@ -68,13 +68,16 @@
                 <br>
                 <p style="color:red" th:errors="*{password}"></p>
                 <input type="password" id="pass" th:field="*{password}">
+                <br>
+                <label for="confirmPassword">Re-enter password:</label>
+                <br>
+                <input type="password" id="confirmPassword" th:field="*{confirmPassword}">
                 <br><br>
                 <input type="submit" class="btn btn-outline-dark" value="Register">
             </form>
         </div>
     </section>
     <footer class="footer">
-
     </footer>
 </div>
 </body>

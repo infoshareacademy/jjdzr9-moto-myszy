@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,9 +44,13 @@ public class MenuController {
     }
 
     @PostMapping("/handleReg")
-    public String register(@Valid User user, BindingResult result) {
+    public String register(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (!user.getPassword().equals(user.getConfirmPassword())) result.rejectValue("password","",
+                "Both fields must be the same");
         if (result.hasErrors()) return "register";
         userService.addUser(user);
+        String status = Constants.SUCCESS_STATUS;
+        redirectAttributes.addFlashAttribute("status", status);
         return "redirect:/login";
     }
 

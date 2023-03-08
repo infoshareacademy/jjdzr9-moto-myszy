@@ -12,6 +12,7 @@ public class User {
     @NotBlank(message="Password cannot be blank")
     @Size(min=6, message="Password is too short")
     private String password;
+    private String confirmPassword;
 
 
 }
