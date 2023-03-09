@@ -8,9 +8,11 @@ import lombok.Data;
 public class User {
     @NotBlank(message="Username cannot be blank")
     @Size(min=4, message="Username is too short")
+    @ValidSymbols
     private String username;
     @NotBlank(message="Password cannot be blank")
     @Size(min=6, message="Password is too short")
+    @ValidSymbols
     private String password;
     private String confirmPassword;
 
