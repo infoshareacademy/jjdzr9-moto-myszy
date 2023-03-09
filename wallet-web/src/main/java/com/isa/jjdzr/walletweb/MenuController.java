@@ -48,6 +48,7 @@ public class MenuController {
     public String register(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
         if (!user.getPassword().equals(user.getConfirmPassword())) result.rejectValue("password","",
                 "Both fields must be the same");
+        if (userService.checkUserName(user)) result.rejectValue("username","","Username already taken");
         if (result.hasErrors()) return "register";
         userService.addUser(user);
         String status = Constants.SUCCESS_STATUS;

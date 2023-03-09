@@ -26,4 +26,11 @@ public class UserService {
     public User addUser(User user){
         return fileUserRepository.save(user);
     }
+
+    public boolean checkUserName(User user) {
+        for (User u : fileUserRepository.getAll()) {
+            if (user.getUsername().equals(u.getUsername())) return true;
+        }
+        return false;
+    }
 }
