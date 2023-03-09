@@ -7,10 +7,10 @@ import java.util.List;
 @Component
 @AllArgsConstructor
 public class UserService {
-    private List<UserDto> users;
+    private List<User> users;
 
-    public UserDto login(UserDto user){
-        for (UserDto u : users) {
+    public User login(User user){
+        for (User u : users) {
             if (user.getUsername().equals(u.getUsername())) {
                 if (user.getPassword().equals(u.getPassword())) return u;
             }
@@ -18,7 +18,7 @@ public class UserService {
         return null;
     }
 
-    public void addUser(UserDto user){
+    public void addUser(User user){
         users.add(user);
     }
 }
