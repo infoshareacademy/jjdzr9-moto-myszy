@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 
 @Component
 public class MenuService {
-    public Model addCurrentUser(Model model, User user){
+    public Model addCurrentUser(Model model, UserDto user){
         if (user != null){
             return model.addAttribute("currentUser", user.getUsername());
         } else {
@@ -14,6 +14,6 @@ public class MenuService {
     }
 
     public Model addNewUser(Model model){
-        return model.addAttribute("user", new User());
+        return model.addAttribute("user", new UserDto());
     }
 }

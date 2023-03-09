@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -15,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class MenuController {
     private final MenuService menuService;
     private final UserService userService;
-    private User currentUser;
+    private UserDto currentUser;
 
     @GetMapping("/")
     public String getHomepage(Model model){
@@ -44,9 +43,7 @@ public class MenuController {
     }
 
     @PostMapping("/handleReg")
-    public String register(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
-        if (!user.getPassword().equals(user.getConfirmPassword())) result.rejectValue("password","",
-                "Both fields must be the same");
+    public String register(@Valid UserDto user, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) return "register";
         userService.addUser(user);
         String status = Constants.SUCCESS_STATUS;
@@ -55,7 +52,7 @@ public class MenuController {
     }
 
     @PostMapping("/handleLogin")
-    public String login(User user){
+    public String login(UserDto user){
         this.currentUser = userService.login(user);
         return "redirect:/";
     }
