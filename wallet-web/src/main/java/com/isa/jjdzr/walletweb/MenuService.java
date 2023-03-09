@@ -1,5 +1,6 @@
 package com.isa.jjdzr.walletweb;
 
+import com.isa.jjdzr.walletweb.dto.User;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
