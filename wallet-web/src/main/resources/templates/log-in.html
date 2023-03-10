@@ -37,9 +37,6 @@
     </nav>
     <aside class="aside" >
         <div>
-            <h3>User <span th:text="${currentUser}"></span></h3>
-        </div>
-        <div>
             <h5>Side menu</h5>
         </div>
         <div class="">
@@ -61,15 +58,15 @@
             <span class="btn btn-outline-success">REGISTRATION SUCCESSFUL</span>
         </div>
         <div class="d-flex align-items-center justify-content-center">
-            <form method="post" th:object="${user}" th:action="@{/handleLogin}">
+            <form method="post" >
                 <h4>Log-in page</h4>
                 <label for="username">Username:</label>
                 <br>
-                <input type="text" id="username" th:field="*{username}">
+                <input type="text" id="username">
                 <br><br>
                 <label for="pass">Password:</label>
                 <br>
-                <input type="password" id="pass" th:field="*{password}">
+                <input type="password" id="pass">
                 <br>
                 <br>
                 <div class="d-flex align-items-center justify-content-between">

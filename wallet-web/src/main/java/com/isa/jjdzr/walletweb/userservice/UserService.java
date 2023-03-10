@@ -9,7 +9,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class UserService {
-    private final FileUserRepository fileUserRepository;
+    private final UserRepository fileUserRepository;
     
     public List<User> getAll(){
         return fileUserRepository.getAll();
