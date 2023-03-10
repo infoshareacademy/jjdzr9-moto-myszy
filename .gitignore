@@ -35,3 +35,6 @@ out/
 .idea/
 .idea.idea
 *.iml
+data/
+.txt
+
