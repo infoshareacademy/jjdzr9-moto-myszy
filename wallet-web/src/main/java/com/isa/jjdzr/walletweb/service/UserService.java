@@ -1,6 +1,7 @@
-package com.isa.jjdzr.walletweb.userservice;
+package com.isa.jjdzr.walletweb.service;
 
 import com.isa.jjdzr.walletweb.dto.User;
+import com.isa.jjdzr.walletweb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -10,17 +11,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository fileUserRepository;
-    
+
     public List<User> getAll(){
         return fileUserRepository.getAll();
-    }
-    public User login(User user){
-        for (User u : getAll()) {
-            if (user.getUsername().equals(u.getUsername())) {
-                if (user.getPassword().equals(u.getPassword())) return u;
-            }
-        }
-        return null;
     }
 
     public User addUser(User user){

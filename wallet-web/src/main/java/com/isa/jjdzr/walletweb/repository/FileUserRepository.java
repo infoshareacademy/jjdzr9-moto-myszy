@@ -1,4 +1,4 @@
-package com.isa.jjdzr.walletweb.userservice;
+package com.isa.jjdzr.walletweb.repository;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,22 +21,17 @@ class FileUserRepository implements UserRepository{
     private Long nextId;
 
     public FileUserRepository() {
-        String entityName = "User";
-        userDirectory = prepareDirectory(entityName);
+        String name = "User";
+        userDirectory = prepareDirectory(name);
         nextId = calculateNextId(userDirectory);
         gson = prepareGson();
     }
     @Override
     public User save(User user) {
-        updateIdIfNewEntity(user);
+        updateIdIfNew(user);
         String json = gson.toJson(user);
         writeToFile(json, user.getId());
         return user;
-    }
-
-    public User find(Long id) {
-        FileReader reader = prepareReader(id);
-        return gson.fromJson(reader, User.class);
     }
 
     @Override
@@ -58,7 +53,7 @@ class FileUserRepository implements UserRepository{
         return file.getAbsolutePath();
     }
 
-    private void updateIdIfNewEntity(User user) {
+    private void updateIdIfNew(User user) {
         if(user.getId() == null) {
             user.setId(nextId++);
         }
@@ -71,7 +66,7 @@ class FileUserRepository implements UserRepository{
     }
 
     private Gson prepareGson() {
-        return new GsonBuilder().create();
+        return new GsonBuilder().setPrettyPrinting().create();
     }
 
     private FileWriter prepareWriter(Long userId) throws IOException {
@@ -80,8 +75,8 @@ class FileUserRepository implements UserRepository{
     }
 
     @SneakyThrows
-    private FileReader prepareReader(Long id) {
-        String filePath = prepareEntityFilePath(id);
+    private FileReader prepareReader(Long userId) {
+        String filePath = prepareEntityFilePath(userId);
         return new FileReader(new File(filePath));
     }
 
@@ -90,11 +85,11 @@ class FileUserRepository implements UserRepository{
         return new FileReader(file);
     }
 
-    private String prepareEntityFilePath(Long entityId) {
+    private String prepareEntityFilePath(Long userID) {
         return new StringBuilder()
                 .append(userDirectory)
                 .append(File.separator)
-                .append(entityId)
+                .append(userID)
                 .append(".json")
                 .toString();
     }
