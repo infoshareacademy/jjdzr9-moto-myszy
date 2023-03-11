@@ -1,4 +1,4 @@
-package com.isa.jjdzr.walletweb.userservice;
+package com.isa.jjdzr.walletweb.repository;
 
 import com.isa.jjdzr.walletweb.dto.User;
 
