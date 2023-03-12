@@ -43,7 +43,7 @@ public class FileRepository<T extends BaseEntity> {
         return gson.fromJson(reader, getParameterClass());
     }
 
-    public List<T> findAll() {
+    public List<T> getAll() {
         Class<T> parameterClass = getParameterClass();
         return stream(new File(entiryDirectory).listFiles())
                 .map(this::prepareReader)
