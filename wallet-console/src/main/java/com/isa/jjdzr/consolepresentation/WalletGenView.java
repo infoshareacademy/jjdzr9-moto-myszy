@@ -3,30 +3,37 @@ package com.isa.jjdzr.consolepresentation;
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Wallet;
+import com.isa.jjdzr.service.WalletService;
 import com.isa.jjdzr.walletgenerator.WalletGenerator;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class WalletGenView {
-    private Printable printer = new Printer();
-    public Wallet start(Wallet wallet) {
+    private final Printable printer;
+    private final WalletService walletService;
+    public WalletGenView(){
+        this.printer = new Printer();
+        this.walletService = new WalletService();
+    }
+    public Long start(Long walletId) {
         printer.printActualLine("Witam w generatorze portfela inwestycyjnego.");
         if (doYouWantToContinue()) {
             printer.printDontCreateMessage();
         } else {
-            if (wallet != null) {
+            if (walletId != null) {
+                //TODO: change this line/warning
                 printer.printActualLine("Portfel nie jest pusty. Utworzenie nowego spowoduje utratę niezapisanych zmian.");
                 if (doYouWantToContinue()) {
                     printer.printDontCreateMessage();
-                    return wallet;
+                    return walletId;
                 }
             }
             printer.printActualLine("Utworzymy teraz nowy portfel inwestycyjny.");
             String cash = getCashAmount();
-            wallet = new WalletGenerator().generateWallet(cash);
+            walletId = walletService.generateWallet(cash);
         }
-        return wallet;
+        return walletId;
     }
     //TODO: put this in other class (wallet generator/updater)
     public void addCash(Wallet wallet) {
