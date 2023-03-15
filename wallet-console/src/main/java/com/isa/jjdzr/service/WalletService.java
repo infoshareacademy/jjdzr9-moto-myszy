@@ -1,9 +1,11 @@
 package com.isa.jjdzr.service;
 
+import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.repositories.WalletRepository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class WalletService {
     private final WalletRepository walletRepository;
@@ -26,5 +28,14 @@ public class WalletService {
 
     public Wallet saveWallet(Wallet wallet) {
         return walletRepository.save(wallet);
+    }
+
+
+
+    public List<Wallet> getUsersWallets(Long userId) {
+        return walletRepository.getAll()
+                .stream()
+                .filter(w -> w.getUserId().equals(userId))
+                .toList();
     }
 }

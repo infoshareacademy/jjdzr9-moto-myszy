@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu implements Menu {
-    private final Printable printer = new Printer();
-    private final Service menuService = new MenuService();
+    private final Printable printer;
+    private final Service menuService;
+    private final Long userId;
     private final List<String> options = new ArrayList<>(
             List.of("1. Utwórz portfel.",
             "2. Wczytaj portfel",
@@ -24,6 +25,9 @@ public class MainMenu implements Menu {
             "9. Zakończ"));
 
     public MainMenu() {
+        this.printer = new Printer();
+        this.menuService = new MenuService();
+        this.userId  = 0L;
     }
     @Override
     public void startMenu() {
@@ -46,8 +50,8 @@ public class MainMenu implements Menu {
                     break;
                 case 2:
                     menuService.clearScreen();
-//                    TODO: remake Loader
-                    walletId = new LoadViewer().load();
+
+                    walletId = new LoadViewer().load(userId);
                     menuService.cont();
                     menuService.clearScreen();
                     break;
