@@ -39,23 +39,19 @@ public class MainMenu implements Menu {
             printer.printMenuOptions(options);
             switch(menuService.getMenuOption(options.size())) {
                 case 1:
-                    if (isWalletNull(walletId)) {
-                        menuService.clearScreen();
-                        //TODO: start refactoring here
-                        walletId = new WalletGenView().start(walletId);
-                    } else {
-                        printer.printError("Masz już wczytany portfel, nie możesz utworzyć nowego.");
-                    }
+                    menuService.clearScreen();
+                    walletId = new WalletGenView().start(walletId);
                     menuService.cont();
                     menuService.clearScreen();
                     break;
                 case 2:
                     menuService.clearScreen();
+//                    TODO: remake Loader
                     walletId = new LoadViewer().load();
                     menuService.cont();
                     menuService.clearScreen();
                     break;
-                case 3:
+                case 3: //TODO: this go out, will make auto save
                     if (isWalletNull(walletId)) {
                         printer.printError("Nie można zapisać nieistniejącego portfela!");
                     } else {

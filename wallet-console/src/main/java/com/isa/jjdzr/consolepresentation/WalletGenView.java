@@ -4,8 +4,8 @@ import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.service.WalletService;
-import com.isa.jjdzr.walletgenerator.WalletGenerator;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -31,10 +31,16 @@ public class WalletGenView {
             }
             printer.printActualLine("Utworzymy teraz nowy portfel inwestycyjny.");
             String cash = getCashAmount();
-            walletId = walletService.generateWallet(cash);
+            String walletName = getWalletName();
+            walletId = walletService.generateWallet(walletName, cash);
         }
         return walletId;
     }
+
+    private String getWalletName() {
+        return "";
+    }
+
     //TODO: put this in other class (wallet generator/updater)
     public void addCash(Wallet wallet) {
         String cash = getCashAmount();
@@ -64,7 +70,7 @@ public class WalletGenView {
         printer.printActualLine("Podaj jaką kwotą chcesz zasilić portfel: ");
         cash = scan.nextLine();
         cash = replaceComma(cash);
-        while (isInvalidCash(cash)) {
+        while (isCashInvalid(cash)) {
             printer.printError("Nieprawidłowa wartość. Podaj kwotę: ");
             cash = scan.nextLine();
             cash = replaceComma(cash);
@@ -76,7 +82,7 @@ public class WalletGenView {
     }
 //    TODO: put validation in other class
 //          FIXME: remake this validation with regex
-    private boolean isInvalidCash(String str) {
+    private boolean isCashInvalid(String str) {
         int countDots = (int) str.chars().filter(ch -> ch == '.').count();
         if (countDots > 1) {
             return true;

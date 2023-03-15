@@ -15,11 +15,16 @@ public class WalletService {
         this.walletAssetService = new WalletAssetService();
     }
 
-    public Long generateWallet(String cash) {
+    public Long generateWallet(String walletName, String cash) {
         Wallet wallet = new Wallet();
-        BigDecimal cashToAdd = new BigDecimal(cash);
-        wallet.setCash(cashToAdd);
-        walletRepository.save(wallet);
-        return wallet.getId();
+        wallet.setWalletName(walletName);
+        wallet.setId(0L);
+        wallet.setCash(new BigDecimal(cash));
+        Wallet result = saveWallet(wallet);
+        return result.getId();
+    }
+
+    public Wallet saveWallet(Wallet wallet) {
+        return walletRepository.save(wallet);
     }
 }
