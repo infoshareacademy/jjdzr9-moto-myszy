@@ -1,6 +1,5 @@
 package com.isa.jjdzr.service;
 
-import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.dto.WalletAsset;
 import com.isa.jjdzr.repositories.WalletRepository;
@@ -46,12 +45,24 @@ public class WalletService {
 
     public void spendCash(Long walletId, WalletAsset walletAsset) {
         Wallet wallet = walletRepository.find(walletId);
-        BigDecimal cashToSpend = walletAsset.getPurchasePrice().multiply(walletAsset.getPurchasedQuantity());
+        BigDecimal cashToSpend = walletAsset.getPurchasePrice().multiply(walletAsset.getQuantity());
         reduceCash(wallet, cashToSpend);
     }
 
     private void reduceCash(Wallet wallet, BigDecimal cashToSpend) {
         BigDecimal newCashAmount = wallet.getCash().subtract(cashToSpend);
+        wallet.setCash(newCashAmount);
+        walletRepository.save(wallet);
+    }
+
+    public List<WalletAsset> findWalletAssets(Long walletId) {
+        return walletAssetService.findWalletAssetsByWalletId(walletId);
+    }
+
+    public void addCashFromTransaction(Long walletId, BigDecimal quantityB, BigDecimal currentPrice) {
+        Wallet wallet = walletRepository.find(walletId);
+        BigDecimal cashToAdd = quantityB.multiply(currentPrice);
+        BigDecimal newCashAmount = wallet.getCash().add(cashToAdd);
         wallet.setCash(newCashAmount);
         walletRepository.save(wallet);
     }

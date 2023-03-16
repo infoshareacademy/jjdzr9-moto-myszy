@@ -1,6 +1,5 @@
 package com.isa.jjdzr.dto;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.isa.jjdzr.common.BaseEntity;
 import com.isa.jjdzr.market.Market;
 import lombok.Data;
@@ -13,7 +12,7 @@ public class WalletAsset implements BaseEntity {
     private Long walletId;
     private String assetId;
     private BigDecimal purchasePrice;
-    private BigDecimal purchasedQuantity;
+    private BigDecimal quantity;
 
     //TODO: put in wallet service
     public BigDecimal getCurrentPrice(Market market) {
@@ -24,9 +23,5 @@ public class WalletAsset implements BaseEntity {
             }
         }
         return null;
-    }
-
-    public void reduceAsset(String quantity) {
-        this.purchasedQuantity = purchasedQuantity.subtract(new BigDecimal(quantity));
     }
 }

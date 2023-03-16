@@ -55,15 +55,15 @@ public class MainMenu implements Menu {
                     menuService.cont();
                     menuService.clearScreen();
                     break;
-                case 3: //TODO: this go out, will make auto save
-                    if (isWalletNull(walletId)) {
-                        printer.printError("Nie można zapisać nieistniejącego portfela!");
-                    } else {
-                        new SaveViewer().save(walletId);
-                    }
-                    menuService.cont();
-                    menuService.clearScreen();
-                    break;
+//                case 3: //TODO: this go out, will make auto save
+//                    if (isWalletNull(walletId)) {
+//                        printer.printError("Nie można zapisać nieistniejącego portfela!");
+//                    } else {
+//                        new SaveViewer().save(walletId);
+//                    }
+//                    menuService.cont();
+//                    menuService.clearScreen();
+//                    break;
                 case 4: //TODO: remake (later, after refactoring brokers)
                     if (isWalletNull(walletId)) {
                         printer.printError("Brak portfela do wyświetlenia. Wczytaj lub utwórz nowy.");

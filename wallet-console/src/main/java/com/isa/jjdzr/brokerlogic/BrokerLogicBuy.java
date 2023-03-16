@@ -2,7 +2,6 @@ package com.isa.jjdzr.brokerlogic;
 
 import com.isa.jjdzr.dto.Asset;
 import com.isa.jjdzr.dto.WalletAsset;
-import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.service.WalletAssetService;
 import com.isa.jjdzr.service.WalletService;
 
@@ -25,7 +24,7 @@ public class BrokerLogicBuy {
 
     private WalletAsset createWalletAsset(Long walletId, Asset asset, String quantity) {
         WalletAsset walletAsset = new WalletAsset();
-        walletAsset.setPurchasedQuantity(new BigDecimal(quantity));
+        walletAsset.setQuantity(new BigDecimal(quantity));
         walletAsset.setWalletId(walletId);
         walletAsset.setAssetId(asset.getId());
         walletAsset.setPurchasePrice(asset.getCurrentPrice());

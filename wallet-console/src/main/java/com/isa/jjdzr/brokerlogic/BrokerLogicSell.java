@@ -1,27 +1,24 @@
 package com.isa.jjdzr.brokerlogic;
 
 import com.isa.jjdzr.dto.Wallet;
-import com.isa.jjdzr.market.Market;
+import com.isa.jjdzr.service.WalletAssetService;
+import com.isa.jjdzr.service.WalletService;
 
 import java.math.BigDecimal;
 
 public class BrokerLogicSell {
+    private final WalletAssetService walletAssetService;
+    private final WalletService walletService;
 
-    public void sell(Wallet wallet, int index, String quantity, BigDecimal currentPrice) {
-        changeWalletAsset(wallet, index, quantity);
-        addCash(wallet, quantity, currentPrice);
+    public BrokerLogicSell() {
+        this.walletAssetService = new WalletAssetService();
+        this.walletService = new WalletService();
     }
-    //TODO: put this in wallet service
-    private void changeWalletAsset(Wallet wallet, int index, String quantity) {
-        //na podstawie tych danych modyfikuje nam obiekt WalletAsset, który chcemy sprzedać lub będzie go usuwać z listy jeśli sprzedamy całosć
-        if (wallet.getWallet().get(index).getPurchasedQuantity().compareTo(new BigDecimal(quantity)) == 0) {
-            wallet.getWallet().remove(index);
-        } else {
-            wallet.getWallet().get(index).reduceAsset(quantity);
-        }
+
+    public void sell(Long walletId, Long walletAssetId, String quantity, BigDecimal currentPrice) {
+        BigDecimal quantityB = new BigDecimal(quantity);
+        walletAssetService.changeWalletAsset(walletAssetId, quantityB);
+        walletService.addCashFromTransaction(walletId, quantityB, currentPrice);
     }
-    //TODO: put this in wallet service
-    private void addCash(Wallet wallet,String quantity, BigDecimal currentPrice) {
-        wallet.addCash(new BigDecimal(quantity).multiply(currentPrice));
-    }
+
 }

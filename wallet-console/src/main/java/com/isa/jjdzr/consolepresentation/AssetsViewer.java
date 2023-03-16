@@ -22,12 +22,12 @@ public class AssetsViewer {
     public void printWalletAsset(WalletAsset walletAsset) {
         printer.printActualLine("ID: " + walletAsset.getId());
         printer.printActualLine("Cena zakupu: " + walletAsset.getPurchasePrice() + "PLN");
-        printer.printActualLine("Ilość: " + walletAsset.getPurchasedQuantity());
+        printer.printActualLine("Ilość: " + walletAsset.getQuantity());
         //TODO:
-        printer.printActualLine("Wartość w momencie zakupu: " +walletAsset.getPurchasedQuantity().multiply(walletAsset.getPurchasePrice()) + "PLN");
+        printer.printActualLine("Wartość w momencie zakupu: " +walletAsset.getQuantity().multiply(walletAsset.getPurchasePrice()) + "PLN");
         BigDecimal cp = walletAsset.getCurrentPrice(new Market());
         printer.printActualLine("Aktualna cena: " + cp + "PLN");
-        printer.printActualLine("Aktualna wartość: " + cp.multiply(walletAsset.getPurchasedQuantity()) + "PLN");
+        printer.printActualLine("Aktualna wartość: " + cp.multiply(walletAsset.getQuantity()) + "PLN");
         printer.printEmptyLine();
     }
 
