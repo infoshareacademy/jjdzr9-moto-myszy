@@ -13,21 +13,22 @@ public class MainMenu implements Menu {
     private final Printable printer;
     private final Service menuService;
     private final Long userId;
-    private final List<String> options = new ArrayList<>(
-            List.of("1. Utwórz portfel.",
-            "2. Wczytaj portfel",
-            "3. Zapisz portfel",
-            "4. Wyświetl portfel",
-            "5. Dokonaj zakupu",
-            "6. Dokonaj sprzedaży",
-            "7. Dodaj gotówkę",
-            "8. Kursy walut",
-            "9. Zakończ"));
+    private final List<String> options;
 
     public MainMenu() {
         this.printer = new Printer();
         this.menuService = new MenuService();
         this.userId  = 0L;
+        this.options = new ArrayList<>(
+                List.of("1. Utwórz portfel.",
+                        "2. Wczytaj portfel",
+                        "3. Zapisz portfel",
+                        "4. Wyświetl portfel",
+                        "5. Dokonaj zakupu",
+                        "6. Dokonaj sprzedaży",
+                        "7. Dodaj gotówkę",
+                        "8. Kursy walut",
+                        "9. Zakończ"));
     }
     @Override
     public void startMenu() {
@@ -50,7 +51,6 @@ public class MainMenu implements Menu {
                     break;
                 case 2:
                     menuService.clearScreen();
-
                     walletId = new LoadViewer().load(userId);
                     menuService.cont();
                     menuService.clearScreen();
@@ -64,32 +64,31 @@ public class MainMenu implements Menu {
                     menuService.cont();
                     menuService.clearScreen();
                     break;
-                case 4:
+                case 4: //TODO: remake (later, after refactoring brokers)
                     if (isWalletNull(walletId)) {
                         printer.printError("Brak portfela do wyświetlenia. Wczytaj lub utwórz nowy.");
                     } else {
                         menuService.clearScreen();
-                        new WalletViewer().startViewer(walletId);
+                        walletId = new WalletViewer().startViewer(walletId);
                     }
                     menuService.cont();
                     menuService.clearScreen();
                     break;
-                case 5:
                     if (isWalletNull(walletId)) {
                         printer.printError("Nie można wykonać operacji na nieistniejącym portfelu!");
                     } else {
                         menuService.clearScreen();
-                        new BrokerBuy().buy(walletId);
+                        walletId = new BrokerBuy().buy(walletId);
                     }
                     menuService.cont();
                     menuService.clearScreen();
                     break;
-                case 6:
+                case 6: //TODO: refactor
                     if (isWalletNull(walletId)) {
                         printer.printError("Nie można wykonać operacji na nieistniejącym portfelu!");
                     } else {
                         menuService.clearScreen();
-                        new BrokerSell().sell(walletId);
+                        walletId = new BrokerSell().sell(walletId);
                     }
                     menuService.cont();
                     menuService.clearScreen();
@@ -99,7 +98,7 @@ public class MainMenu implements Menu {
                         printer.printError("Nie można wykonać operacji na nieistniejącym portfelu!");
                     } else {
                         menuService.clearScreen();
-                        new WalletGenView().addCash(walletId);
+                        new WalletGenView().topUpWallet(walletId);
                     }
                     menuService.cont();
                     menuService.clearScreen();

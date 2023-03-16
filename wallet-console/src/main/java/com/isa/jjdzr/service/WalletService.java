@@ -2,6 +2,7 @@ package com.isa.jjdzr.service;
 
 import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Wallet;
+import com.isa.jjdzr.dto.WalletAsset;
 import com.isa.jjdzr.repositories.WalletRepository;
 
 import java.math.BigDecimal;
@@ -37,5 +38,21 @@ public class WalletService {
                 .stream()
                 .filter(w -> w.getUserId().equals(userId))
                 .toList();
+    }
+
+    public Wallet find(Long walletId) {
+        return walletRepository.find(walletId);
+    }
+
+    public void spendCash(Long walletId, WalletAsset walletAsset) {
+        Wallet wallet = walletRepository.find(walletId);
+        BigDecimal cashToSpend = walletAsset.getPurchasePrice().multiply(walletAsset.getPurchasedQuantity());
+        reduceCash(wallet, cashToSpend);
+    }
+
+    private void reduceCash(Wallet wallet, BigDecimal cashToSpend) {
+        BigDecimal newCashAmount = wallet.getCash().subtract(cashToSpend);
+        wallet.setCash(newCashAmount);
+        walletRepository.save(wallet);
     }
 }

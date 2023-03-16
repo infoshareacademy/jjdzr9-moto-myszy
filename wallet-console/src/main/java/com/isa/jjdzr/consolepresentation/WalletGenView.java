@@ -5,7 +5,6 @@ import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.service.WalletService;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -41,8 +40,8 @@ public class WalletGenView {
         return "";
     }
 
-    //TODO: put this in other class (wallet generator/updater)
-    public void addCash(Wallet wallet) {
+    //TODO: recator this
+    public void topUpWallet(Long walletId) {
         String cash = getCashAmount();
         wallet.addCash(cash);
     }
@@ -81,7 +80,6 @@ public class WalletGenView {
         return cash;
     }
 //    TODO: put validation in other class
-//          FIXME: remake this validation with regex
     private boolean isCashInvalid(String str) {
         int countDots = (int) str.chars().filter(ch -> ch == '.').count();
         if (countDots > 1) {

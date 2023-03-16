@@ -10,23 +10,10 @@ import java.util.List;
 @Data
 public class WalletAsset implements BaseEntity {
     private Long id;
-    private final String assetId;
-    private final BigDecimal purchasePrice;
+    private Long walletId;
+    private String assetId;
+    private BigDecimal purchasePrice;
     private BigDecimal purchasedQuantity;
-
-    @JsonCreator
-    public WalletAsset() {
-        this.assetId = "id";
-        this.purchasePrice = new BigDecimal("0");
-        this.purchasedQuantity = new BigDecimal("0");
-    }
-
-    public WalletAsset(Asset asset, String purchasedQuantity) {
-        this.assetId = asset.getId();
-        this.purchasePrice = new BigDecimal(String.valueOf(asset.getCurrentPrice()));
-        this.purchasedQuantity = new BigDecimal(purchasedQuantity);
-
-    }
 
     //TODO: put in wallet service
     public BigDecimal getCurrentPrice(Market market) {
