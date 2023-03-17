@@ -14,14 +14,4 @@ public class WalletAsset implements BaseEntity {
     private BigDecimal purchasePrice;
     private BigDecimal quantity;
 
-    //TODO: put in wallet service
-    public BigDecimal getCurrentPrice(Market market) {
-        List<Asset> assetList = market.availableAssets();
-        for (Asset a : assetList) {
-            if (a.getId().equals(this.assetId)) {
-                return a.getCurrentPrice();
-            }
-        }
-        return null;
-    }
 }

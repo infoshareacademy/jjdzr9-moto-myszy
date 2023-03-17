@@ -5,6 +5,7 @@ import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.service.WalletService;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -42,8 +43,8 @@ public class WalletGenView {
 
     //TODO: recator this
     public void topUpWallet(Long walletId) {
-        String cash = getCashAmount();
-        wallet.addCash(cash);
+        BigDecimal cash = new BigDecimal(getCashAmount());
+        walletService.topUpWallet(walletId, cash);
     }
     //TODO: put this in other class
     private boolean doYouWantToContinue() { //sprawdza czy chcesz kontynuowac i jesli tak to wywala false

@@ -66,4 +66,11 @@ public class WalletService {
         wallet.setCash(newCashAmount);
         walletRepository.save(wallet);
     }
+
+    public void topUpWallet(Long walletId, BigDecimal cash) {
+        Wallet wallet = find(walletId);
+        BigDecimal newCashAmount = wallet.getCash().add(cash);
+        wallet.setCash(newCashAmount);
+        saveWallet(wallet);
+    }
 }

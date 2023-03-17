@@ -5,13 +5,23 @@ import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Asset;
 import com.isa.jjdzr.dto.WalletAsset;
 import com.isa.jjdzr.market.Market;
+import com.isa.jjdzr.service.WalletAssetService;
+import com.isa.jjdzr.service.WalletService;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 
 public class AssetsViewer {
-    private Printable printer = new Printer();
+    private final Printable printer;
+    private final WalletService walletService;
+    private final WalletAssetService walletAssetService;
+
+    public AssetsViewer(){
+        this.printer = new Printer();
+        this.walletService = new WalletService();
+        this.walletAssetService = new WalletAssetService();
+    }
 
     public void printAsset(Asset asset) {
         printer.printActualLine("Asset ID: " + asset.getId());
@@ -20,12 +30,11 @@ public class AssetsViewer {
     }
 
     public void printWalletAsset(WalletAsset walletAsset) {
-        printer.printActualLine("ID: " + walletAsset.getId());
+        printer.printActualLine("ID: " + walletAsset.getAssetId());
         printer.printActualLine("Cena zakupu: " + walletAsset.getPurchasePrice() + "PLN");
         printer.printActualLine("Ilość: " + walletAsset.getQuantity());
-        //TODO:
         printer.printActualLine("Wartość w momencie zakupu: " +walletAsset.getQuantity().multiply(walletAsset.getPurchasePrice()) + "PLN");
-        BigDecimal cp = walletAsset.getCurrentPrice(new Market());
+        BigDecimal cp = walletAssetService.getCurrentPrice(walletAsset.getId());
         printer.printActualLine("Aktualna cena: " + cp + "PLN");
         printer.printActualLine("Aktualna wartość: " + cp.multiply(walletAsset.getQuantity()) + "PLN");
         printer.printEmptyLine();
@@ -40,7 +49,8 @@ public class AssetsViewer {
             }
     }
 
-    public void printWallet(List<WalletAsset> wallet) {
+    public void printWallet(Long walletId) {
+        List<WalletAsset> wallet = walletAssetService.findWalletAssetsByWalletId(walletId);
         if (wallet.size() == 0) {
             printer.printActualLine("Brak aktywów do wyświetlenia");
         } else {
@@ -51,7 +61,8 @@ public class AssetsViewer {
         }
     }
 
-    public void printWalletList(List<WalletAsset> wallet) {
+    public void printWalletList(Long walletId) {
+        List<WalletAsset> wallet = walletAssetService.findWalletAssetsByWalletId(walletId);
         if (wallet.size() == 0) {
             printer.printActualLine("Brak aktywów do wyświetlenia");
         } else {
@@ -59,7 +70,7 @@ public class AssetsViewer {
             printer.printActualLine("Lista twoich aktyw: ");
             printer.printEmptyLine();
             for (WalletAsset walletAsset : wallet) {
-                printer.printActualLine(i++ + ". " + walletAsset.getId());
+                printer.printActualLine(i++ + ". " + walletAsset.getAssetId());
             }
         }
         printer.printEmptyLine();
