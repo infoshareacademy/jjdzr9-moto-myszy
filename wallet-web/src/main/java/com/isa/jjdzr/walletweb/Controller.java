@@ -8,7 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @org.springframework.stereotype.Controller
 @RequiredArgsConstructor
@@ -47,5 +51,11 @@ public class Controller {
         redirectAttributes.addFlashAttribute("status", status);
         return "redirect:/login";
     }
+    @GetMapping("/search")
+    public List<String> search(@RequestParam("query") String query) {
+        List<String> results = new ArrayList<>();
+        return results;
+    }
 
 }
+
