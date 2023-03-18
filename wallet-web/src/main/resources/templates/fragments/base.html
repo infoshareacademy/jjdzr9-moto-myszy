@@ -16,18 +16,9 @@
     <div>
       <img src="http://s3.amazonaws.com/gt7sp-prod/decal/92/21/92/6269595626519922192_1.png" alt="logo" class="logo">
     </div>
-
   </header>
+
   <nav class="nav" >
-    <nav class="navbar bg-body-tertiary">
-      <div class="container-fluid">
-        <form class="d-flex" role="search" mrthod="GET" action="/search">
-          <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        <div class="search-results"></div>
-      </div>
-    </nav>
     <div class="nav">
       <a th:href="@{/}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">HOME</a>
     </div>
@@ -66,8 +57,10 @@
   </aside>
   <section class="section" th:insert="${content}">
   </section>
-  <footer class="footer">
-
+  <footer class="footer mt-auto py-3 bg-light">
+    <div class="container text-center">
+      <span class="text-muted">Copyright © 2023 WalletApp</span>
+    </div>
   </footer>
 </div>
 </body>
