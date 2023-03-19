@@ -15,11 +15,15 @@ public class BrokerSell {
     private final Printer printer;
     private final WalletService walletService;
     private final WalletAssetService walletAssetService;
+    private final AssetsViewer assetsViewer;
+    private final Scanner scan;
 
     public BrokerSell() {
         this.printer = new Printer();
         this.walletService = new WalletService();
         this.walletAssetService = new WalletAssetService();
+        this.assetsViewer = new AssetsViewer();
+        this.scan = new Scanner(System.in);
     }
 
     public Long sell(Long walletId) {
@@ -39,33 +43,31 @@ public class BrokerSell {
     }
 
     private Long getWalletAssetIndex(Long walletId) {
-
-        Scanner scanner = new Scanner(System.in);
-        List<WalletAsset> walletAssets = walletAssetService.findWalletAssetsByWalletId(walletId);
-        int walletAssetCount = walletAssets.size();
-
         System.out.println("Jaki aktyw chcesz sprzedać?");
-        //TODO: put this in asset vierwer as printWalletAssetsList
-        int i = 1;
-        for (WalletAsset wa : walletAssets) {
-            printer.printActualLine(i++ + ". " + wa.getAssetId());
-        }
-        //TODO: create method from this
-        int walletAssetIndex = -1;
-        while (walletAssetIndex < 0 || walletAssetIndex >= walletAssetCount) {
+        assetsViewer.printWalletAssetsList(walletId);
+        return getIndexFromUserInput(walletId);
+    }
+
+
+
+    private Long getIndexFromUserInput(Long walletId) {
+        List<WalletAsset> walletAssets = walletAssetService.findWalletAssetsByWalletId(walletId);
+        long walletAssetCount = walletAssets.size();
+        long result = -1;
+        while (result < 0 || result >= walletAssetCount) {
             printer.printActualLine("Wybierz opcję pomiędzy 1, a " + walletAssetCount + ": ");
             try {
-                walletAssetIndex = Integer.parseInt(scanner.nextLine()) - 1;
+                result = Integer.parseInt(scan.nextLine()) - 1L;
             } catch (NumberFormatException e) {
                 printer.printActualLine("Błąd. Proszę, wprowadź liczbę.");
             }
-
-            if (walletAssetIndex < 0 || walletAssetIndex >= walletAssetCount) {
+            if (result < 0 || result >= walletAssetCount) {
                 printer.printActualLine("Błąd. Wybierz opcję pomiędzy 1, a  " + walletAssetCount + ".");
             }
         }
-        return (long) walletAssetIndex;
+        return result;
     }
+
     //FIXME: make working validation
     private String getQuantityToSell(Long index) {
 

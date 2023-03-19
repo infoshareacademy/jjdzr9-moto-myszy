@@ -75,4 +75,12 @@ public class AssetsViewer {
         }
         printer.printEmptyLine();
     }
+
+    public void printWalletAssetsList(Long walletId) {
+        List<WalletAsset> walletAssets = walletAssetService.findWalletAssetsByWalletId(walletId);
+        int i = 1;
+        for (WalletAsset wa : walletAssets) {
+            printer.printActualLine(i++ + ". " + wa.getAssetId());
+        }
+    }
 }

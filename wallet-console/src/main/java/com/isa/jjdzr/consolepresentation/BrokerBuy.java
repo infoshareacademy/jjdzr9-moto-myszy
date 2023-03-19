@@ -88,13 +88,6 @@ public class BrokerBuy {
             return getQuantityToBuy(walletId, asset);
         }
         return quantityToBuy;
-
     }
-    //TODO: put this in some validating class
-    private boolean checkCash(Wallet wallet, BigDecimal cost){
-        return wallet.getCash().compareTo(cost) >= 0;
-    }
-
-
 }
 
