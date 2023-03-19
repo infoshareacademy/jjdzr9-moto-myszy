@@ -2,14 +2,12 @@ package com.isa.jjdzr.consolepresentation;
 
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
-import com.isa.jjdzr.datareadandwrite.WalletLoader;
 import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.service.WalletService;
 
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import static java.util.Objects.isNull;
 
