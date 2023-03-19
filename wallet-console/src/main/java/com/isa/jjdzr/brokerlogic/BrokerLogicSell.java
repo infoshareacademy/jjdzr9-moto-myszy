@@ -1,6 +1,5 @@
 package com.isa.jjdzr.brokerlogic;
 
-import com.isa.jjdzr.dto.Wallet;
 import com.isa.jjdzr.service.WalletAssetService;
 import com.isa.jjdzr.service.WalletService;
 
@@ -17,7 +16,7 @@ public class BrokerLogicSell {
 
     public void sell(Long walletId, Long walletAssetId, String quantity, BigDecimal currentPrice) {
         BigDecimal quantityB = new BigDecimal(quantity);
-        walletAssetService.changeWalletAsset(walletAssetId, quantityB);
+        walletAssetService.sellWalletAsset(walletAssetId, quantityB);
         walletService.addCashFromTransaction(walletId, quantityB, currentPrice);
     }
 

@@ -40,11 +40,11 @@ public class WalletAssetService {
         return asset.getCurrentPrice();
     }
 
-    public WalletAsset find(Long index) {
-        return walletAssetRepository.find(index);
+    public WalletAsset find(Long walletAssetId) {
+        return walletAssetRepository.find(walletAssetId);
     }
 
-    public void changeWalletAsset(Long walletAssetId, BigDecimal quantity) {
+    public void sellWalletAsset(Long walletAssetId, BigDecimal quantity) {
         WalletAsset walletAsset = walletAssetRepository.find(walletAssetId);
         if (Objects.equals(walletAsset.getQuantity(), quantity)) {
             walletAssetRepository.delete(walletAssetId);
