@@ -37,7 +37,7 @@ public class LoadViewer {
         Long walletId = null;
         while(isNull(walletId)) {
             try {
-                walletId = scan.nextLong();
+                walletId = scan.nextLong()-1L;
                 if (walletId < 0 || walletId > size ) {
                     printer.printError("Zła wartość, spróbuj ponownie");
                     walletId = null;

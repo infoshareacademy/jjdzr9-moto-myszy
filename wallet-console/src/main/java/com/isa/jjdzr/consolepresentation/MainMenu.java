@@ -55,6 +55,7 @@ public class MainMenu implements Menu {
                     walletId = new LoadViewer().load(userId);
                     menuService.cont();
                     menuService.clearScreen();
+                    System.out.println(walletId);
                     break;
                 case 3: //TODO: remake viewer
                     if (isNull(walletId)) {

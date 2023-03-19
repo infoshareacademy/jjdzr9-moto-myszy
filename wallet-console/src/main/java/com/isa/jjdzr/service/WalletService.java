@@ -20,7 +20,7 @@ public class WalletService {
     public Long generateWallet(String walletName, String cash) {
         Wallet wallet = new Wallet();
         wallet.setWalletName(walletName);
-        wallet.setId(0L);
+        wallet.setUserId(0L);
         wallet.setCash(new BigDecimal(cash));
         Wallet result = saveWallet(wallet);
         return result.getId();
