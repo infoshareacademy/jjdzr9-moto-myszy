@@ -47,5 +47,5 @@ public class Controller {
         redirectAttributes.addFlashAttribute("status", status);
         return "redirect:/login";
     }
-
 }
+

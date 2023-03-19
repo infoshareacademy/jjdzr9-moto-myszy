@@ -4,40 +4,84 @@
     padding: 0;
 }
 
+.logo {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    animation: slide 2s ease-in-out infinite;
+}
+
+@keyframes slide {
+    0% {
+        left: 0;
+    }
+    50% {
+        left: 50px;
+    }
+    100% {
+        left: 0;
+    }
+}
+
 .layout {
     display: grid;
-    grid-template-rows: repeat(4,auto);
+    grid-template-rows: repeat(4, auto);
     grid-template-columns: 200px 1fr 4fr 200px;
     gap: 20px 10px;
-    grid-template-areas: 
+    grid-template-areas:
     ". header header ."
     ". nav nav ."
     ". aside section ."
     ". footer footer .";
-    
-    
+    background-color: #f5f5f5;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
+
+
 
 .header {
     grid-area: header;
-    place-items: end;
+    place-items: center;
     text-align: center;
-    height: 100px;
+    padding: 20px;
 }
 
 .nav {
     grid-area: nav;
+    background-color: #f5f5f5;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     gap: 8px;
-    
+    padding: 10px;
+    opacity: 1;
 }
 
 .aside {
     grid-area: aside;
+    background-color: #f5f5f5;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-y: auto;
+    height: 310px;
+}
+
+.btn:hover {
+    background-color: #000;
+    color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 30);
+}
+
+.btn {
+    transition: all 0.5s ease-in-out;
+}
+
+.aside .btn-container {
+    margin-bottom: 10px;
 }
 
 .section{
@@ -45,7 +89,7 @@
 }
 
 .footer {
-    height: 200px;
+    height: 100px;
     grid-area: footer;
 }
 
