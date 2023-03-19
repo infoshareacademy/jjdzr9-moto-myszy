@@ -2,25 +2,34 @@ package com.isa.jjdzr.brokerlogic;
 
 import com.isa.jjdzr.dto.Asset;
 import com.isa.jjdzr.dto.WalletAsset;
-import com.isa.jjdzr.dto.Wallet;
+import com.isa.jjdzr.service.WalletAssetService;
+import com.isa.jjdzr.service.WalletService;
 
 import java.math.BigDecimal;
 
 public class BrokerLogicBuy {
+    private final WalletAssetService walletAssetService;
+    private final WalletService walletService;
 
-    public void buy(Asset asset, Wallet wallet, String quantity){
-        createWalletAsset(wallet, asset, quantity);
-        spendCash(wallet, asset, quantity);
+    public BrokerLogicBuy(){
+        this.walletAssetService = new WalletAssetService();
+        this.walletService = new WalletService();
     }
-    //TODO: put this in wallet service
-    private void createWalletAsset(Wallet wallet, Asset asset, String quantity) {
-        WalletAsset wa = new WalletAsset(asset, quantity);
-        wallet.addAsset(wa);
+
+    public Long buy(Asset asset, Long walletId, String quantity){
+        WalletAsset walletAsset = createWalletAsset(walletId, asset, quantity);
+        walletService.spendCash(walletId, walletAsset);
+        return walletId;
     }
-    //TODO: put this in wallet service
-    private void spendCash(Wallet wallet, Asset asset, String quantity) {
-        BigDecimal cashToSpend = new BigDecimal(quantity).multiply(asset.getCurrentPrice());
-        wallet.spendCash(cashToSpend);
+
+    private WalletAsset createWalletAsset(Long walletId, Asset asset, String quantity) {
+        WalletAsset walletAsset = new WalletAsset();
+        walletAsset.setQuantity(new BigDecimal(quantity));
+        walletAsset.setWalletId(walletId);
+        walletAsset.setAssetId(asset.getId());
+        walletAsset.setPurchasePrice(asset.getCurrentPrice());
+        return walletAssetService.save(walletAsset);
     }
+
 
 }

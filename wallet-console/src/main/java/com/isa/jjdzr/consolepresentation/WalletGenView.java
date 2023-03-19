@@ -3,35 +3,48 @@ package com.isa.jjdzr.consolepresentation;
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Wallet;
-import com.isa.jjdzr.walletgenerator.WalletGenerator;
+import com.isa.jjdzr.service.WalletService;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class WalletGenView {
-    private Printable printer = new Printer();
-    public Wallet start(Wallet wallet) {
+    private final Printable printer;
+    private final WalletService walletService;
+    public WalletGenView(){
+        this.printer = new Printer();
+        this.walletService = new WalletService();
+    }
+    public Long start(Long walletId) {
         printer.printActualLine("Witam w generatorze portfela inwestycyjnego.");
         if (doYouWantToContinue()) {
             printer.printDontCreateMessage();
         } else {
-            if (wallet != null) {
+            if (walletId != null) {
+                //TODO: change this line/warning
                 printer.printActualLine("Portfel nie jest pusty. Utworzenie nowego spowoduje utratę niezapisanych zmian.");
                 if (doYouWantToContinue()) {
                     printer.printDontCreateMessage();
-                    return wallet;
+                    return walletId;
                 }
             }
             printer.printActualLine("Utworzymy teraz nowy portfel inwestycyjny.");
             String cash = getCashAmount();
-            wallet = new WalletGenerator().generateWallet(cash);
+            String walletName = getWalletName();
+            walletId = walletService.generateWallet(walletName, cash);
         }
-        return wallet;
+        return walletId;
     }
-    //TODO: put this in other class (wallet generator/updater)
-    public void addCash(Wallet wallet) {
-        String cash = getCashAmount();
-        wallet.addCash(cash);
+
+    private String getWalletName() {
+        return "";
+    }
+
+    //TODO: recator this
+    public void topUpWallet(Long walletId) {
+        BigDecimal cash = new BigDecimal(getCashAmount());
+        walletService.topUpWallet(walletId, cash);
     }
     //TODO: put this in other class
     private boolean doYouWantToContinue() { //sprawdza czy chcesz kontynuowac i jesli tak to wywala false
@@ -57,7 +70,7 @@ public class WalletGenView {
         printer.printActualLine("Podaj jaką kwotą chcesz zasilić portfel: ");
         cash = scan.nextLine();
         cash = replaceComma(cash);
-        while (isInvalidCash(cash)) {
+        while (isCashInvalid(cash)) {
             printer.printError("Nieprawidłowa wartość. Podaj kwotę: ");
             cash = scan.nextLine();
             cash = replaceComma(cash);
@@ -68,8 +81,7 @@ public class WalletGenView {
         return cash;
     }
 //    TODO: put validation in other class
-//          FIXME: remake this validation with regex
-    private boolean isInvalidCash(String str) {
+    private boolean isCashInvalid(String str) {
         int countDots = (int) str.chars().filter(ch -> ch == '.').count();
         if (countDots > 1) {
             return true;

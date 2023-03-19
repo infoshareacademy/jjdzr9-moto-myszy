@@ -7,20 +7,28 @@ import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Asset;
 import com.isa.jjdzr.market.Market;
 import com.isa.jjdzr.dto.Wallet;
+import com.isa.jjdzr.service.WalletService;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
 public class BrokerBuy {
-    private Printable printer = new Printer();
-    private AssetsViewer assetsViewer = new AssetsViewer();
-    public void buy(Wallet wallet) {
+    private final Printable printer;
+    private final AssetsViewer assetsViewer;
+    private final WalletService walletService;
+
+    public BrokerBuy(){
+        this.printer = new Printer();
+        this.assetsViewer = new AssetsViewer();
+        this.walletService = new WalletService();
+    }
+    public Long buy(Long walletId) {
 
         Asset asset = getAsset(new Market());
-        String quantity = getQuantityToBuy(wallet, asset);
-        new BrokerLogicBuy().buy(asset, wallet,quantity);
+        String quantity = getQuantityToBuy(walletId, asset);
         printer.printActualLine("Zapłaciłeś: " + asset.getCurrentPrice().multiply(new BigDecimal(quantity)) + "PLN");
+        return new BrokerLogicBuy().buy(asset, walletId, quantity);
 
     }
     //FIXME: make working validation
@@ -51,8 +59,8 @@ public class BrokerBuy {
 
     }
     //FIXME: repair validation
-    private String getQuantityToBuy(Wallet wallet, Asset asset) {
-
+    private String getQuantityToBuy(Long walletId, Asset asset) {
+        Wallet wallet = walletService.find(walletId);
         Scanner sc = new Scanner(System.in);
         printer.printActualLine("Posiadane środki: " + wallet.getCash() +"PLN");
         printer.printActualLine("Podaj ilość jaką chcesz kupić: ");
@@ -64,10 +72,10 @@ public class BrokerBuy {
         }
 
         try {
-            int quantity = Integer.parseInt(quantityToBuy);
+            Integer.parseInt(quantityToBuy);
         } catch (Exception e) {
             printer.printError("Zła wartość, spróbuj ponownie.");
-            return getQuantityToBuy(wallet, asset);
+            return getQuantityToBuy(walletId, asset);
         }
         BigDecimal cost = new BigDecimal(quantityToBuy).multiply(asset.getCurrentPrice());
 
@@ -77,16 +85,9 @@ public class BrokerBuy {
             printer.printActualLine("Gratulacje, właśnie dokonałeś zakupu");
         } else {
             printer.printActualLine("Niewystarczająca ilość środków w portfelu. Proszę, podaj mniejszą ilość.");
-            return getQuantityToBuy(wallet, asset);
+            return getQuantityToBuy(walletId, asset);
         }
         return quantityToBuy;
-
     }
-    //TODO: put this in some validating class
-    private boolean checkCash(Wallet wallet, BigDecimal cost){
-        return wallet.getCash().compareTo(cost) >= 0;
-    }
-
-
 }
 
