@@ -1,11 +1,13 @@
-package com.isa.jjdzr.dto;
+package com.isa.jjdzr.walletcore.dto;
 
-import com.isa.jjdzr.common.BaseEntity;
+
+import com.isa.jjdzr.walletcore.common.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -2,8 +2,9 @@ package com.isa.jjdzr.consolepresentation;
 
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
-import com.isa.jjdzr.dto.Wallet;
-import com.isa.jjdzr.service.WalletService;
+import com.isa.jjdzr.walletcore.dto.Wallet;
+import com.isa.jjdzr.walletcore.service.WalletService;
+
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -33,10 +34,10 @@ public class LoadViewer {
     private Long getWalletId(int size) {
         printer.printActualLine("Podaj nr portfela: ");
         Long walletId = null;
-        while(isNull(walletId)) {
+        while (isNull(walletId)) {
             try {
-                walletId = scan.nextLong()-1L;
-                if (walletId < 0 || walletId > size ) {
+                walletId = scan.nextLong() - 1L;
+                if (walletId < 0 || walletId > size) {
                     printer.printError("Zła wartość, spróbuj ponownie");
                     walletId = null;
                 }

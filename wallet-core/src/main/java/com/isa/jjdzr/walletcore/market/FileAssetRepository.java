@@ -1,8 +1,9 @@
-package com.isa.jjdzr.market;
+package com.isa.jjdzr.walletcore.market;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.isa.jjdzr.dto.Asset;
+import com.isa.jjdzr.walletcore.dto.Asset;
+
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,9 +18,9 @@ final class FileAssetRepository implements AssetRepository {
     public List<Asset> retrieveAssets() {
         ObjectMapper objectMapper = new ObjectMapper();
         Asset[] retrievedAssets;
-        String[] filenames = new String[]{"market1.txt", "market2.txt", "market3.txt", "market4.txt", "market5.txt","market6.txt"};
+        String[] filenames = new String[]{"market1.txt", "market2.txt", "market3.txt", "market4.txt", "market5.txt", "market6.txt"};
         String randomfile = filenames[new Random().nextInt(filenames.length)];
-        Path path = Path.of("data","market",randomfile);
+        Path path = Path.of("data", "market", randomfile);
         String s = null;
         try {
             s = Files.readString(path);

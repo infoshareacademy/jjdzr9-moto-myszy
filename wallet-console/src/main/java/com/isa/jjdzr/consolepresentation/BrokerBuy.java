@@ -4,10 +4,11 @@ package com.isa.jjdzr.consolepresentation;
 import com.isa.jjdzr.brokerlogic.BrokerLogicBuy;
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
-import com.isa.jjdzr.dto.Asset;
-import com.isa.jjdzr.market.Market;
-import com.isa.jjdzr.dto.Wallet;
-import com.isa.jjdzr.service.WalletService;
+import com.isa.jjdzr.walletcore.dto.Asset;
+import com.isa.jjdzr.walletcore.dto.Wallet;
+import com.isa.jjdzr.walletcore.market.Market;
+import com.isa.jjdzr.walletcore.service.WalletService;
+
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,11 +19,12 @@ public class BrokerBuy {
     private final AssetsViewer assetsViewer;
     private final WalletService walletService;
 
-    public BrokerBuy(){
+    public BrokerBuy() {
         this.printer = new Printer();
         this.assetsViewer = new AssetsViewer();
         this.walletService = new WalletService();
     }
+
     public Long buy(Long walletId) {
 
         Asset asset = getAsset(new Market());
@@ -31,6 +33,7 @@ public class BrokerBuy {
         return new BrokerLogicBuy().buy(asset, walletId, quantity);
 
     }
+
     //FIXME: make working validation
     private Asset getAsset(Market market) {
 
@@ -58,11 +61,12 @@ public class BrokerBuy {
         return assets.get(assetIndex);
 
     }
+
     //FIXME: repair validation
     private String getQuantityToBuy(Long walletId, Asset asset) {
         Wallet wallet = walletService.find(walletId);
         Scanner sc = new Scanner(System.in);
-        printer.printActualLine("Posiadane środki: " + wallet.getCash() +"PLN");
+        printer.printActualLine("Posiadane środki: " + wallet.getCash() + "PLN");
         printer.printActualLine("Podaj ilość jaką chcesz kupić: ");
         String quantityToBuy = sc.nextLine();
 

@@ -1,9 +1,9 @@
-package com.isa.jjdzr.service;
+package com.isa.jjdzr.walletcore.service;
 
-import com.isa.jjdzr.dto.Asset;
-import com.isa.jjdzr.dto.WalletAsset;
-import com.isa.jjdzr.market.Market;
-import com.isa.jjdzr.repositories.WalletAssetRepository;
+import com.isa.jjdzr.walletcore.dto.Asset;
+import com.isa.jjdzr.walletcore.dto.WalletAsset;
+import com.isa.jjdzr.walletcore.market.Market;
+import com.isa.jjdzr.walletcore.repositories.WalletAssetRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -29,15 +29,19 @@ public class WalletAssetService {
                 .filter(wa -> walletId.equals(wa.getWalletId()))
                 .toList();
     }
-//TODO: need to do sth with this method
-    public BigDecimal getCurrentPrice(Long waIndex) {
-        String assetId = walletAssetRepository.find(waIndex).getAssetId();
+
+    //TODO: need to do sth with this method
+    public WalletAsset findCurrentPrice(Long waIndex) {
+        WalletAsset walletAsset = walletAssetRepository.find(waIndex);
+        String assetId = walletAsset.getAssetId();
         List<Asset> availableAssets = market.availableAssets();
         Asset asset = availableAssets.stream()
                 .filter(a -> assetId.equals(a.getId()))
                 .findFirst()
                 .orElse(new Asset("wrong id", new BigDecimal(0)));
-        return asset.getCurrentPrice();
+        walletAsset.setCurrentPrice(asset.getCurrentPrice());
+        walletAssetRepository.save(walletAsset);
+        return walletAsset;
     }
 
     public WalletAsset find(Long walletAssetId) {

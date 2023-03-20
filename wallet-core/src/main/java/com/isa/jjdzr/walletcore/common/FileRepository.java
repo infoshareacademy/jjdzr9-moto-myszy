@@ -1,8 +1,7 @@
-package com.isa.jjdzr.common;
+package com.isa.jjdzr.walletcore.common;
 
 import com.google.gson.*;
 import lombok.SneakyThrows;
-
 
 import java.io.File;
 import java.io.FileReader;
@@ -76,7 +75,7 @@ public class FileRepository<T extends BaseEntity> {
     }
 
     private void updateIdIfNewEntity(T entity) {
-        if(entity.getId() == null) {
+        if (entity.getId() == null) {
             entity.setId(nextId++);
         }
     }
@@ -90,8 +89,8 @@ public class FileRepository<T extends BaseEntity> {
 
     private Gson prepareGson() {
         return new GsonBuilder()
-                .registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (localDate, srcType, context) ->  new JsonPrimitive(formatter.format(localDate)))
-                .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, typeOfT, context) ->  LocalDate.parse(json.getAsString(), formatter))
+                .registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (localDate, srcType, context) -> new JsonPrimitive(formatter.format(localDate)))
+                .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, typeOfT, context) -> LocalDate.parse(json.getAsString(), formatter))
                 .create();
     }
 

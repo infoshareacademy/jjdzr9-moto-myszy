@@ -1,8 +1,8 @@
-package com.isa.jjdzr.service;
+package com.isa.jjdzr.walletcore.service;
 
-import com.isa.jjdzr.dto.Wallet;
-import com.isa.jjdzr.dto.WalletAsset;
-import com.isa.jjdzr.repositories.WalletRepository;
+import com.isa.jjdzr.walletcore.dto.Wallet;
+import com.isa.jjdzr.walletcore.dto.WalletAsset;
+import com.isa.jjdzr.walletcore.repositories.WalletRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -29,7 +29,6 @@ public class WalletService {
     public Wallet saveWallet(Wallet wallet) {
         return walletRepository.save(wallet);
     }
-
 
 
     public List<Wallet> getUsersWallets(Long userId) {

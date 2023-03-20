@@ -1,6 +1,6 @@
 package com.isa.jjdzr.consolepresentation;
 
-public class WalletMenu implements Menu{
+public class WalletMenu implements Menu {
     @Override
     public void startMenu() {
 

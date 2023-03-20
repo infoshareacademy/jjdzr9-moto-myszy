@@ -2,24 +2,19 @@ package com.isa.jjdzr.consolepresentation;
 
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
-import com.isa.jjdzr.dto.Asset;
-import com.isa.jjdzr.dto.WalletAsset;
-import com.isa.jjdzr.market.Market;
-import com.isa.jjdzr.service.WalletAssetService;
-import com.isa.jjdzr.service.WalletService;
+import com.isa.jjdzr.walletcore.dto.Asset;
+import com.isa.jjdzr.walletcore.dto.WalletAsset;
+import com.isa.jjdzr.walletcore.service.WalletAssetService;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 
 public class AssetsViewer {
     private final Printable printer;
-    private final WalletService walletService;
     private final WalletAssetService walletAssetService;
 
-    public AssetsViewer(){
+    public AssetsViewer() {
         this.printer = new Printer();
-        this.walletService = new WalletService();
         this.walletAssetService = new WalletAssetService();
     }
 
@@ -33,10 +28,9 @@ public class AssetsViewer {
         printer.printActualLine("ID: " + walletAsset.getAssetId());
         printer.printActualLine("Cena zakupu: " + walletAsset.getPurchasePrice() + "PLN");
         printer.printActualLine("Ilość: " + walletAsset.getQuantity());
-        printer.printActualLine("Wartość w momencie zakupu: " +walletAsset.getQuantity().multiply(walletAsset.getPurchasePrice()) + "PLN");
-        BigDecimal cp = walletAssetService.getCurrentPrice(walletAsset.getId());
-        printer.printActualLine("Aktualna cena: " + cp + "PLN");
-        printer.printActualLine("Aktualna wartość: " + cp.multiply(walletAsset.getQuantity()) + "PLN");
+        printer.printActualLine("Wartość w momencie zakupu: " + walletAsset.getQuantity().multiply(walletAsset.getPurchasePrice()) + "PLN");
+        printer.printActualLine("Aktualna cena: " + walletAsset.getCurrentPrice() + "PLN");
+        printer.printActualLine("Aktualna wartość: " + walletAsset.getCurrentPrice().multiply(walletAsset.getQuantity()) + "PLN");
         printer.printEmptyLine();
     }
 
@@ -44,9 +38,9 @@ public class AssetsViewer {
         printer.printActualLine("Lista aktyw do kupna:");
         int i = 0;
         for (Asset asset : assetList) {
-            printer.printActualLine(i++ + ". " +asset.getId() + " - " + asset.getCurrentPrice());
+            printer.printActualLine(i++ + ". " + asset.getId() + " - " + asset.getCurrentPrice());
             printer.printEmptyLine();
-            }
+        }
     }
 
     public void printWallet(Long walletId) {
@@ -56,6 +50,7 @@ public class AssetsViewer {
         } else {
             printer.printActualLine("W skład Twojego portfela wchodzą:");
             for (WalletAsset walletAsset : wallet) {
+                walletAssetService.find(walletAsset.getId());
                 printWalletAsset(walletAsset);
             }
         }

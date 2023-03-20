@@ -1,6 +1,6 @@
-package com.isa.jjdzr.market;
+package com.isa.jjdzr.walletcore.market;
 
-import com.isa.jjdzr.dto.Asset;
+import com.isa.jjdzr.walletcore.dto.Asset;
 
 import java.util.List;
 
@@ -12,12 +12,9 @@ public class Market {
         this.repository = new FileAssetRepository();
     }
 
-    public List<Asset> availableAssets(){
+    public List<Asset> availableAssets() {
         return repository.retrieveAssets();
     }
-
-
-
 
 
 }

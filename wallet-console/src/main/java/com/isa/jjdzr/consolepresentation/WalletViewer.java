@@ -4,10 +4,10 @@ import com.isa.jjdzr.console.MenuService;
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.console.Service;
-import com.isa.jjdzr.dto.Wallet;
-import com.isa.jjdzr.dto.WalletAsset;
-import com.isa.jjdzr.service.WalletAssetService;
-import com.isa.jjdzr.service.WalletService;
+import com.isa.jjdzr.walletcore.dto.WalletAsset;
+import com.isa.jjdzr.walletcore.service.WalletAssetService;
+import com.isa.jjdzr.walletcore.service.WalletService;
+
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -40,9 +40,9 @@ public class WalletViewer {
     public Long startViewer(Long walletId) {
         boolean keepWorking = true;
 
-        while(keepWorking) {
+        while (keepWorking) {
             printer.printMenuOptions(options);
-            switch(menuService.getMenuOption(options.size())) {
+            switch (menuService.getMenuOption(options.size())) {
                 case 1:
                     assetsViewer.printWalletList(walletId);
                     menuService.cont();
@@ -88,11 +88,14 @@ public class WalletViewer {
                     scan.next();
                 }
             }
-            assetsViewer.printWalletAsset(wallet.get(index - 1));
+            WalletAsset walletAsset = wallet.get(index - 1);
+            walletAssetService.findCurrentPrice(walletAsset.getId());
+            assetsViewer.printWalletAsset(walletAsset);
         }
     }
+
     //TODO: put this in other class like validator and remake it
-    private boolean checkWAIndex (int walletSize, int i) {
+    private boolean checkWAIndex(int walletSize, int i) {
         return !Pattern.matches("[1-" + walletSize + "]", String.valueOf(i));
     }
 }
