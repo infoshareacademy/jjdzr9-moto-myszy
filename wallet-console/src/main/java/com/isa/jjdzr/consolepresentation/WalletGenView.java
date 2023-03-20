@@ -2,8 +2,8 @@ package com.isa.jjdzr.consolepresentation;
 
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
-import com.isa.jjdzr.dto.Wallet;
-import com.isa.jjdzr.service.WalletService;
+import com.isa.jjdzr.walletcore.service.WalletService;
+
 
 import java.math.BigDecimal;
 import java.util.Scanner;

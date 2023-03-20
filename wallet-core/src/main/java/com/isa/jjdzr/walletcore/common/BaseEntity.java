@@ -1,4 +1,4 @@
-package com.isa.jjdzr.common;
+package com.isa.jjdzr.walletcore.common;
 
 public interface BaseEntity {
 

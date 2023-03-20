@@ -1,9 +1,11 @@
 package com.isa.jjdzr.brokerlogic;
 
-import com.isa.jjdzr.dto.Asset;
-import com.isa.jjdzr.dto.WalletAsset;
-import com.isa.jjdzr.service.WalletAssetService;
-import com.isa.jjdzr.service.WalletService;
+
+import com.isa.jjdzr.walletcore.dto.Asset;
+import com.isa.jjdzr.walletcore.dto.WalletAsset;
+import com.isa.jjdzr.walletcore.service.WalletAssetService;
+import com.isa.jjdzr.walletcore.service.WalletService;
+
 
 import java.math.BigDecimal;
 

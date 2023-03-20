@@ -1,8 +1,7 @@
-package com.isa.jjdzr.common;
+package com.isa.jjdzr.walletcore.common;
 
 import com.google.gson.*;
 import lombok.SneakyThrows;
-
 
 import java.io.File;
 import java.io.FileReader;

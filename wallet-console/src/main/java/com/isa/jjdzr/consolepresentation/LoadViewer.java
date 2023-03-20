@@ -2,8 +2,9 @@ package com.isa.jjdzr.consolepresentation;
 
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
-import com.isa.jjdzr.dto.Wallet;
-import com.isa.jjdzr.service.WalletService;
+import com.isa.jjdzr.walletcore.dto.Wallet;
+import com.isa.jjdzr.walletcore.service.WalletService;
+
 
 import java.util.InputMismatchException;
 import java.util.List;

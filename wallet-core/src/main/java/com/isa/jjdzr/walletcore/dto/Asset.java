@@ -1,4 +1,4 @@
-package com.isa.jjdzr.dto;
+package com.isa.jjdzr.walletcore.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

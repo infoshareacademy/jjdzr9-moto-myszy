@@ -4,10 +4,11 @@ package com.isa.jjdzr.consolepresentation;
 import com.isa.jjdzr.brokerlogic.BrokerLogicBuy;
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
-import com.isa.jjdzr.dto.Asset;
-import com.isa.jjdzr.market.Market;
-import com.isa.jjdzr.dto.Wallet;
-import com.isa.jjdzr.service.WalletService;
+import com.isa.jjdzr.walletcore.dto.Asset;
+import com.isa.jjdzr.walletcore.dto.Wallet;
+import com.isa.jjdzr.walletcore.market.Market;
+import com.isa.jjdzr.walletcore.service.WalletService;
+
 
 import java.math.BigDecimal;
 import java.util.List;

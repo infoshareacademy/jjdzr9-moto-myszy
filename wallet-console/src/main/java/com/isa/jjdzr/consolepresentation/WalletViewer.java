@@ -4,10 +4,10 @@ import com.isa.jjdzr.console.MenuService;
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.console.Service;
-import com.isa.jjdzr.dto.Wallet;
-import com.isa.jjdzr.dto.WalletAsset;
-import com.isa.jjdzr.service.WalletAssetService;
-import com.isa.jjdzr.service.WalletService;
+import com.isa.jjdzr.walletcore.dto.WalletAsset;
+import com.isa.jjdzr.walletcore.service.WalletAssetService;
+import com.isa.jjdzr.walletcore.service.WalletService;
+
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
