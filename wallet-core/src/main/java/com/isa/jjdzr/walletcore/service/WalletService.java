@@ -1,7 +1,5 @@
 package com.isa.jjdzr.walletcore.service;
 
-
-
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.repositories.WalletRepository;
@@ -31,7 +29,6 @@ public class WalletService {
     public Wallet saveWallet(Wallet wallet) {
         return walletRepository.save(wallet);
     }
-
 
 
     public List<Wallet> getUsersWallets(Long userId) {

@@ -40,9 +40,9 @@ public class WalletViewer {
     public Long startViewer(Long walletId) {
         boolean keepWorking = true;
 
-        while(keepWorking) {
+        while (keepWorking) {
             printer.printMenuOptions(options);
-            switch(menuService.getMenuOption(options.size())) {
+            switch (menuService.getMenuOption(options.size())) {
                 case 1:
                     assetsViewer.printWalletList(walletId);
                     menuService.cont();
@@ -93,8 +93,9 @@ public class WalletViewer {
             assetsViewer.printWalletAsset(walletAsset);
         }
     }
+
     //TODO: put this in other class like validator and remake it
-    private boolean checkWAIndex (int walletSize, int i) {
+    private boolean checkWAIndex(int walletSize, int i) {
         return !Pattern.matches("[1-" + walletSize + "]", String.valueOf(i));
     }
 }

@@ -18,9 +18,9 @@ final class FileAssetRepository implements AssetRepository {
     public List<Asset> retrieveAssets() {
         ObjectMapper objectMapper = new ObjectMapper();
         Asset[] retrievedAssets;
-        String[] filenames = new String[]{"market1.txt", "market2.txt", "market3.txt", "market4.txt", "market5.txt","market6.txt"};
+        String[] filenames = new String[]{"market1.txt", "market2.txt", "market3.txt", "market4.txt", "market5.txt", "market6.txt"};
         String randomfile = filenames[new Random().nextInt(filenames.length)];
-        Path path = Path.of("data","market",randomfile);
+        Path path = Path.of("data", "market", randomfile);
         String s = null;
         try {
             s = Files.readString(path);

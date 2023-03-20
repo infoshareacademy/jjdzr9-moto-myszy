@@ -19,11 +19,12 @@ public class BrokerBuy {
     private final AssetsViewer assetsViewer;
     private final WalletService walletService;
 
-    public BrokerBuy(){
+    public BrokerBuy() {
         this.printer = new Printer();
         this.assetsViewer = new AssetsViewer();
         this.walletService = new WalletService();
     }
+
     public Long buy(Long walletId) {
 
         Asset asset = getAsset(new Market());
@@ -32,6 +33,7 @@ public class BrokerBuy {
         return new BrokerLogicBuy().buy(asset, walletId, quantity);
 
     }
+
     //FIXME: make working validation
     private Asset getAsset(Market market) {
 
@@ -59,11 +61,12 @@ public class BrokerBuy {
         return assets.get(assetIndex);
 
     }
+
     //FIXME: repair validation
     private String getQuantityToBuy(Long walletId, Asset asset) {
         Wallet wallet = walletService.find(walletId);
         Scanner sc = new Scanner(System.in);
-        printer.printActualLine("Posiadane środki: " + wallet.getCash() +"PLN");
+        printer.printActualLine("Posiadane środki: " + wallet.getCash() + "PLN");
         printer.printActualLine("Podaj ilość jaką chcesz kupić: ");
         String quantityToBuy = sc.nextLine();
 

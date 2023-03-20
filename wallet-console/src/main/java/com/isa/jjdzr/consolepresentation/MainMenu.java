@@ -20,7 +20,7 @@ public class MainMenu implements Menu {
     public MainMenu() {
         this.printer = new Printer();
         this.menuService = new MenuService();
-        this.userId  = 0L;
+        this.userId = 0L;
         this.options = new ArrayList<>(
                 List.of("1. Utwórz portfel.",
                         "2. Wczytaj portfel",
@@ -31,6 +31,7 @@ public class MainMenu implements Menu {
                         "7. Kursy walut",
                         "8. Zakończ"));
     }
+
     @Override
     public void startMenu() {
 
@@ -40,10 +41,10 @@ public class MainMenu implements Menu {
         menuService.clearScreen();
         printer.printActualLine("Witamy w portfelu inwestycyjnym !!!");
 
-        while(keepWorking) {
+        while (keepWorking) {
             printer.printActualLine("\nUżytkownik: Guest\n"); //bedzie wyświetlać nazwę użytkownika
             printer.printMenuOptions(options);
-            switch(menuService.getMenuOption(options.size())) {
+            switch (menuService.getMenuOption(options.size())) {
                 case 1:
                     menuService.clearScreen();
                     walletId = new WalletGenView().start(walletId);
@@ -103,7 +104,9 @@ public class MainMenu implements Menu {
                     menuService.cont();
                     menuService.clearScreen();
                     break;
-                case 8: keepWorking = false; break;
+                case 8:
+                    keepWorking = false;
+                    break;
                 default:
                     break;
             }

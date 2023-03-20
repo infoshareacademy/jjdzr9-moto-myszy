@@ -1,7 +1,5 @@
 package com.isa.jjdzr.walletcore.service;
 
-
-
 import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.market.Market;
@@ -31,7 +29,8 @@ public class WalletAssetService {
                 .filter(wa -> walletId.equals(wa.getWalletId()))
                 .toList();
     }
-//TODO: need to do sth with this method
+
+    //TODO: need to do sth with this method
     public WalletAsset findCurrentPrice(Long waIndex) {
         WalletAsset walletAsset = walletAssetRepository.find(waIndex);
         String assetId = walletAsset.getAssetId();

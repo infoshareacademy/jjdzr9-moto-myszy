@@ -3,8 +3,9 @@ package com.isa.jjdzr.console;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class MenuService implements Service{
+public class MenuService implements Service {
     private Printable printer = new Printer();
+
     @Override
     public void cont() {
         Scanner scan = new Scanner(System.in);

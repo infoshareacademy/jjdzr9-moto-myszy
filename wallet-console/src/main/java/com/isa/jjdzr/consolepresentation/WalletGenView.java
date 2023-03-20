@@ -12,10 +12,12 @@ import java.util.regex.Pattern;
 public class WalletGenView {
     private final Printable printer;
     private final WalletService walletService;
-    public WalletGenView(){
+
+    public WalletGenView() {
         this.printer = new Printer();
         this.walletService = new WalletService();
     }
+
     public Long start(Long walletId) {
         printer.printActualLine("Witam w generatorze portfela inwestycyjnego.");
         if (doYouWantToContinue()) {
@@ -46,6 +48,7 @@ public class WalletGenView {
         BigDecimal cash = new BigDecimal(getCashAmount());
         walletService.topUpWallet(walletId, cash);
     }
+
     //TODO: put this in other class
     private boolean doYouWantToContinue() { //sprawdza czy chcesz kontynuowac i jesli tak to wywala false
         Scanner scan = new Scanner(System.in);
@@ -57,6 +60,7 @@ public class WalletGenView {
         }
         return !decision.equalsIgnoreCase("T");
     }
+
     //TODO: put this in other class like validator and rename
     private boolean isInvalid(String str) {
         String validSymbols = "[TN]?";
@@ -80,7 +84,8 @@ public class WalletGenView {
 
         return cash;
     }
-//    TODO: put validation in other class
+
+    //    TODO: put validation in other class
     private boolean isCashInvalid(String str) {
         int countDots = (int) str.chars().filter(ch -> ch == '.').count();
         if (countDots > 1) {
@@ -96,9 +101,10 @@ public class WalletGenView {
             return !Pattern.matches(validSymbols, str);
         }
     }
-// TODO: put in other class
-    private String replaceComma(String str){
-        return str.replace(',','.');
+
+    // TODO: put in other class
+    private String replaceComma(String str) {
+        return str.replace(',', '.');
     }
 }
 

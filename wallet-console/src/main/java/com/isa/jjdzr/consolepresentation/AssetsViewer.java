@@ -5,21 +5,16 @@ import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.service.WalletAssetService;
-import com.isa.jjdzr.walletcore.service.WalletService;
 
-
-import java.math.BigDecimal;
 import java.util.List;
 
 
 public class AssetsViewer {
     private final Printable printer;
-    private final WalletService walletService;
     private final WalletAssetService walletAssetService;
 
-    public AssetsViewer(){
+    public AssetsViewer() {
         this.printer = new Printer();
-        this.walletService = new WalletService();
         this.walletAssetService = new WalletAssetService();
     }
 
@@ -33,9 +28,9 @@ public class AssetsViewer {
         printer.printActualLine("ID: " + walletAsset.getAssetId());
         printer.printActualLine("Cena zakupu: " + walletAsset.getPurchasePrice() + "PLN");
         printer.printActualLine("Ilość: " + walletAsset.getQuantity());
-        printer.printActualLine("Wartość w momencie zakupu: " +walletAsset.getQuantity().multiply(walletAsset.getPurchasePrice()) + "PLN");
+        printer.printActualLine("Wartość w momencie zakupu: " + walletAsset.getQuantity().multiply(walletAsset.getPurchasePrice()) + "PLN");
         printer.printActualLine("Aktualna cena: " + walletAsset.getCurrentPrice() + "PLN");
-        printer.printActualLine("Aktualna wartość: " +  walletAsset.getCurrentPrice().multiply(walletAsset.getQuantity()) + "PLN");
+        printer.printActualLine("Aktualna wartość: " + walletAsset.getCurrentPrice().multiply(walletAsset.getQuantity()) + "PLN");
         printer.printEmptyLine();
     }
 
@@ -43,9 +38,9 @@ public class AssetsViewer {
         printer.printActualLine("Lista aktyw do kupna:");
         int i = 0;
         for (Asset asset : assetList) {
-            printer.printActualLine(i++ + ". " +asset.getId() + " - " + asset.getCurrentPrice());
+            printer.printActualLine(i++ + ". " + asset.getId() + " - " + asset.getCurrentPrice());
             printer.printEmptyLine();
-            }
+        }
     }
 
     public void printWallet(Long walletId) {
