@@ -32,10 +32,11 @@ public class BrokerSell {
             printer.printActualLine("Powrót do menu.");
         } else {
             Long waIndex = getWalletAssetIndex(walletId);
-            String quantity = getQuantityToSell(waIndex);
-            BigDecimal currentPrice = walletAssetService.getCurrentPrice(waIndex);
+            WalletAsset walletAsset = walletAssetService.findCurrentPrice(waIndex);
+            BigDecimal currentPrice = walletAsset.getCurrentPrice();
             printer.printActualLine("Aktualna cena pojedynczej sztuki: " + currentPrice + "PLN");
-            new BrokerLogicSell().sell(walletId, waIndex, quantity, currentPrice);
+            String quantity = getQuantityToSell(waIndex);
+            new BrokerLogicSell().sell(walletId, waIndex, quantity);
             printer.printActualLine("Sprzedaż zakończona sukcesem.");
             printer.printActualLine("Portfel zasilono kwotą: " + new BigDecimal(quantity).multiply(currentPrice) + "PLN");
         }

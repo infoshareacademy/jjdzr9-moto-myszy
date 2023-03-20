@@ -14,6 +14,7 @@ public class WalletAsset implements BaseEntity {
     private Long walletId;
     private String assetId;
     private BigDecimal purchasePrice;
+    private BigDecimal currentPrice;
     private BigDecimal quantity;
 
 }

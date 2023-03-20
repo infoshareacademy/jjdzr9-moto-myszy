@@ -30,14 +30,17 @@ public class WalletAssetService {
                 .toList();
     }
 //TODO: need to do sth with this method
-    public BigDecimal getCurrentPrice(Long waIndex) {
-        String assetId = walletAssetRepository.find(waIndex).getAssetId();
+    public WalletAsset findCurrentPrice(Long waIndex) {
+        WalletAsset walletAsset = walletAssetRepository.find(waIndex);
+        String assetId = walletAsset.getAssetId();
         List<Asset> availableAssets = market.availableAssets();
         Asset asset = availableAssets.stream()
                 .filter(a -> assetId.equals(a.getId()))
                 .findFirst()
                 .orElse(new Asset("wrong id", new BigDecimal(0)));
-        return asset.getCurrentPrice();
+        walletAsset.setCurrentPrice(asset.getCurrentPrice());
+        walletAssetRepository.save(walletAsset);
+        return walletAsset;
     }
 
     public WalletAsset find(Long walletAssetId) {

@@ -88,7 +88,9 @@ public class WalletViewer {
                     scan.next();
                 }
             }
-            assetsViewer.printWalletAsset(wallet.get(index - 1));
+            WalletAsset walletAsset = wallet.get(index - 1);
+            walletAssetService.findCurrentPrice(walletAsset.getId());
+            assetsViewer.printWalletAsset(walletAsset);
         }
     }
     //TODO: put this in other class like validator and remake it

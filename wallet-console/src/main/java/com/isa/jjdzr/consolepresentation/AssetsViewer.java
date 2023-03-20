@@ -4,7 +4,6 @@ import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.dto.Asset;
 import com.isa.jjdzr.dto.WalletAsset;
-import com.isa.jjdzr.market.Market;
 import com.isa.jjdzr.service.WalletAssetService;
 import com.isa.jjdzr.service.WalletService;
 
@@ -34,9 +33,8 @@ public class AssetsViewer {
         printer.printActualLine("Cena zakupu: " + walletAsset.getPurchasePrice() + "PLN");
         printer.printActualLine("Ilość: " + walletAsset.getQuantity());
         printer.printActualLine("Wartość w momencie zakupu: " +walletAsset.getQuantity().multiply(walletAsset.getPurchasePrice()) + "PLN");
-        BigDecimal cp = walletAssetService.getCurrentPrice(walletAsset.getId());
-        printer.printActualLine("Aktualna cena: " + cp + "PLN");
-        printer.printActualLine("Aktualna wartość: " + cp.multiply(walletAsset.getQuantity()) + "PLN");
+        printer.printActualLine("Aktualna cena: " + walletAsset.getCurrentPrice() + "PLN");
+        printer.printActualLine("Aktualna wartość: " +  walletAsset.getCurrentPrice().multiply(walletAsset.getQuantity()) + "PLN");
         printer.printEmptyLine();
     }
 
@@ -56,6 +54,7 @@ public class AssetsViewer {
         } else {
             printer.printActualLine("W skład Twojego portfela wchodzą:");
             for (WalletAsset walletAsset : wallet) {
+                walletAssetService.find(walletAsset.getId());
                 printWalletAsset(walletAsset);
             }
         }
