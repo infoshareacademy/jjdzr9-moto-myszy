@@ -20,13 +20,10 @@
 
   <nav class="nav" >
     <div class="nav">
-      <a th:href="@{/}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">HOME</a>
+      <a th:href="@{/}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">GŁÓWNA</a>
     </div>
     <div class="nav">
-      <a th:href="@{/market}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">MARKET</a>
-    </div>
-    <div class="nav">
-      <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+      <a th:href="@{/market}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">RYNEK</a>
     </div>
     <div class="nav">
       <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
@@ -35,7 +32,10 @@
       <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
     </div>
     <div class="nav">
-      <a th:href="@{/login}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">Log in</a>
+      <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">CENY WALUT</a>
+    </div>
+    <div class="nav">
+      <a th:href="@{/login}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">LOGOWANIE</a>
     </div>
   </nav>
   <aside class="aside" >
@@ -43,16 +43,16 @@
       <h5>Side menu</h5>
     </div>
     <div class="btn-container, nav">
-      <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+      <a th:href="@{/create-wallet}" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">STWÓRZ PORTFEL</a>
     </div>
     <div class="btn-container, nav">
-      <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+      <a href="#" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">WCZYTAJ PORTFEL</a>
     </div>
     <div class="btn-container, nav">
-      <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+      <a href="#" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">PODGLĄD PORTFELA</a>
     </div>
     <div class="btn-container, nav">
-      <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+      <a href="#" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">DODAJ GOTÓWKĘ</a>
     </div>
   </aside>
   <section class="section" th:insert="${content}">
