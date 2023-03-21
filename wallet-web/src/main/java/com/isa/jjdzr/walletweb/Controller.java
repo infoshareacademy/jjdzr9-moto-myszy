@@ -1,5 +1,6 @@
 package com.isa.jjdzr.walletweb;
 
+import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletweb.dto.User;
 import com.isa.jjdzr.walletweb.service.UserService;
 import jakarta.validation.Valid;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @org.springframework.stereotype.Controller
 @RequiredArgsConstructor
 public class Controller {
+    private final Market market;
     private final UserService userService;
 
     @GetMapping("/")
@@ -27,6 +29,7 @@ public class Controller {
 
     @GetMapping("/market")
     public String getMarket(Model model){
+        model.addAttribute("market",market.availableAssets());
         return "market";
     }
 

@@ -12,23 +12,17 @@
                             <th class="text-nowrap">#</th>
                             <th class="text-nowrap">Nazwa</th>
                             <th class="text-nowrap">Cena zakupu</th>
-                            <th class="text-nowrap">Ilość</th>
-                            <th class="text-nowrap">Aktualna cena</th>
-                            <th class="text-nowrap">Wartość</th>
-                            <th class="text-nowrap">zysk/strata</th>
-                            <th class="text-nowrap">Sprzedaj</th>
+                            <th class="text-nowrap">Historia</th>
+                            <th class="text-nowrap">Kup</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr th:each="asset: ${market}">
                             <td>1</td>
-                            <td>GBP</td>
-                            <td>5.20</td>
-                            <td>1000</td>
-                            <td>5.35</td>
-                            <td>5350</td>
-                            <td>%</td>
-                            <td>button</td>
+                            <td th:text="${asset.id}"></td>
+                            <td th:text="${asset.currentPrice}"></td>
+                            <td><a class="btn btn-light btn-sm">Historia</a></td>
+                            <td><a class="btn btn-outline-primary btn-sm">Kup</a></td>
                         </tr>
                     </tbody>
                 </table>
