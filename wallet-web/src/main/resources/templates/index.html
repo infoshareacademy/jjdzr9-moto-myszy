@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en" th:replace="fragments/base::layout(~{::section}, 'index')">
 <body>
     <section class="section">
-
+        <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'login_successful'">
+            <span class="btn btn-outline-success">LOGOWANIE ZAKOŃCZONE SUKCESEM</span>
+        </div>
         <div>
             <h1>Handluj akcjami, walutami i więcej z naszą aplikacją</h1>
             <p> Witaj w naszej aplikacji do handlu, która pozwoli Ci inwestować w różne instrumenty finansowe na całym świecie. Niezależnie od Twojego doświadczenia w inwestowaniu, nasza aplikacja jest łatwa w obsłudze i umożliwia szybki dostęp do rynków, dzięki czemu możesz łatwo handlować akcjami, walutami, towarami i innymi instrumentami finansowymi.</p>

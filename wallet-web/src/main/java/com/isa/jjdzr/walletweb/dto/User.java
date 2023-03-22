@@ -1,12 +1,13 @@
 package com.isa.jjdzr.walletweb.dto;
 
+import com.isa.jjdzr.walletcore.common.BaseEntity;
 import com.isa.jjdzr.walletweb.ValidSymbols;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class User {
+public class User implements BaseEntity {
     private Long id;
     @NotBlank(message="Nazwa użytkownika nie może być pusta")
     @Size(min=4, message="Nazwa użytkownika jest zbyt krótka")
