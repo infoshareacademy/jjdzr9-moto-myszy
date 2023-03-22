@@ -40,7 +40,7 @@ public class UserController {
         Long userId = userService.login(user);
         if (userId == Constants.WRONG_USERNAME) result.rejectValue("username", "", "Użytkownik nie istnieje");
         if (userId == Constants.WRONG_PASSWORD) result.rejectValue("password", "", "Niepoprawne hasło");
-        if (result.hasErrors()) return "login";
+        if (result.hasErrors()) return "log-in";
         User currentUser = userService.find(userId);
         String status = Constants.LOGIN_SUCCESSFUL;
         redirectAttributes.addFlashAttribute("status", status);
