@@ -41,21 +41,26 @@
       <a th:href="@{/logout}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">WYLOGUJ</a>
     </div>
   </nav>
-  <aside class="aside" >
-    <div>
-      <h5>Side menu</h5>
+  <aside class="aside">
+    <div th:if="${session.isEmpty()}" class="nav">
+      <p>Zaloguj się</p>
     </div>
-    <div class="btn-container, nav">
-      <a th:href="@{/create-wallet}" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">STWÓRZ PORTFEL</a>
-    </div>
-    <div class="btn-container, nav">
-      <a th:href="@{/wallet-view}" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">WCZYTAJ PORTFEL</a>
-    </div>
-    <div class="btn-container, nav">
-      <a href="#" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">PODGLĄD PORTFELA</a>
-    </div>
-    <div class="btn-container, nav">
-      <a href="#" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">DODAJ GOTÓWKĘ</a>
+    <div th:unless="${session.isEmpty()}">
+      <div>
+        <h5>Side menu</h5>
+      </div>
+      <div class="btn-container, nav">
+        <a th:href="@{/create-wallet}" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">STWÓRZ PORTFEL</a>
+      </div>
+      <div class="btn-container, nav">
+        <a th:href="@{/load-wallet/{userId}(userId=(${session.isEmpty()} ? '-1' : ${session.user.id}))}" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">WCZYTAJ PORTFEL</a>
+      </div>
+      <div class="btn-container, nav">
+        <a th:href="@{/wallet-view}" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">PODGLĄD PORTFELA</a>
+      </div>
+      <div class="btn-container, nav">
+        <a href="#" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">DODAJ GOTÓWKĘ</a>
+      </div>
     </div>
   </aside>
   <section class="section" th:insert="${content}">

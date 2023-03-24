@@ -5,13 +5,17 @@ import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletService;
 import com.isa.jjdzr.walletweb.Constants;
+import com.isa.jjdzr.walletweb.dto.User;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -48,5 +52,13 @@ public class WalletController {
         model.addAttribute("walletAssets", walletAssets);
         model.addAttribute("wallet", wallet);
         return "wallet-view";
+    }
+
+    @GetMapping("/load-wallet/{userId}")
+    public String loadWallet(Model model, @PathVariable("userId") Long userId) {
+        if (userId == -1L) return "redirect:/login";
+        List<Wallet> walletList = walletService.getUsersWallets(userId);
+        model.addAttribute(walletList);
+        return "load-wallet";
     }
 }
