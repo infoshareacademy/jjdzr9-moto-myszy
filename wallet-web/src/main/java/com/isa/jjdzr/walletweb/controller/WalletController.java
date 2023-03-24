@@ -1,6 +1,8 @@
 package com.isa.jjdzr.walletweb.controller;
 
 import com.isa.jjdzr.walletcore.dto.Wallet;
+import com.isa.jjdzr.walletcore.dto.WalletAsset;
+import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletService;
 import com.isa.jjdzr.walletweb.Constants;
 import jakarta.validation.Valid;
@@ -12,11 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class WalletController {
 
     private final WalletService walletService;
+    private final WalletAssetService walletAssetService;
 
     @GetMapping("/create-wallet")
     public String createWallet(Model model) {
@@ -34,5 +39,14 @@ public class WalletController {
         redirectAttributes.addFlashAttribute("status", status);
         //TODO: adding newly created wallet to session
         return "redirect:/wallet-view";
+    }
+
+    @GetMapping("/wallet-view")
+    public String showWallet(Model model){
+        List<WalletAsset> walletAssets = walletAssetService.findWalletAssetsByWalletId(0L);
+        Wallet wallet = walletService.find(0L);
+        model.addAttribute("walletAssets", walletAssets);
+        model.addAttribute("wallet", wallet);
+        return "wallet-view";
     }
 }

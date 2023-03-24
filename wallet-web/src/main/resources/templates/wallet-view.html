@@ -4,10 +4,32 @@
   <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'success'">
     <span class="btn btn-outline-success">UTWORZONO NOWY PORTFEL</span>
   </div>
-  <div class="d-flex align-items-center justify-content-center">
-
-      </div>
-    </form>
+  <div>
+    <div>
+      <p th:text="'Gotówka: ' + ${wallet.cash}"></p>
+    </div>
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-nowrap">#</th>
+            <th class="text-nowrap">Nazwa</th>
+            <th class="text-nowrap">Cena zakupu</th>
+            <th class="text-nowrap">ilość</th>
+            <th class="text-nowrap">Aktualna cena</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="asset, state: ${walletAssets}">
+            <td th:text="${state.count}"></td>
+            <td th:text="${asset.assetId}"></td>
+            <td th:text="${asset.purchasePrice}"></td>
+            <td th:text="${asset.quantity}"></td>
+            <td th:text="${asset.currentPrice}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 </html>
