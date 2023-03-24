@@ -4,6 +4,9 @@
         <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'success'">
             <span class="btn btn-outline-success">REJESTRACJA ZAKOŃCZONA SUKCESEM</span>
         </div>
+        <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'logout_successful'">
+            <span class="btn btn-outline-success">WYLOGOWANO</span>
+        </div>
         <div class="d-flex align-items-center justify-content-center">
             <form method="post" th:action="@{/handleLogin}" th:object="${user}">
                 <h4>LOGOWANIE</h4>

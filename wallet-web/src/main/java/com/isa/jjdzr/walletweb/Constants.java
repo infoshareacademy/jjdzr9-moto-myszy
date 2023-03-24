@@ -6,4 +6,5 @@ public class Constants {
     public static final long WRONG_USERNAME = -1L;
     public static final long WRONG_PASSWORD = -2L;
     public static final String LOGIN_SUCCESSFUL = "login_successful";
+    public static final String LOGOUT_SUCCESSFUL = "logout_successful";
 }
