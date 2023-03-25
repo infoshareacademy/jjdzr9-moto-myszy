@@ -1,25 +1,25 @@
 package com.isa.jjdzr.brokerlogic;
 
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
-import com.isa.jjdzr.walletcore.service.WalletAssetService;
-import com.isa.jjdzr.walletcore.service.WalletService;
+import com.isa.jjdzr.walletcore.service.WalletAssetServiceImpl;
+import com.isa.jjdzr.walletcore.service.WalletServiceImpl;
 
 import java.math.BigDecimal;
 
 public class BrokerLogicSell {
-    private final WalletAssetService walletAssetService;
-    private final WalletService walletService;
+    private final WalletAssetServiceImpl walletAssetServiceImpl;
+    private final WalletServiceImpl walletServiceImpl;
 
     public BrokerLogicSell() {
-        this.walletAssetService = new WalletAssetService();
-        this.walletService = new WalletService();
+        this.walletAssetServiceImpl = new WalletAssetServiceImpl();
+        this.walletServiceImpl = new WalletServiceImpl();
     }
 
     public void sell(Long walletId, Long walletAssetId, String quantity) {
         BigDecimal quantityB = new BigDecimal(quantity);
-        WalletAsset walletAsset = walletAssetService.find(walletAssetId);
-        walletAssetService.sellWalletAsset(walletAssetId, quantityB);
-        walletService.addCashFromTransaction(walletId, quantityB, walletAsset.getCurrentPrice());
+        WalletAsset walletAsset = walletAssetServiceImpl.find(walletAssetId);
+        walletAssetServiceImpl.sellWalletAsset(walletAssetId, quantityB);
+        walletServiceImpl.addCashFromTransaction(walletId, quantityB, walletAsset.getCurrentPrice());
     }
 
 }

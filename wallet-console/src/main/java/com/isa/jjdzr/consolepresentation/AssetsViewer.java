@@ -4,18 +4,18 @@ import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
-import com.isa.jjdzr.walletcore.service.WalletAssetService;
+import com.isa.jjdzr.walletcore.service.WalletAssetServiceImpl;
 
 import java.util.List;
 
 
 public class AssetsViewer {
     private final Printable printer;
-    private final WalletAssetService walletAssetService;
+    private final WalletAssetServiceImpl walletAssetServiceImpl;
 
     public AssetsViewer() {
         this.printer = new Printer();
-        this.walletAssetService = new WalletAssetService();
+        this.walletAssetServiceImpl = new WalletAssetServiceImpl();
     }
 
     public void printAsset(Asset asset) {
@@ -44,20 +44,20 @@ public class AssetsViewer {
     }
 
     public void printWallet(Long walletId) {
-        List<WalletAsset> wallet = walletAssetService.findWalletAssetsByWalletId(walletId);
+        List<WalletAsset> wallet = walletAssetServiceImpl.findWalletAssetsByWalletId(walletId);
         if (wallet.size() == 0) {
             printer.printActualLine("Brak aktywów do wyświetlenia");
         } else {
             printer.printActualLine("W skład Twojego portfela wchodzą:");
             for (WalletAsset walletAsset : wallet) {
-                walletAssetService.find(walletAsset.getId());
+                walletAssetServiceImpl.find(walletAsset.getId());
                 printWalletAsset(walletAsset);
             }
         }
     }
 
     public void printWalletList(Long walletId) {
-        List<WalletAsset> wallet = walletAssetService.findWalletAssetsByWalletId(walletId);
+        List<WalletAsset> wallet = walletAssetServiceImpl.findWalletAssetsByWalletId(walletId);
         if (wallet.size() == 0) {
             printer.printActualLine("Brak aktywów do wyświetlenia");
         } else {
@@ -72,7 +72,7 @@ public class AssetsViewer {
     }
 
     public void printWalletAssetsList(Long walletId) {
-        List<WalletAsset> walletAssets = walletAssetService.findWalletAssetsByWalletId(walletId);
+        List<WalletAsset> walletAssets = walletAssetServiceImpl.findWalletAssetsByWalletId(walletId);
         int i = 1;
         for (WalletAsset wa : walletAssets) {
             printer.printActualLine(i++ + ". " + wa.getAssetId());

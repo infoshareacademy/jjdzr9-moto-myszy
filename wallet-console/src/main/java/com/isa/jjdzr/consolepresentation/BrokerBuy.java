@@ -7,7 +7,7 @@ import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletcore.market.Market;
-import com.isa.jjdzr.walletcore.service.WalletService;
+import com.isa.jjdzr.walletcore.service.WalletServiceImpl;
 
 
 import java.math.BigDecimal;
@@ -17,12 +17,12 @@ import java.util.Scanner;
 public class BrokerBuy {
     private final Printable printer;
     private final AssetsViewer assetsViewer;
-    private final WalletService walletService;
+    private final WalletServiceImpl walletServiceImpl;
 
     public BrokerBuy() {
         this.printer = new Printer();
         this.assetsViewer = new AssetsViewer();
-        this.walletService = new WalletService();
+        this.walletServiceImpl = new WalletServiceImpl();
     }
 
     public Long buy(Long walletId) {
@@ -64,7 +64,7 @@ public class BrokerBuy {
 
     //FIXME: repair validation
     private String getQuantityToBuy(Long walletId, Asset asset) {
-        Wallet wallet = walletService.find(walletId);
+        Wallet wallet = walletServiceImpl.find(walletId);
         Scanner sc = new Scanner(System.in);
         printer.printActualLine("Posiadane środki: " + wallet.getCash() + "PLN");
         printer.printActualLine("Podaj ilość jaką chcesz kupić: ");
