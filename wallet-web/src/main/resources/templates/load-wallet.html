@@ -6,9 +6,9 @@
       <p>Wybierz portfel, który chcesz wczytać: </p>
     </div>
     <div class="d-flex align-items-center justify-content-center">
-      <form method="post">
-        <select th:each="wallet, status:${walletList}">
-          <option th:text="${wallet.walletName}"></option>
+      <form>
+        <select>
+          <option method="post" th:each="wallet, status:${walletList}" th:text="${wallet.walletName}"></option>
         </select>
         <input type="submit" class="btn btn-outline-dark" value="Wczytaj" >
       </form>

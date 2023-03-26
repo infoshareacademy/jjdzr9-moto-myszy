@@ -5,6 +5,7 @@ import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletService;
 import com.isa.jjdzr.walletweb.Constants;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -30,12 +31,12 @@ public class WalletController {
         return "create-wallet";
     }
 
-    @GetMapping("/wallet-view")
-    public String showWallet(Model model) {
-        List<WalletAsset> walletAssets = walletAssetServiceImpl.findWalletAssetsByWalletId(0L);
-        Wallet wallet = walletServiceImpl.find(0L);
+    @GetMapping("/wallet-view/{walletId}")
+    public String showWallet(@PathVariable("walletId") Long walletId, Model model) {
+        //TODO: redirect to wallet creation
+        if (walletId == -1L) return "redirect:/";
+        List<WalletAsset> walletAssets = walletAssetServiceImpl.findWalletAssetsByWalletId(walletId);
         model.addAttribute("walletAssets", walletAssets);
-        model.addAttribute("wallet", wallet);
         return "wallet-view";
     }
 
@@ -47,15 +48,14 @@ public class WalletController {
         return "load-wallet";
     }
 
-    @PostMapping("/handle-wallet-creation")
-    public String createWallet(@Valid Wallet wallet, BindingResult result, RedirectAttributes redirectAttributes) {
+    @PostMapping("/handle-wallet-creation/{userId}")
+    public String createWallet(@Valid Wallet wallet, @PathVariable("userId") Long userId, BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
         if (result.hasErrors()) return "create-wallet";
-        //TODO: add this in thymeleaf (as logged user id)
-        wallet.setUserId(0L);
+        wallet.setUserId(userId);
         walletServiceImpl.saveWallet(wallet);
         String status = Constants.SUCCESS_STATUS;
         redirectAttributes.addFlashAttribute("status", status);
-        //TODO: adding newly created wallet to session
-        return "redirect:/wallet-view";
+        session.setAttribute("wallet", wallet);
+        return "redirect:/wallet-view/" + wallet.getId();
     }
 }
