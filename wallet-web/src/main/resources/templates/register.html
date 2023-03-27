@@ -3,22 +3,22 @@
     <section class="section">
         <div class="d-flex align-items-center justify-content-center">
             <form method="post" th:object="${user}" th:action="@{/handleReg}">
-                <h4>Register</h4>
-                <label for="username">Username:</label>
+                <h4>REJESTRACJA</h4>
+                <label for="username">Nazwa użytkownika:</label>
                 <br>
                 <p style="color:red" th:errors="*{username}"></p>
                 <input type="text" id="username" th:field="*{username}">
                 <br>
-                <label for="pass">Password:</label>
+                <label for="pass">Hasło:</label>
                 <br>
                 <p style="color:red" th:errors="*{password}"></p>
                 <input type="password" id="pass" th:field="*{password}">
                 <br>
-                <label for="confirmPassword">Re-enter password:</label>
+                <label for="confirmPassword">Powtórz hasło:</label>
                 <br>
                 <input type="password" id="confirmPassword" th:field="*{confirmPassword}">
                 <br><br>
-                <input type="submit" class="btn btn-outline-dark" value="Register">
+                <input type="submit" class="btn btn-outline-dark" value="Zarejestruj">
             </form>
         </div>
     </section>

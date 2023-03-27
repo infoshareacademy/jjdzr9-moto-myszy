@@ -3,7 +3,7 @@ package com.isa.jjdzr.consolepresentation;
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.walletcore.dto.Wallet;
-import com.isa.jjdzr.walletcore.service.WalletService;
+import com.isa.jjdzr.walletcore.service.WalletServiceImpl;
 
 
 import java.util.InputMismatchException;
@@ -14,19 +14,19 @@ import static java.util.Objects.isNull;
 
 public class LoadViewer {
     private final Printable printer;
-    private final WalletService walletService;
+    private final WalletServiceImpl walletServiceImpl;
     private final Scanner scan;
 
     public LoadViewer() {
         this.printer = new Printer();
-        this.walletService = new WalletService();
+        this.walletServiceImpl = new WalletServiceImpl();
         this.scan = new Scanner(System.in);
     }
 
     public Long load(Long userId) {
         printer.printActualLine("Lista portfeli do wczytania: ");
         printUserWallets(userId);
-        int walletSize = walletService.getUsersWallets(userId).size();
+        int walletSize = walletServiceImpl.getUserWallets(userId).size();
         return getWalletId(walletSize);
 
     }
@@ -51,7 +51,7 @@ public class LoadViewer {
     //TODO: put this in another class (mb printer ?)
     private void printUserWallets(Long userId) {
         int i = 1;
-        List<Wallet> wallets = walletService.getUsersWallets(userId);
+        List<Wallet> wallets = walletServiceImpl.getUserWallets(userId);
         for (Wallet w : wallets) {
             printer.printActualLine(i++ + ". " + w.getWalletName());
         }

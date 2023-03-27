@@ -2,23 +2,23 @@ package com.isa.jjdzr.brokerlogic;
 
 import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
-import com.isa.jjdzr.walletcore.service.WalletAssetService;
-import com.isa.jjdzr.walletcore.service.WalletService;
+import com.isa.jjdzr.walletcore.service.WalletAssetServiceImpl;
+import com.isa.jjdzr.walletcore.service.WalletServiceImpl;
 
 import java.math.BigDecimal;
 
 public class BrokerLogicBuy {
-    private final WalletAssetService walletAssetService;
-    private final WalletService walletService;
+    private final WalletAssetServiceImpl walletAssetServiceImpl;
+    private final WalletServiceImpl walletServiceImpl;
 
     public BrokerLogicBuy() {
-        this.walletAssetService = new WalletAssetService();
-        this.walletService = new WalletService();
+        this.walletAssetServiceImpl = new WalletAssetServiceImpl();
+        this.walletServiceImpl = new WalletServiceImpl();
     }
 
     public Long buy(Asset asset, Long walletId, String quantity) {
         WalletAsset walletAsset = createWalletAsset(walletId, asset, quantity);
-        walletService.spendCash(walletId, walletAsset);
+        walletServiceImpl.spendCash(walletId, walletAsset);
         return walletId;
     }
 
@@ -28,7 +28,7 @@ public class BrokerLogicBuy {
         walletAsset.setWalletId(walletId);
         walletAsset.setAssetId(asset.getId());
         walletAsset.setPurchasePrice(asset.getCurrentPrice());
-        return walletAssetService.save(walletAsset);
+        return walletAssetServiceImpl.save(walletAsset);
     }
 
 

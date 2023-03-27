@@ -2,7 +2,7 @@ package com.isa.jjdzr.consolepresentation;
 
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
-import com.isa.jjdzr.walletcore.service.WalletService;
+import com.isa.jjdzr.walletcore.service.WalletServiceImpl;
 
 
 import java.math.BigDecimal;
@@ -11,11 +11,11 @@ import java.util.regex.Pattern;
 
 public class WalletGenView {
     private final Printable printer;
-    private final WalletService walletService;
+    private final WalletServiceImpl walletServiceImpl;
 
     public WalletGenView() {
         this.printer = new Printer();
-        this.walletService = new WalletService();
+        this.walletServiceImpl = new WalletServiceImpl();
     }
 
     public Long start(Long walletId) {
@@ -34,7 +34,7 @@ public class WalletGenView {
             printer.printActualLine("Utworzymy teraz nowy portfel inwestycyjny.");
             String cash = getCashAmount();
             String walletName = getWalletName();
-            walletId = walletService.generateWallet(walletName, cash);
+            walletId = walletServiceImpl.generateWallet(walletName, cash);
         }
         return walletId;
     }
@@ -46,7 +46,7 @@ public class WalletGenView {
     //TODO: recator this
     public void topUpWallet(Long walletId) {
         BigDecimal cash = new BigDecimal(getCashAmount());
-        walletService.topUpWallet(walletId, cash);
+        walletServiceImpl.topUpWallet(walletId, cash);
     }
 
     //TODO: put this in other class

@@ -1,34 +1,21 @@
-package com.isa.jjdzr.walletweb;
+package com.isa.jjdzr.walletweb.controller;
 
+import com.isa.jjdzr.walletweb.Constants;
 import com.isa.jjdzr.walletweb.dto.User;
 import com.isa.jjdzr.walletweb.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-@org.springframework.stereotype.Controller
+@Controller
 @RequiredArgsConstructor
-public class Controller {
+public class UserController {
     private final UserService userService;
-
-    @GetMapping("/")
-    public String getHomepage(Model model){
-        return "index";
-    }
-
-    @GetMapping("/login")
-    public String getLogin(Model model){
-        return "log-in";
-    }
-
-    @GetMapping("/market")
-    public String getMarket(Model model){
-        return "market";
-    }
 
     @GetMapping("/register")
     public String getRegpage(Model model){
@@ -39,13 +26,25 @@ public class Controller {
     @PostMapping("/handleReg")
     public String register(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
         if (!user.getPassword().equals(user.getConfirmPassword())) result.rejectValue("password","",
-                "Both fields must be the same");
-        if (userService.checkUserName(user)) result.rejectValue("username","","Username already taken");
+                "Oba pola muszą być identyczne");
+        if (userService.checkUserName(user)) result.rejectValue("username","","Nazwa użytkownika zajęta");
         if (result.hasErrors()) return "register";
         userService.addUser(user);
         String status = Constants.SUCCESS_STATUS;
         redirectAttributes.addFlashAttribute("status", status);
         return "redirect:/login";
     }
-}
 
+    @PostMapping("/handleLogin")
+    public String login(User user, BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
+        Long userId = userService.login(user);
+        if (userId == Constants.WRONG_USERNAME) result.rejectValue("username", "", "Użytkownik nie istnieje");
+        if (userId == Constants.WRONG_PASSWORD) result.rejectValue("password", "", "Niepoprawne hasło");
+        if (result.hasErrors()) return "log-in";
+        User currentUser = userService.find(userId);
+        String status = Constants.LOGIN_SUCCESSFUL;
+        redirectAttributes.addFlashAttribute("status", status);
+        session.setAttribute("user", currentUser);
+        return "redirect:/";
+    }
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'register')">
+    <section class="section">
+        <div class="d-flex align-items-center justify-content-center">
+            <form method="post" th:object="${wallet}" th:action="@{/handle-wallet-creation/{userId}(userId=(${session.isEmpty()} ? '-1' : ${session.user.id}))}">
+                <h4>UTWÓRZ NOWY PORTFEL</h4>
+                <label for="wallet-name">Nazwa portfela:</label>
+                <br>
+                <p style="color:red" th:errors="*{walletName}"></p>
+                <input type="text" id="wallet-name" th:field="*{walletName}">
+                <br>
+                <label for="cash">Podaj kwotę startową:</label>
+                <br>
+                <p style="color:red" th:errors="*{cash}"></p>
+                <input type="text" id="cash" th:field="*{cash}">
+
+                <!-- add logged user id here-->
+                <br><br>
+                <input type="submit" class="btn btn-outline-dark" value="Utwórz">
+            </form>
+        </div>
+    </section>
+</html>

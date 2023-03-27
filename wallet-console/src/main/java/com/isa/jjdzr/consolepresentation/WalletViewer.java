@@ -5,8 +5,8 @@ import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.console.Service;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
-import com.isa.jjdzr.walletcore.service.WalletAssetService;
-import com.isa.jjdzr.walletcore.service.WalletService;
+import com.isa.jjdzr.walletcore.service.WalletAssetServiceImpl;
+import com.isa.jjdzr.walletcore.service.WalletServiceImpl;
 
 
 import java.util.ArrayList;
@@ -20,15 +20,15 @@ public class WalletViewer {
     private final Service menuService;
     private final AssetsViewer assetsViewer;
     private final List<String> options;
-    private final WalletAssetService walletAssetService;
-    private final WalletService walletService;
+    private final WalletAssetServiceImpl walletAssetServiceImpl;
+    private final WalletServiceImpl walletServiceImpl;
 
     public WalletViewer() {
         this.printer = new Printer();
         this.menuService = new MenuService();
         this.assetsViewer = new AssetsViewer();
-        this.walletAssetService = new WalletAssetService();
-        this.walletService = new WalletService();
+        this.walletAssetServiceImpl = new WalletAssetServiceImpl();
+        this.walletServiceImpl = new WalletServiceImpl();
         this.options = new ArrayList<>(
                 List.of("1. Wyświetl listę posiadanych aktywów",
                         "2. Wyświetl wybrane aktywa",
@@ -56,7 +56,7 @@ public class WalletViewer {
                     menuService.cont();
                     break;
                 case 4:
-                    printer.printActualLine("Posiadana gotówka: " + walletService.find(walletId).getCash() + "PLN");
+                    printer.printActualLine("Posiadana gotówka: " + walletServiceImpl.find(walletId).getCash() + "PLN");
                     menuService.cont();
                     break;
                 case 5:
@@ -71,7 +71,7 @@ public class WalletViewer {
 
     //TODO: remake this - three parts 1. validation if wallet is empty, 2.'getAssetToPrint' and 3. printing actual asset
     private void printSingleWalletAsset(Long walletId) {
-        List<WalletAsset> wallet = walletAssetService.findWalletAssetsByWalletId(walletId);
+        List<WalletAsset> wallet = walletAssetServiceImpl.findWalletAssetsByWalletId(walletId);
         Scanner scan = new Scanner(System.in);
         if (wallet.size() == 0) {
             printer.printActualLine("Brak aktywów do wyświetlenia");
@@ -89,7 +89,7 @@ public class WalletViewer {
                 }
             }
             WalletAsset walletAsset = wallet.get(index - 1);
-            walletAssetService.findCurrentPrice(walletAsset.getId());
+            walletAssetServiceImpl.findCurrentPrice(walletAsset.getId());
             assetsViewer.printWalletAsset(walletAsset);
         }
     }

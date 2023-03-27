@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'log-in')">
+<section class="section">
+  <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'success'">
+    <span class="btn btn-outline-success">UTWORZONO NOWY PORTFEL</span>
+  </div>
+  <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'top_up_success'">
+    <span class="btn btn-outline-success">ZASILENIE PORTFELA ZAKONCZONO SUKCESEM</span>
+  </div>
+  <div>
+    <div>
+      <p th:text="'Gotówka: ' + ${cash}"></p>
+    </div>
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-nowrap">#</th>
+            <th class="text-nowrap">Nazwa</th>
+            <th class="text-nowrap">Cena zakupu</th>
+            <th class="text-nowrap">ilość</th>
+            <th class="text-nowrap">Aktualna cena</th>
+            <th class="text-nowrap">Wartość zakupu</th>
+            <th class="text-nowrap">Aktualna wartość</th>
+            <th class="text-nowrap">Zysk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="asset, state: ${walletAssets}">
+            <td th:text="${state.count}"></td>
+            <td th:text="${asset.assetId}"></td>
+            <td th:text="${#numbers.formatCurrency(asset.purchasePrice)}"></td>
+            <td th:text="${asset.quantity}"></td>
+            <td th:text="${#numbers.formatCurrency(asset.currentPrice)}"></td>
+            <td th:text="${#numbers.formatCurrency(asset.purchaseValue)}"></td>
+            <td th:text="${#numbers.formatCurrency(asset.currentValue)}"></td>
+            <td th:attr="style=${asset.profit > 0 ? 'color: green' : 'color: red'}" th:text="${#numbers.formatPercent(asset.profit,1,2)}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</html>

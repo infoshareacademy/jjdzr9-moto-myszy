@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'log-in')">
+<section class="section">
+  <div>
+    <div class="d-flex align-items-center justify-content-center">
+      <p>Wybierz portfel, który chcesz wczytać: </p>
+    </div>
+    <div class="d-flex align-items-center justify-content-center">
+      <ul>
+        <li th:each="wallet : ${walletList}">
+          <a th:href="@{/handleLoad/{walletId}(walletId = ${wallet.id})}"><span th:text="${wallet.walletName}"></span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+</html>

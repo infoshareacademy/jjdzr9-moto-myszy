@@ -2,23 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'log-in')">
     <section class="section">
         <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'success'">
-            <span class="btn btn-outline-success">REGISTRATION SUCCESSFUL</span>
+            <span class="btn btn-outline-success">REJESTRACJA ZAKOŃCZONA SUKCESEM</span>
+        </div>
+        <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'logout_successful'">
+            <span class="btn btn-outline-success">WYLOGOWANO</span>
         </div>
         <div class="d-flex align-items-center justify-content-center">
-            <form method="post" >
-                <h4>Log-in page</h4>
-                <label for="username">Username:</label>
+            <form method="post" th:action="@{/handleLogin}" th:object="${user}">
+                <h4>LOGOWANIE</h4>
+                <label for="username">Nazwa użytkownika:</label>
                 <br>
-                <input type="text" id="username">
+                <p style="color:red" th:errors="*{username}"></p>
+                <input type="text" th:field="*{username}" id="username">
                 <br><br>
-                <label for="pass">Password:</label>
+                <label for="pass">Hasło:</label>
                 <br>
-                <input type="password" id="pass">
+                <p style="color:red" th:errors="*{password}"></p>
+                <input type="password" th:field="*{password}" id="pass">
                 <br>
                 <br>
                 <div class="d-flex align-items-center justify-content-between">
-                    <input type="submit" class="btn btn-outline-dark" value="Log-In">
-                    <a th:href="@{/register}" type="button" class="btn btn-outline-danger">Register</a>
+                    <input type="submit" class="btn btn-outline-dark" value="Zaloguj" >
+                    <a th:href="@{/register}" type="button" class="btn btn-outline-danger">Rejestracja</a>
                 </div>
             </form>
         </div>

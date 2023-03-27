@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy =  ValidSymbolsValidator.class)
 public @interface ValidSymbols {
-    String message() default "Invalid symbols";
+    String message() default "Niewłaściwe symbole";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

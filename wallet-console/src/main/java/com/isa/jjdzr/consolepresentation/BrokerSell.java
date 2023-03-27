@@ -4,8 +4,8 @@ package com.isa.jjdzr.consolepresentation;
 import com.isa.jjdzr.brokerlogic.BrokerLogicSell;
 import com.isa.jjdzr.console.Printer;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
-import com.isa.jjdzr.walletcore.service.WalletAssetService;
-import com.isa.jjdzr.walletcore.service.WalletService;
+import com.isa.jjdzr.walletcore.service.WalletAssetServiceImpl;
+import com.isa.jjdzr.walletcore.service.WalletServiceImpl;
 
 
 import java.math.BigDecimal;
@@ -14,26 +14,26 @@ import java.util.Scanner;
 
 public class BrokerSell {
     private final Printer printer;
-    private final WalletService walletService;
-    private final WalletAssetService walletAssetService;
+    private final WalletServiceImpl walletServiceImpl;
+    private final WalletAssetServiceImpl walletAssetServiceImpl;
     private final AssetsViewer assetsViewer;
     private final Scanner scan;
 
     public BrokerSell() {
         this.printer = new Printer();
-        this.walletService = new WalletService();
-        this.walletAssetService = new WalletAssetService();
+        this.walletServiceImpl = new WalletServiceImpl();
+        this.walletAssetServiceImpl = new WalletAssetServiceImpl();
         this.assetsViewer = new AssetsViewer();
         this.scan = new Scanner(System.in);
     }
 
     public Long sell(Long walletId) {
-        if (walletService.findWalletAssets(walletId).size() == 0) {
+        if (walletServiceImpl.findWalletAssets(walletId).size() == 0) {
             printer.printActualLine("Brak aktywów do sprzedania.");
             printer.printActualLine("Powrót do menu.");
         } else {
             Long waIndex = getWalletAssetIndex(walletId);
-            WalletAsset walletAsset = walletAssetService.findCurrentPrice(waIndex);
+            WalletAsset walletAsset = walletAssetServiceImpl.findCurrentPrice(waIndex);
             BigDecimal currentPrice = walletAsset.getCurrentPrice();
             printer.printActualLine("Aktualna cena pojedynczej sztuki: " + currentPrice + "PLN");
             String quantity = getQuantityToSell(waIndex);
@@ -53,7 +53,7 @@ public class BrokerSell {
 
 
     private Long getIndexFromUserInput(Long walletId) {
-        List<WalletAsset> walletAssets = walletAssetService.findWalletAssetsByWalletId(walletId);
+        List<WalletAsset> walletAssets = walletAssetServiceImpl.findWalletAssetsByWalletId(walletId);
         long walletAssetCount = walletAssets.size();
         long result = -1;
         while (result < 0 || result >= walletAssetCount) {
@@ -76,7 +76,7 @@ public class BrokerSell {
         Scanner input = new Scanner(System.in);
         String quantity;
         BigDecimal quantityToSell;
-        WalletAsset asset = walletAssetService.find(index);
+        WalletAsset asset = walletAssetServiceImpl.find(index);
         printer.printActualLine("Posiadana ilość: " + asset.getQuantity());
 
         while (true) {
