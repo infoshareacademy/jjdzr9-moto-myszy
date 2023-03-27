@@ -24,5 +24,6 @@ public class Wallet implements BaseEntity {
 
     @Min(value = 0, message = "Wartość nie może być ujemna")
     @Max(value = 1000000, message = "Zbyt duża wartość")
+    @NotBlank(message = "Kwota nie może być pusta")
     private BigDecimal cash;
 }
