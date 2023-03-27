@@ -5,6 +5,7 @@ import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletService;
 import com.isa.jjdzr.walletweb.Constants;
+import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
 import com.isa.jjdzr.walletweb.dto.TopUpDto;
 import com.isa.jjdzr.walletweb.service.WalletWebService;
 import jakarta.servlet.http.HttpSession;
@@ -35,11 +36,7 @@ public class WalletController {
     public String showWallet(@PathVariable("walletId") Long walletId, Model model) {
         if (walletId == -1L) return "redirect:/create-wallet";
         Wallet wallet = walletWebService.find(walletId);
-        //TODO: put in one method
-        List<WalletAsset> walletAssets = walletWebService.findWalletAssetsByWalletId(walletId);
-        walletAssets = walletAssets.stream()
-                .map(wa -> walletWebService.findCurrentPrice(wa.getId()))
-                .toList();
+        List<DetailedWalletAssetDto> walletAssets = walletWebService.prepareDetailedWalletAssetDtos(walletId);
         model.addAttribute("walletAssets", walletAssets);
         model.addAttribute("cash", wallet.getCash());
         return "wallet-view";
@@ -68,7 +65,7 @@ public class WalletController {
     public String handleWalletLoading(@PathVariable("walletId") Long walletId, HttpSession session) {
         Wallet wallet = walletWebService.find(walletId);
         session.setAttribute("wallet", wallet.getId());
-        return "redirect:/wallet-view/{walletId}";
+        return "redirect:/wallet-view/" + walletId;
     }
 
     @GetMapping("/top-up-wallet")

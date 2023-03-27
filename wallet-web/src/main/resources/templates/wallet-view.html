@@ -20,15 +20,21 @@
             <th class="text-nowrap">Cena zakupu</th>
             <th class="text-nowrap">ilość</th>
             <th class="text-nowrap">Aktualna cena</th>
+            <th class="text-nowrap">Wartość zakupu</th>
+            <th class="text-nowrap">Aktualna wartość</th>
+            <th class="text-nowrap">Zysk</th>
           </tr>
         </thead>
         <tbody>
           <tr th:each="asset, state: ${walletAssets}">
             <td th:text="${state.count}"></td>
             <td th:text="${asset.assetId}"></td>
-            <td th:text="${asset.purchasePrice}"></td>
+            <td th:text="${#numbers.formatCurrency(asset.purchasePrice)}"></td>
             <td th:text="${asset.quantity}"></td>
-            <td th:text="${asset.currentPrice}"></td>
+            <td th:text="${#numbers.formatCurrency(asset.currentPrice)}"></td>
+            <td th:text="${#numbers.formatCurrency(asset.purchaseValue)}"></td>
+            <td th:text="${#numbers.formatCurrency(asset.currentValue)}"></td>
+            <td th:attr="style=${asset.profit > 0 ? 'color: green' : 'color: red'}" th:text="${#numbers.formatPercent(asset.profit,1,2)}"></td>
           </tr>
         </tbody>
       </table>
