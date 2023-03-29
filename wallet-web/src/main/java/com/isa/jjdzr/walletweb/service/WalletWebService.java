@@ -72,4 +72,8 @@ public class WalletWebService {
         result.setProfit(profit);
         return result;
     }
+
+    public WalletAsset findWalletAsset(Long walletAssetId) {
+        return walletAssetServiceImpl.find(walletAssetId);
+    }
 }

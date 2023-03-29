@@ -83,4 +83,11 @@ public class WalletController {
         return "redirect:/wallet-view/" + walletId;
     }
 
+    @GetMapping("/sell-asset/{waId}")
+    public String getSellAsset(@PathVariable("waId") Long waId, Model model) {
+        WalletAsset walletAsset = walletWebService.findWalletAsset(waId);
+        model.addAttribute("walletAsset", walletAsset);
+        return "sell-asset";
+    }
+
 }
