@@ -1,6 +1,5 @@
 package com.isa.jjdzr.walletweb.service;
 
-import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.market.Market;
@@ -54,7 +53,7 @@ public class WalletWebService {
                 .map(wa -> findCurrentPrice(wa.getId()))
                 .toList();
         List<DetailedWalletAssetDto> result = new ArrayList<>();
-        for (WalletAsset wa : walletAssets) {
+        for (WalletAsset wa: walletAssets) {
             DetailedWalletAssetDto dto = createDetailedWalletAssetDto(wa);
             result.add(dto);
         }
@@ -72,9 +71,13 @@ public class WalletWebService {
         result.setQuantity(wa.getQuantity());
         result.setPurchaseValue(result.getPurchasePrice().multiply(result.getQuantity()));
         result.setCurrentValue(result.getCurrentPrice().multiply(result.getQuantity()));
-        BigDecimal profit = new BigDecimal(1).subtract(result.getPurchasePrice().divide(result.getCurrentPrice(), 4, RoundingMode.CEILING));
+        BigDecimal profit = new BigDecimal(1).subtract(result.getPurchasePrice().divide(result.getCurrentPrice(), 4,RoundingMode.CEILING));
         result.setProfit(profit);
         return result;
+    }
+
+    public WalletAsset findWalletAsset(Long walletAssetId) {
+        return walletAssetServiceImpl.find(walletAssetId);
     }
 
     public List<Asset> findMatchingAssets(FilterInputDto filterInput) {

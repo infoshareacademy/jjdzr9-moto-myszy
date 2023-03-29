@@ -23,6 +23,7 @@
             <th class="text-nowrap">Wartość zakupu</th>
             <th class="text-nowrap">Aktualna wartość</th>
             <th class="text-nowrap">Zysk</th>
+            <th class="text-nowrap">Sprzedaj</th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +36,7 @@
             <td th:text="${#numbers.formatCurrency(asset.purchaseValue)}"></td>
             <td th:text="${#numbers.formatCurrency(asset.currentValue)}"></td>
             <td th:attr="style=${asset.profit > 0 ? 'color: green' : 'color: red'}" th:text="${#numbers.formatPercent(asset.profit,1,2)}"></td>
+            <td><a th:href="@{/sell-asset/{waId}(waId=${asset.id})}" class="btn btn-outline-success btn-sm">Sprzedaj</a> </td>
           </tr>
         </tbody>
       </table>
