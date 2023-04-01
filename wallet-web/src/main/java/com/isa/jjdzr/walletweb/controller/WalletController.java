@@ -2,10 +2,9 @@ package com.isa.jjdzr.walletweb.controller;
 
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
-import com.isa.jjdzr.walletcore.service.WalletAssetService;
-import com.isa.jjdzr.walletcore.service.WalletService;
 import com.isa.jjdzr.walletweb.Constants;
 import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
+import com.isa.jjdzr.walletweb.dto.SellDto;
 import com.isa.jjdzr.walletweb.dto.TopUpDto;
 import com.isa.jjdzr.walletweb.service.WalletWebService;
 import jakarta.servlet.http.HttpSession;
@@ -84,10 +83,23 @@ public class WalletController {
     }
 
     @GetMapping("/sell-asset/{waId}")
-    public String getSellAsset(@PathVariable("waId") Long waId, Model model) {
+    public String getSellWalletAsset(@PathVariable("waId") Long waId, Model model) {
         WalletAsset walletAsset = walletWebService.findWalletAsset(waId);
         model.addAttribute("walletAsset", walletAsset);
+        model.addAttribute("sellInfo", new SellDto());
         return "sell-asset";
     }
 
+    @PostMapping("/handle-sell/{waId}")
+    public String sellWalletAsset(@PathVariable("waId") Long waId,@Valid SellDto sellInfo, BindingResult result, RedirectAttributes redirectAttributes) {
+        String status = walletWebService.checkPossibilityToSell(waId, sellInfo.getQuantity());
+        if (status.equals(Constants.NOT_SUFFICIENT_QUANTITY_IN_WALLET)) {
+            result.rejectValue("quantity","", "Nie masz takiej ilości w portfelu");
+        }
+        if (result.hasErrors()) return "redirect:/sell-asset/" + waId;
+        Long walletId = walletWebService.sell(waId, sellInfo.getQuantity());
+        redirectAttributes.addFlashAttribute("status", status);
+        return "redirect:/wallet-view/" + walletId;
+
+    }
 }

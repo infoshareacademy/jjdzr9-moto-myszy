@@ -5,6 +5,7 @@ import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletService;
+import com.isa.jjdzr.walletweb.Constants;
 import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
 import com.isa.jjdzr.walletweb.dto.FilterInputDto;
 import com.isa.jjdzr.walletweb.dto.TopUpDto;
@@ -53,7 +54,7 @@ public class WalletWebService {
                 .map(wa -> findCurrentPrice(wa.getId()))
                 .toList();
         List<DetailedWalletAssetDto> result = new ArrayList<>();
-        for (WalletAsset wa: walletAssets) {
+        for (WalletAsset wa : walletAssets) {
             DetailedWalletAssetDto dto = createDetailedWalletAssetDto(wa);
             result.add(dto);
         }
@@ -71,13 +72,22 @@ public class WalletWebService {
         result.setQuantity(wa.getQuantity());
         result.setPurchaseValue(result.getPurchasePrice().multiply(result.getQuantity()));
         result.setCurrentValue(result.getCurrentPrice().multiply(result.getQuantity()));
-        BigDecimal profit = new BigDecimal(1).subtract(result.getPurchasePrice().divide(result.getCurrentPrice(), 4,RoundingMode.CEILING));
+        BigDecimal profit = new BigDecimal(1).subtract(result.getPurchasePrice().divide(result.getCurrentPrice(), 4, RoundingMode.CEILING));
         result.setProfit(profit);
         return result;
     }
 
     public WalletAsset findWalletAsset(Long walletAssetId) {
         return walletAssetServiceImpl.find(walletAssetId);
+    }
+
+    public String checkPossibilityToSell(Long waId, BigDecimal quantity) {
+        WalletAsset walletAsset = walletAssetServiceImpl.find(waId);
+        if (quantity.compareTo(walletAsset.getQuantity()) > 0) {
+            return Constants.NOT_SUFFICIENT_QUANTITY_IN_WALLET;
+        } else {
+            return Constants.SUCCESS_STATUS;
+        }
     }
 
     public List<Asset> findMatchingAssets(FilterInputDto filterInput) {
@@ -91,4 +101,11 @@ public class WalletWebService {
         return result;
     }
 
+}
+
+    public Long sell(Long waId, BigDecimal quantity) {
+        WalletAsset walletAsset = walletAssetServiceImpl.find(waId);
+        walletServiceImpl.addCashFromTransaction(walletAsset.getWalletId(), quantity, walletAsset.getCurrentPrice());
+        return walletAssetServiceImpl.sellWalletAsset(waId, quantity);
+    }
 }

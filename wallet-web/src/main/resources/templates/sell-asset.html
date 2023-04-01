@@ -23,6 +23,14 @@
         </tr>
         </tbody>
       </table>
+      <form method="post" th:object="${sellInfo}" th:action="@{/handle-sell/{waId}(waId=${walletAsset.id})}">
+        <label for="quantity">Ilość:</label>
+        <br>
+        <p style="color:red" th:errors="*{quantity}"></p>
+        <input type="text" id="quantity" th:field="*{quantity}">
+        <br><br>
+        <input type="submit" class="btn btn-outline-dark" value="Sprzedaj">
+      </form>
     </div>
   </div>
 </section>
