@@ -52,13 +52,14 @@ public class WalletAssetServiceImpl implements WalletAssetService{
         return walletAssetRepository.find(walletAssetId);
     }
     @Override
-    public void sellWalletAsset(Long walletAssetId, BigDecimal quantity) {
+    public Long sellWalletAsset(Long walletAssetId, BigDecimal quantity) {
         WalletAsset walletAsset = walletAssetRepository.find(walletAssetId);
         if (Objects.equals(walletAsset.getQuantity(), quantity)) {
             walletAssetRepository.delete(walletAssetId);
         } else {
             reduceAssetQuantity(walletAssetId, quantity);
         }
+        return walletAssetId;
     }
 
     private void reduceAssetQuantity(Long walletAssetId, BigDecimal quantity) {

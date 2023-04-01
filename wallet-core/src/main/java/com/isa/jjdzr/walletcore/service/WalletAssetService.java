@@ -10,5 +10,5 @@ public interface WalletAssetService {
     List<WalletAsset> findWalletAssetsByWalletId(Long walletId);
     WalletAsset findCurrentPrice(Long waIndex);
     WalletAsset find(Long walletAssetId);
-    void sellWalletAsset(Long walletAssetId, BigDecimal quantity);
+    Long sellWalletAsset(Long walletAssetId, BigDecimal quantity);
 }
