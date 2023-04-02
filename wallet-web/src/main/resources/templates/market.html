@@ -2,6 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'market')">
 
         <section class="section">
+            <form action="/market/search" method="GET">
+                <input type="text" name="name" placeholder="Nazwa aktywu">
+                <button type="submit">Szukaj</button>
+            </form>
             <div>
                 <p>Gotówka: 1 500PLN</p>
             </div>

@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Asset {
+    private String name;
     private String id;
     private BigDecimal currentPrice;
 
