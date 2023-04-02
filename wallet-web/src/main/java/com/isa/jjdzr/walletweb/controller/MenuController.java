@@ -3,24 +3,23 @@ package com.isa.jjdzr.walletweb.controller;
 import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletweb.Constants;
+import com.isa.jjdzr.walletweb.dto.FilterInputDto;
 import com.isa.jjdzr.walletweb.dto.User;
+import com.isa.jjdzr.walletweb.service.WalletWebService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class MenuController {
     private final Market market;
-
+private final WalletWebService walletWebService;
 
     @GetMapping("/")
     public String getHomepage(Model model) {
@@ -49,22 +48,18 @@ public class MenuController {
     @GetMapping("/market")
     public String getMarket(Model model) {
         model.addAttribute("market", market.availableAssets());
+        model.addAttribute("filterInput", new FilterInputDto());
         return "market";
     }
 
     @GetMapping("/market/search")
-    public String search(Model model, @RequestParam(name = "name", required = false) String name) {
-        List<Asset> availableAssets = market.availableAssets();
-        List<Asset> matchingAssets = new ArrayList<>();
-        for (Asset asset : availableAssets) {
-            if (asset.getName() != null && asset.getName().contains(name)) {
-                matchingAssets.add(asset);
-            }
-        }
-        model.addAttribute("assets", matchingAssets);
+    public String search(FilterInputDto filterInput, Model model) {
+        List<Asset> matchingAssets = walletWebService.findMatchingAssets(filterInput);
+
+        model.addAttribute("market", matchingAssets);
+        model.addAttribute("filterInput", new FilterInputDto());
         return "market";
     }
-
 
 }
 

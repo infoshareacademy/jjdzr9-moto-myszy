@@ -36,10 +36,7 @@ final class FileAssetRepository implements AssetRepository {
         }
 
         List<Asset> retrievedAssetsList = new ArrayList<>(Arrays.asList(retrievedAssets));
-
-        for (Asset asset : retrievedAssetsList) {
-            asset.setName(asset.getName());
-        }
+        
 
         return retrievedAssetsList;
     }

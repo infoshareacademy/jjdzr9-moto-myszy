@@ -1,10 +1,13 @@
 package com.isa.jjdzr.walletweb.service;
 
+import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
+import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletService;
 import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
+import com.isa.jjdzr.walletweb.dto.FilterInputDto;
 import com.isa.jjdzr.walletweb.dto.TopUpDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ import java.util.List;
 public class WalletWebService {
     private final WalletService walletServiceImpl;
     private final WalletAssetService walletAssetServiceImpl;
+    private final Market market;
 
     public Wallet find(Long walletId) {
         return walletServiceImpl.find(walletId);
@@ -50,7 +54,7 @@ public class WalletWebService {
                 .map(wa -> findCurrentPrice(wa.getId()))
                 .toList();
         List<DetailedWalletAssetDto> result = new ArrayList<>();
-        for (WalletAsset wa: walletAssets) {
+        for (WalletAsset wa : walletAssets) {
             DetailedWalletAssetDto dto = createDetailedWalletAssetDto(wa);
             result.add(dto);
         }
@@ -68,8 +72,20 @@ public class WalletWebService {
         result.setQuantity(wa.getQuantity());
         result.setPurchaseValue(result.getPurchasePrice().multiply(result.getQuantity()));
         result.setCurrentValue(result.getCurrentPrice().multiply(result.getQuantity()));
-        BigDecimal profit = new BigDecimal(1).subtract(result.getPurchasePrice().divide(result.getCurrentPrice(), 4,RoundingMode.CEILING));
+        BigDecimal profit = new BigDecimal(1).subtract(result.getPurchasePrice().divide(result.getCurrentPrice(), 4, RoundingMode.CEILING));
         result.setProfit(profit);
         return result;
     }
+
+    public List<Asset> findMatchingAssets(FilterInputDto filterInput) {
+        List<Asset> availableAssets = market.availableAssets();
+        List<Asset> result = new ArrayList<>();
+        for (Asset asset : availableAssets) {
+            if (asset.getId() != null && asset.getId().contains(filterInput.getFilterInput())) {
+                result.add(asset);
+            }
+        }
+        return result;
+    }
+
 }

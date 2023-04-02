@@ -41,7 +41,7 @@ public class WalletAssetServiceImpl implements WalletAssetService{
         Asset asset = availableAssets.stream()
                 .filter(a -> assetId.equals(a.getId()))
                 .findFirst()
-                .orElse(new Asset("name","wrong id", new BigDecimal(0)));
+                .orElse(new Asset("wrong id", new BigDecimal(0)));
         walletAsset.setCurrentPrice(asset.getCurrentPrice());
         walletAssetRepository.save(walletAsset);
         return walletAsset;

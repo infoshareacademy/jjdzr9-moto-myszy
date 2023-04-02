@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'market')">
 
         <section class="section">
-            <form action="/market/search" method="GET">
-                <input type="text" name="name" placeholder="Nazwa aktywu">
+            <form th:action="@{/market/search}" method="GET" th:object="${filterInput}">
+                <input type="text" placeholder="Nazwa aktywu" th:field="*{filterInput}" >
                 <button type="submit">Szukaj</button>
             </form>
             <div>
