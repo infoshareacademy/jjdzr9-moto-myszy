@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MenuController {
     private final Market market;
-private final WalletWebService walletWebService;
+    private final WalletWebService walletWebService;
 
     @GetMapping("/")
     public String getHomepage(Model model) {
@@ -40,10 +40,6 @@ private final WalletWebService walletWebService;
         return "redirect:/login";
     }
 
-//    @GetMapping("/wallet-view")
-//    public String getWalletView(Model model) {
-//        return "wallet-view";
-//    }
 
     @GetMapping("/market")
     public String getMarket(Model model) {

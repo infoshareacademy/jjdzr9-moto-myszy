@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'log-in')">
+<section class="section">
+  <div>
+    <div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="text-nowrap">#</th>
+          <th class="text-nowrap">Nazwa</th>
+          <th class="text-nowrap">Cena zakupu</th>
+          <th class="text-nowrap">ilość</th>
+          <th class="text-nowrap">Aktualna cena</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:object="${walletAsset}">
+          <td></td>
+          <td th:text="*{assetId}"></td>
+          <td th:text="*{#numbers.formatCurrency(purchasePrice)}"></td>
+          <td th:text="*{quantity}"></td>
+          <td th:text="*{#numbers.formatCurrency(currentPrice)}"></td>
+        </tr>
+        </tbody>
+      </table>
+      <form method="post" th:object="${sellInfo}" th:action="@{/handle-sell}">
+        <label for="quantity">Ilość:</label>
+        <br>
+        <p style="color:red" th:errors="*{quantityToSell}"></p>
+        <input type="text" id="quantity" th:field="*{quantityToSell}"/>
+        <input type="hidden" th:field="*{walletAssetId}"/>
+        <br><br>
+        <input type="submit" class="btn btn-outline-dark" value="Sprzedaj">
+      </form>
+    </div>
+  </div>
+</section>
+</html>

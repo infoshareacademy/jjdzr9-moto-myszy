@@ -6,9 +6,8 @@ import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletService;
-import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
-import com.isa.jjdzr.walletweb.dto.FilterInputDto;
-import com.isa.jjdzr.walletweb.dto.TopUpDto;
+import com.isa.jjdzr.walletweb.Constants;
+import com.isa.jjdzr.walletweb.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +74,51 @@ public class WalletWebService {
         BigDecimal profit = new BigDecimal(1).subtract(result.getPurchasePrice().divide(result.getCurrentPrice(), 4, RoundingMode.CEILING));
         result.setProfit(profit);
         return result;
+    }
+
+    public WalletAsset findWalletAsset(Long walletAssetId) {
+        return walletAssetServiceImpl.find(walletAssetId);
+    }
+
+    public String checkPossibilityToSell(SellInfoDto sellInfo) {
+        WalletAsset walletAsset = walletAssetServiceImpl.find(sellInfo.getWalletAssetId());
+        if (sellInfo.getQuantityToSell().compareTo(walletAsset.getQuantity()) > 0) {
+            return Constants.NOT_SUFFICIENT_QUANTITY_IN_WALLET;
+        } else {
+            return Constants.SELL_POSSIBLE;
+        }
+    }
+
+    public Long sell(SellInfoDto sellInfo) {
+        WalletAsset walletAsset = walletAssetServiceImpl.find(sellInfo.getWalletAssetId());
+        walletServiceImpl.addCashFromTransaction(walletAsset.getWalletId(), sellInfo.getQuantityToSell(), walletAsset.getCurrentPrice());
+        return walletAssetServiceImpl.sellWalletAsset(sellInfo.getWalletAssetId(), sellInfo.getQuantityToSell());
+    }
+
+    public String checkPossibilityToBuy(BuyInfoDto buyInfo) {
+        Wallet wallet = walletServiceImpl.find(buyInfo.getWalletId());
+        BigDecimal cost = buyInfo.getPrice().multiply(buyInfo.getQuantity());
+        if (wallet.getCash().compareTo(cost) < 0) {
+            return Constants.NOT_ENOUGH_MONEY;
+        } else {
+            return Constants.BUY_POSSIBLE;
+        }
+    }
+
+    public Long handleBuy(BuyInfoDto buyInfo) {
+        WalletAsset walletAsset = createWalletAsset(buyInfo);
+        walletServiceImpl.spendCash(buyInfo.getWalletId(), walletAsset);
+        return buyInfo.getWalletId();
+    }
+
+    private WalletAsset createWalletAsset(BuyInfoDto buyInfo) {
+        WalletAsset walletAsset = new WalletAsset();
+        walletAsset.setAssetId(buyInfo.getAssetId());
+        walletAsset.setWalletId(buyInfo.getWalletId());
+        walletAsset.setQuantity(buyInfo.getQuantity());
+        walletAsset.setPurchasePrice(buyInfo.getPrice());
+        walletAsset.setCurrentPrice(buyInfo.getPrice());
+        return walletAssetServiceImpl.save(walletAsset);
     }
 
     public List<Asset> findMatchingAssets(FilterInputDto filterInput) {
