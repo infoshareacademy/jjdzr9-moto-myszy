@@ -1,14 +1,13 @@
 package com.isa.jjdzr.walletweb.service;
 
+import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
+import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletService;
 import com.isa.jjdzr.walletweb.Constants;
-import com.isa.jjdzr.walletweb.dto.BuyInfoDto;
-import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
-import com.isa.jjdzr.walletweb.dto.SellInfoDto;
-import com.isa.jjdzr.walletweb.dto.TopUpDto;
+import com.isa.jjdzr.walletweb.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +21,7 @@ import java.util.List;
 public class WalletWebService {
     private final WalletService walletServiceImpl;
     private final WalletAssetService walletAssetServiceImpl;
+    private final Market market;
 
     public Wallet find(Long walletId) {
         return walletServiceImpl.find(walletId);
@@ -121,7 +121,7 @@ public class WalletWebService {
         return walletAssetServiceImpl.save(walletAsset);
     }
 
-        public List<Asset> findMatchingAssets(FilterInputDto filterInput) {
+    public List<Asset> findMatchingAssets(FilterInputDto filterInput) {
         List<Asset> availableAssets = market.availableAssets();
         List<Asset> result = new ArrayList<>();
         for (Asset asset : availableAssets) {
@@ -130,14 +130,6 @@ public class WalletWebService {
             }
         }
         return result;
-    }
-
-
-
-    public Long sell(Long waId, BigDecimal quantity) {
-        WalletAsset walletAsset = walletAssetServiceImpl.find(waId);
-        walletServiceImpl.addCashFromTransaction(walletAsset.getWalletId(), quantity, walletAsset.getCurrentPrice());
-        return walletAssetServiceImpl.sellWalletAsset(waId, quantity);
     }
 
 }
