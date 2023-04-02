@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import static java.nio.file.Files.readString;
+
 final class FileAssetRepository implements AssetRepository {
     @Override
     public List<Asset> retrieveAssets() {
@@ -23,7 +25,7 @@ final class FileAssetRepository implements AssetRepository {
         Path path = Path.of("data", "market", randomfile);
         String s = null;
         try {
-            s = Files.readString(path);
+            s = readString(path);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -34,7 +36,9 @@ final class FileAssetRepository implements AssetRepository {
         }
 
         List<Asset> retrievedAssetsList = new ArrayList<>(Arrays.asList(retrievedAssets));
+        
 
         return retrievedAssetsList;
     }
+
 }
