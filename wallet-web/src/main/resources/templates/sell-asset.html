@@ -23,11 +23,12 @@
         </tr>
         </tbody>
       </table>
-      <form method="post" th:object="${sellInfo}" th:action="@{/handle-sell/{waId}(waId=${walletAsset.id})}">
+      <form method="post" th:object="${sellInfo}" th:action="@{/handle-sell}">
         <label for="quantity">Ilość:</label>
         <br>
-        <p style="color:red" th:errors="*{quantity}"></p>
-        <input type="text" id="quantity" th:field="*{quantity}">
+        <p style="color:red" th:errors="*{quantityToSell}"></p>
+        <input type="text" id="quantity" th:field="*{quantityToSell}"/>
+        <input type="hidden" th:field="*{walletAssetId}"/>
         <br><br>
         <input type="submit" class="btn btn-outline-dark" value="Sprzedaj">
       </form>

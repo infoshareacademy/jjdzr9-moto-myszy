@@ -9,5 +9,5 @@ public class Constants {
     public static final String LOGOUT_SUCCESSFUL = "logout_successful";
     public static final String TOP_UP_SUCCESS = "top_up_success";
     public static final String NOT_SUFFICIENT_QUANTITY_IN_WALLET = "not_sufficient_quantity";
-
+    public static final String SELL_POSSIBLE = "sell_possible";
 }
