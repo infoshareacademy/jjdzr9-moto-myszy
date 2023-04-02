@@ -5,6 +5,7 @@ import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletService;
 import com.isa.jjdzr.walletweb.Constants;
+import com.isa.jjdzr.walletweb.dto.BuyInfoDto;
 import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
 import com.isa.jjdzr.walletweb.dto.SellInfoDto;
 import com.isa.jjdzr.walletweb.dto.TopUpDto;
@@ -92,5 +93,31 @@ public class WalletWebService {
         WalletAsset walletAsset = walletAssetServiceImpl.find(sellInfo.getWalletAssetId());
         walletServiceImpl.addCashFromTransaction(walletAsset.getWalletId(), sellInfo.getQuantityToSell(), walletAsset.getCurrentPrice());
         return walletAssetServiceImpl.sellWalletAsset(sellInfo.getWalletAssetId(), sellInfo.getQuantityToSell());
+    }
+
+    public String checkPossibilityToBuy(BuyInfoDto buyInfo) {
+        Wallet wallet = walletServiceImpl.find(buyInfo.getWalletId());
+        BigDecimal cost = buyInfo.getPrice().multiply(buyInfo.getQuantity());
+        if (wallet.getCash().compareTo(cost) < 0) {
+            return Constants.NOT_ENOUGH_MONEY;
+        } else {
+            return Constants.BUY_POSSIBLE;
+        }
+    }
+
+    public Long handleBuy(BuyInfoDto buyInfo) {
+        WalletAsset walletAsset = createWalletAsset(buyInfo);
+        walletServiceImpl.spendCash(buyInfo.getWalletId(), walletAsset);
+        return buyInfo.getWalletId();
+    }
+
+    private WalletAsset createWalletAsset(BuyInfoDto buyInfo) {
+        WalletAsset walletAsset = new WalletAsset();
+        walletAsset.setAssetId(buyInfo.getAssetId());
+        walletAsset.setWalletId(buyInfo.getWalletId());
+        walletAsset.setQuantity(buyInfo.getQuantity());
+        walletAsset.setPurchasePrice(buyInfo.getPrice());
+        walletAsset.setCurrentPrice(buyInfo.getPrice());
+        return walletAssetServiceImpl.save(walletAsset);
     }
 }

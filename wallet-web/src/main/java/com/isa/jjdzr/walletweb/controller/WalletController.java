@@ -116,4 +116,16 @@ public class WalletController {
         model.addAttribute("buyInfo", buyInfo);
         return "buy-asset";
     }
+
+    @PostMapping("/handle-buy")
+    public String buyWalletAsset(BuyInfoDto buyInfo, BindingResult result, RedirectAttributes redirectAttributes) {
+        String status = walletWebService.checkPossibilityToBuy(buyInfo);
+        if (status.equals(Constants.NOT_ENOUGH_MONEY)) {
+            result.rejectValue("quantity", "", "Niewystarczające środki na zakup tej ilości");
+        }
+        if (result.hasErrors()) return "redirect:/buy-asset/" + buyInfo.getAssetId() + "/" + buyInfo.getPrice() + "/" + buyInfo.getWalletId();
+        Long walletId = walletWebService.handleBuy(buyInfo);
+        redirectAttributes.addFlashAttribute("status", status);
+        return "redirect:/wallet-view/" + walletId;
+    }
 }
