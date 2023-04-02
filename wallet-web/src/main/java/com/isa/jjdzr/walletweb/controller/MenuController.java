@@ -57,7 +57,7 @@ public class MenuController {
         List<Asset> availableAssets = market.availableAssets();
         List<Asset> matchingAssets = new ArrayList<>();
         for (Asset asset : availableAssets) {
-            if (asset.getName().contains(name)) {
+            if (asset.getName() != null && asset.getName().contains(name)) {
                 matchingAssets.add(asset);
             }
         }
