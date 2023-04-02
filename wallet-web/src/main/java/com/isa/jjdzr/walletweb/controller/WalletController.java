@@ -86,18 +86,20 @@ public class WalletController {
     public String getSellWalletAsset(@PathVariable("waId") Long waId, Model model) {
         WalletAsset walletAsset = walletWebService.findWalletAsset(waId);
         model.addAttribute("walletAsset", walletAsset);
-        model.addAttribute("sellInfo", new SellDto());
+        SellDto sellInfo = new SellDto();
+        sellInfo.setWalletAssetId(waId);
+        model.addAttribute("sellInfo", sellInfo);
         return "sell-asset";
     }
 
-    @PostMapping("/handle-sell/{waId}")
-    public String sellWalletAsset(@PathVariable("waId") Long waId,@Valid SellDto sellInfo, BindingResult result, RedirectAttributes redirectAttributes) {
-        String status = walletWebService.checkPossibilityToSell(waId, sellInfo.getQuantity());
+    @PostMapping("/handle-sell")
+    public String sellWalletAsset(@Valid SellDto sellInfo, BindingResult result, RedirectAttributes redirectAttributes) {
+        String status = walletWebService.checkPossibilityToSell(sellInfo);
         if (status.equals(Constants.NOT_SUFFICIENT_QUANTITY_IN_WALLET)) {
-            result.rejectValue("quantity","", "Nie masz takiej ilości w portfelu");
+            result.rejectValue("quantityToSell","", "Nie masz takiej ilości w portfelu");
         }
-        if (result.hasErrors()) return "redirect:/sell-asset/" + waId;
-        Long walletId = walletWebService.sell(waId, sellInfo.getQuantity());
+        if (result.hasErrors()) return "redirect:/sell-asset/" + sellInfo.getWalletAssetId();
+        Long walletId = walletWebService.sell(sellInfo);
         redirectAttributes.addFlashAttribute("status", status);
         return "redirect:/wallet-view/" + walletId;
 

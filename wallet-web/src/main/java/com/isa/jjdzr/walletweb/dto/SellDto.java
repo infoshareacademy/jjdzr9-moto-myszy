@@ -7,5 +7,6 @@ import java.math.BigDecimal;
 @Data
 public class SellDto {
 
-    private BigDecimal quantity;
+    private Long walletAssetId;
+    private BigDecimal quantityToSell;
 }
