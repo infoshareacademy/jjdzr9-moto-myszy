@@ -6,7 +6,7 @@ import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletService;
 import com.isa.jjdzr.walletweb.Constants;
 import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
-import com.isa.jjdzr.walletweb.dto.SellDto;
+import com.isa.jjdzr.walletweb.dto.SellInfoDto;
 import com.isa.jjdzr.walletweb.dto.TopUpDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -79,7 +79,7 @@ public class WalletWebService {
         return walletAssetServiceImpl.find(walletAssetId);
     }
 
-    public String checkPossibilityToSell(SellDto sellInfo) {
+    public String checkPossibilityToSell(SellInfoDto sellInfo) {
         WalletAsset walletAsset = walletAssetServiceImpl.find(sellInfo.getWalletAssetId());
         if (sellInfo.getQuantityToSell().compareTo(walletAsset.getQuantity()) > 0) {
             return Constants.NOT_SUFFICIENT_QUANTITY_IN_WALLET;
@@ -88,7 +88,7 @@ public class WalletWebService {
         }
     }
 
-    public Long sell(SellDto sellInfo) {
+    public Long sell(SellInfoDto sellInfo) {
         WalletAsset walletAsset = walletAssetServiceImpl.find(sellInfo.getWalletAssetId());
         walletServiceImpl.addCashFromTransaction(walletAsset.getWalletId(), sellInfo.getQuantityToSell(), walletAsset.getCurrentPrice());
         return walletAssetServiceImpl.sellWalletAsset(sellInfo.getWalletAssetId(), sellInfo.getQuantityToSell());

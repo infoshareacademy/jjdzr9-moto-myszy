@@ -26,7 +26,7 @@
                             <td th:text="${asset.id}"></td>
                             <td th:text="${asset.currentPrice}"></td>
                             <td><a class="btn btn-light btn-sm">Historia</a></td>
-                            <td><a class="btn btn-outline-primary btn-sm">Kup</a></td>
+                            <td><a th:href="@{/buy-asset/{id}/{price}/{walletId}(id=${asset.id}, price=${asset.currentPrice}, walletId=${session.wallet})}" class="btn btn-outline-primary btn-sm">Kup</a></td>
                         </tr>
                     </tbody>
                 </table>
