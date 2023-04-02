@@ -23,7 +23,6 @@
                     <tbody>
                         <tr th:each="asset, state: ${market}">
                             <td th:text="${state.count}"></td>
-                            <td th:text="${asset.getName()}"></td>
                             <td th:text="${asset.id}"></td>
                             <td th:text="${asset.currentPrice}"></td>
                             <td><a class="btn btn-light btn-sm">Historia</a></td>
