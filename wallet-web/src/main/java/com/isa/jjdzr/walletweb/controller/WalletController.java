@@ -3,8 +3,9 @@ package com.isa.jjdzr.walletweb.controller;
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletweb.Constants;
+import com.isa.jjdzr.walletweb.dto.BuyInfoDto;
 import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
-import com.isa.jjdzr.walletweb.dto.SellDto;
+import com.isa.jjdzr.walletweb.dto.SellInfoDto;
 import com.isa.jjdzr.walletweb.dto.TopUpDto;
 import com.isa.jjdzr.walletweb.service.WalletWebService;
 import jakarta.servlet.http.HttpSession;
@@ -56,7 +57,7 @@ public class WalletController {
         walletWebService.saveWallet(wallet);
         String status = Constants.SUCCESS_STATUS;
         redirectAttributes.addFlashAttribute("status", status);
-        session.setAttribute("wallet", wallet);
+        session.setAttribute("wallet", wallet.getId());
         return "redirect:/wallet-view/" + wallet.getId();
     }
 
@@ -86,14 +87,14 @@ public class WalletController {
     public String getSellWalletAsset(@PathVariable("waId") Long waId, Model model) {
         WalletAsset walletAsset = walletWebService.findWalletAsset(waId);
         model.addAttribute("walletAsset", walletAsset);
-        SellDto sellInfo = new SellDto();
+        SellInfoDto sellInfo = new SellInfoDto();
         sellInfo.setWalletAssetId(waId);
         model.addAttribute("sellInfo", sellInfo);
         return "sell-asset";
     }
 
     @PostMapping("/handle-sell")
-    public String sellWalletAsset(@Valid SellDto sellInfo, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String sellWalletAsset(@Valid SellInfoDto sellInfo, BindingResult result, RedirectAttributes redirectAttributes) {
         String status = walletWebService.checkPossibilityToSell(sellInfo);
         if (status.equals(Constants.NOT_SUFFICIENT_QUANTITY_IN_WALLET)) {
             result.rejectValue("quantityToSell","", "Nie masz takiej ilości w portfelu");
@@ -103,5 +104,16 @@ public class WalletController {
         redirectAttributes.addFlashAttribute("status", status);
         return "redirect:/wallet-view/" + walletId;
 
+    }
+
+    @GetMapping("/buy-asset/{id}/{price}/{walletId}")
+    public String getBuyAsset(@PathVariable("id") String id, @PathVariable("price") BigDecimal price,
+                              @PathVariable("walletId") Long walletId, Model model) {
+        BuyInfoDto buyInfo = new BuyInfoDto();
+        buyInfo.setAssetId(id);
+        buyInfo.setWalletId(walletId);
+        buyInfo.setPrice(price);
+        model.addAttribute("buyInfo", buyInfo);
+        return "buy-asset";
     }
 }

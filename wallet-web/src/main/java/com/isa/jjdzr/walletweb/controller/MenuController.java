@@ -36,10 +36,6 @@ public class MenuController {
         return "redirect:/login";
     }
 
-//    @GetMapping("/wallet-view")
-//    public String getWalletView(Model model) {
-//        return "wallet-view";
-//    }
 
     @GetMapping("/market")
     public String getMarket(Model model) {
