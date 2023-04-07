@@ -1,6 +1,6 @@
 package com.isa.jjdzr.walletweb.service;
 
-import com.isa.jjdzr.walletweb.Constants;
+import com.isa.jjdzr.walletcore.common.Constants;
 import com.isa.jjdzr.walletweb.dto.User;
 import com.isa.jjdzr.walletweb.repository.FileUserRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.isa.jjdzr.walletweb.dto;
 
 import com.isa.jjdzr.walletcore.common.BaseEntity;
-import com.isa.jjdzr.walletweb.ValidSymbols;
+import com.isa.jjdzr.walletcore.common.ValidSymbols;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;

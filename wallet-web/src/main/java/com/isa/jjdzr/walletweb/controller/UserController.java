@@ -1,6 +1,6 @@
 package com.isa.jjdzr.walletweb.controller;
 
-import com.isa.jjdzr.walletweb.Constants;
+import com.isa.jjdzr.walletcore.common.Constants;
 import com.isa.jjdzr.walletweb.dto.User;
 import com.isa.jjdzr.walletweb.service.UserService;
 import jakarta.servlet.http.HttpSession;

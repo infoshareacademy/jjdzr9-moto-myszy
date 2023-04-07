@@ -1,4 +1,4 @@
-package com.isa.jjdzr.api;
+package com.isa.jjdzr.walletcore.api;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,6 +1,6 @@
 package com.isa.jjdzr.consolepresentation;
 
-import com.isa.jjdzr.api.ApiNbp;
+import com.isa.jjdzr.walletcore.api.ApiNbp;
 import com.isa.jjdzr.console.MenuService;
 import com.isa.jjdzr.console.Printable;
 import com.isa.jjdzr.console.Printer;
