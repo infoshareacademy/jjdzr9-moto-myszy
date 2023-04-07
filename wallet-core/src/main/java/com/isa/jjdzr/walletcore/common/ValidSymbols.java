@@ -1,4 +1,4 @@
-package com.isa.jjdzr.walletweb;
+package com.isa.jjdzr.walletcore.common;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

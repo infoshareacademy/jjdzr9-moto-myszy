@@ -1,4 +1,4 @@
-package com.isa.jjdzr.walletweb;
+package com.isa.jjdzr.walletcore.common;
 
 public class Constants {
     public static final String SUCCESS_STATUS = "success";

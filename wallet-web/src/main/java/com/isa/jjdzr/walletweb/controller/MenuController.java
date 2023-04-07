@@ -2,7 +2,7 @@ package com.isa.jjdzr.walletweb.controller;
 
 import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.market.Market;
-import com.isa.jjdzr.walletweb.Constants;
+import com.isa.jjdzr.walletcore.common.Constants;
 import com.isa.jjdzr.walletweb.dto.FilterInputDto;
 import com.isa.jjdzr.walletweb.dto.User;
 import com.isa.jjdzr.walletweb.service.WalletWebService;
