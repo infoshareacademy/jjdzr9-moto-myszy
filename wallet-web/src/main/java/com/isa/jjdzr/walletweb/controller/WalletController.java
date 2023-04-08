@@ -37,7 +37,6 @@ public class WalletController {
         if (walletId == -1L) return "redirect:/create-wallet";
         Wallet wallet = walletWebService.find(walletId);
         List<DetailedWalletAssetDto> walletAssets = walletWebService.prepareDetailedWalletAssetDtos(walletId);
-        walletWebService.createWalletChart(walletAssets, wallet);
         model.addAttribute("walletAssets", walletAssets);
         model.addAttribute("cash", wallet.getCash());
         return "wallet-view";
