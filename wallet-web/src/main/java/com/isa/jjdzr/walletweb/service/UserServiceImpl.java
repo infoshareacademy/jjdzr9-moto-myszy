@@ -2,7 +2,7 @@ package com.isa.jjdzr.walletweb.service;
 
 import com.isa.jjdzr.walletcore.common.Constants;
 import com.isa.jjdzr.walletweb.dto.User;
-import com.isa.jjdzr.walletweb.repository.FileUserRepository;
+import com.isa.jjdzr.walletweb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import static java.util.Objects.isNull;
 @Component
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private final FileUserRepository fileUserRepository;
+    private final UserRepository fileUserRepository;
 
     @Override
     public List<User> getAll() {
