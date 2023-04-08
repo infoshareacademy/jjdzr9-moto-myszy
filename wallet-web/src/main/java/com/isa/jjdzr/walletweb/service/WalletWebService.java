@@ -1,12 +1,12 @@
 package com.isa.jjdzr.walletweb.service;
 
+import com.isa.jjdzr.walletcore.common.Constants;
 import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletService;
-import com.isa.jjdzr.walletcore.common.Constants;
 import com.isa.jjdzr.walletweb.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,7 @@ public class WalletWebService {
     private final WalletService walletServiceImpl;
     private final WalletAssetService walletAssetServiceImpl;
     private final Market market;
+    private final ChartsService chartsService;
 
     public Wallet find(Long walletId) {
         return walletServiceImpl.find(walletId);
@@ -132,4 +133,8 @@ public class WalletWebService {
         return result;
     }
 
+    public void createWalletChart(List<DetailedWalletAssetDto> walletAssets, Wallet wallet) {
+            chartsService.createWalletChart(walletAssets, wallet);
+
+    }
 }
