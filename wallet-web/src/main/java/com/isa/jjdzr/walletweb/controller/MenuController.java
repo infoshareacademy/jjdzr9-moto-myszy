@@ -5,7 +5,7 @@ import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.common.Constants;
 import com.isa.jjdzr.walletweb.dto.FilterInputDto;
 import com.isa.jjdzr.walletweb.dto.User;
-import com.isa.jjdzr.walletweb.service.WalletWebService;
+import com.isa.jjdzr.walletweb.service.WalletWebServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MenuController {
     private final Market market;
-    private final WalletWebService walletWebService;
+    private final WalletWebServiceImpl walletWebServiceImpl;
 
     @GetMapping("/")
     public String getHomepage(Model model) {
@@ -50,7 +50,7 @@ public class MenuController {
 
     @GetMapping("/market/search")
     public String search(FilterInputDto filterInput, Model model) {
-        List<Asset> matchingAssets = walletWebService.findMatchingAssets(filterInput);
+        List<Asset> matchingAssets = walletWebServiceImpl.findMatchingAssets(filterInput);
 
         model.addAttribute("market", matchingAssets);
         model.addAttribute("filterInput", new FilterInputDto());
