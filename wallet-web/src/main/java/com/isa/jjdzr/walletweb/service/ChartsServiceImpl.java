@@ -30,9 +30,9 @@ public class ChartsServiceImpl implements ChartsService {
         dataset.setValue("Gotówka: \n"+ wallet.getCash() + "PLN", wallet.getCash());
 
         JFreeChart chart = ChartFactory.createPieChart(
-                wallet.getWalletName(),   // chart title
-                dataset,          // data
-                true,             // include legend
+                wallet.getWalletName(),
+                dataset,
+                true,
                 true,
                 false);
         saveWalletChart(chart);

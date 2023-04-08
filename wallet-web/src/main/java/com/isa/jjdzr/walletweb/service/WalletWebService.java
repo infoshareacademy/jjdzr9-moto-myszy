@@ -58,7 +58,6 @@ public class WalletWebService {
             DetailedWalletAssetDto dto = createDetailedWalletAssetDto(wa);
             result.add(dto);
         }
-        createWalletChart(result, walletServiceImpl.find(walletId));
         return result;
     }
 
