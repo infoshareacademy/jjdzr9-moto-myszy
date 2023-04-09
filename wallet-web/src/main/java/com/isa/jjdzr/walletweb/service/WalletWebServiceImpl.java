@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class WalletWebServiceImpl {
+public class WalletWebServiceImpl implements WalletWebService{
     private final WalletService walletServiceImpl;
     private final WalletAssetService walletAssetServiceImpl;
     private final Market market;

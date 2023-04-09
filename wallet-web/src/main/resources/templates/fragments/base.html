@@ -19,14 +19,14 @@
   </header>
 
   <nav class="nav" >
-    <div class="nav">
+    <div>
       <a th:href="@{/}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">GŁÓWNA</a>
     </div>
-    <div class="nav">
+    <div>
       <a th:href="@{/market}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">RYNEK</a>
     </div>
-    <div class="nav">
-      <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">stuff</a>
+    <div>
+      <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">KURS WALUT</a>
     </div>
     <div th:if="${session.isEmpty()}" class="nav">
       <a th:href="@{/login}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">LOGOWANIE</a>

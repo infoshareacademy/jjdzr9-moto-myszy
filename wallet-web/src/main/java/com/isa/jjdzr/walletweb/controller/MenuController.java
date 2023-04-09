@@ -5,7 +5,7 @@ import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.common.Constants;
 import com.isa.jjdzr.walletweb.dto.FilterInputDto;
 import com.isa.jjdzr.walletweb.dto.User;
-import com.isa.jjdzr.walletweb.service.WalletWebServiceImpl;
+import com.isa.jjdzr.walletweb.service.WalletWebService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MenuController {
     private final Market market;
-    private final WalletWebServiceImpl walletWebServiceImpl;
+    private final WalletWebService walletWebServiceImpl;
 
     @GetMapping("/")
     public String getHomepage(Model model) {

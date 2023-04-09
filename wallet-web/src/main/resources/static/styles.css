@@ -59,6 +59,10 @@
     opacity: 1;
 }
 
+#nav > * {
+    width: 200px;
+}
+
 .aside {
     grid-area: aside;
     background-color: #f5f5f5;
