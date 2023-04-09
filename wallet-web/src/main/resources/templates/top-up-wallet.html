@@ -3,12 +3,17 @@
     <section class="section">
         <div class="d-flex align-items-center justify-content-center">
             <form method="Put" th:object="${topUpDto}" th:action="@{/handleTopUp/{walletId}(walletId = ${session.wallet})}">
-                <h4>Zasilenie portfela</h4>
-                <label for="cash">Podaj kwotę jaką chcesz zasilić portfel:</label>
+                <div class="d-flex justify-content-center">
+                    <h4>Zasilenie portfela</h4>
+                </div>
+                <label class="col-form-label-lg" for="cash">Podaj kwotę jaką chcesz zasilić portfel:</label>
                 <br>
                 <p style="color:red" th:errors="*{cash}"></p>
-                <input type="text" id="cash" th:field="*{cash}">
-                <input type="submit" class="btn btn-outline-dark" value="Zasil">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-text">$$</div>
+                    <input class="form-control" type="text" id="cash" th:field="*{cash}">
+                    <input type="submit" class="btn btn-outline-dark" value="Zasil">
+                </div>
             </form>
         </div>
     </section>
