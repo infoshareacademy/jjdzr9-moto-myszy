@@ -91,3 +91,11 @@
 .table {
     width: 100%;
 }
+
+.derp {
+
+}
+
+.derp * {
+    width: 200px;
+}
