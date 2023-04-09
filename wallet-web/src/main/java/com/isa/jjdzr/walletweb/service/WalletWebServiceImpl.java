@@ -125,7 +125,12 @@ public class WalletWebServiceImpl implements WalletWebService{
         result.setQuantity(wa.getQuantity());
         result.setPurchaseValue(result.getPurchasePrice().multiply(result.getQuantity()));
         result.setCurrentValue(result.getCurrentPrice().multiply(result.getQuantity()));
-        BigDecimal profit = new BigDecimal(1).subtract(result.getPurchasePrice().divide(result.getCurrentPrice(), 4, RoundingMode.CEILING));
+        BigDecimal profit;
+        if (result.getPurchasePrice().compareTo(result.getCurrentPrice()) >= 0) {
+            profit = result.getCurrentPrice().divide(result.getPurchasePrice(), 4, RoundingMode.CEILING).subtract(new BigDecimal(1));
+        } else {
+            profit = new BigDecimal(1).subtract(result.getPurchasePrice().divide(result.getCurrentPrice(), 4, RoundingMode.CEILING));
+        }
         result.setProfit(profit);
         return result;
     }
