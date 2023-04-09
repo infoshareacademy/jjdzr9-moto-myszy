@@ -10,7 +10,7 @@
   <div>
     <div class="d-flex justify-content-evenly">
       <div>
-        <p th:text="'Gotówka: ' + ${cash}"></p>
+        <p th:text="'Gotówka: ' + ${#numbers.formatCurrency(cash)}"></p>
       </div>
       <div>
         <button type="button" class="btn btn-outline-dark btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">

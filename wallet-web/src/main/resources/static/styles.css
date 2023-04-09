@@ -59,7 +59,7 @@
     opacity: 1;
 }
 
-#nav > * {
+.nav * {
     width: 200px;
 }
 
@@ -72,6 +72,10 @@
     justify-content: space-between;
     overflow-y: auto;
     height: 310px;
+}
+
+.aside * {
+    width: 200px;
 }
 
 .btn:hover {

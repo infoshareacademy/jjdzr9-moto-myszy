@@ -2,15 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'market')">
 
         <section class="section">
-            <form th:action="@{/market/search}" method="GET" th:object="${filterInput}">
-                <input type="text" placeholder="Nazwa aktywu" th:field="*{filterInput}" >
-                <button type="submit">Szukaj</button>
-            </form>
-            <div>
-                <p>Gotówka: 1 500PLN</p>
+            <div class="py-2">
+                <form th:action="@{/market/search}" method="GET" th:object="${filterInput}">
+                    <div class="input-group input-group-lg">
+                        <input class="form-control" type="text" placeholder="Nazwa aktywu" th:field="*{filterInput}" >
+                        <button class="btn btn-outline-dark btl-lg" type="submit">Szukaj</button>
+                    </div>
+                </form>
             </div>
             <div>
-                <table class="table">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th class="text-nowrap">#</th>
@@ -24,9 +25,9 @@
                         <tr th:each="asset, state: ${market}">
                             <td th:text="${state.count}"></td>
                             <td th:text="${asset.id}"></td>
-                            <td th:text="${asset.currentPrice}"></td>
-                            <td><a class="btn btn-light btn-sm">Historia</a></td>
-                            <td><a th:href="@{/buy-asset/{id}/{price}/{walletId}(id=${asset.id}, price=${asset.currentPrice}, walletId=${session.wallet})}" class="btn btn-outline-primary btn-sm">Kup</a></td>
+                            <td th:text="${#numbers.formatCurrency(asset.currentPrice)}"></td>
+                            <td><a class="btn btn-outline-dark btn-sm">Historia</a></td>
+                            <td><a th:href="@{/buy-asset/{id}/{price}/{walletId}(id=${asset.id}, price=${asset.currentPrice}, walletId=${session.wallet})}" class="btn btn-outline-dark btn-sm">Kup</a></td>
                         </tr>
                     </tbody>
                 </table>
