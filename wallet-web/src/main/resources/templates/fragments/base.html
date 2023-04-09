@@ -11,7 +11,7 @@
 <div class="layout">
   <header class="header d-flex bd-highlight mb-3">
     <div class="me-auto p-2 bd-highlight align-self-center">
-      <img th:src="@{images/stonks.jpg}" height="200" alt="">
+      <img th:src="@{/images/stonks.jpg}" height="200" alt="">
     </div>
     <div class="p-2 bd-highlight align-self-center">
       <h1>WalletApp by:</h1>
@@ -39,8 +39,8 @@
     </div>
   </nav>
   <aside class="aside d-flex align-items-start flex-column bd-highlight mb-3">
-    <div th:if="${session.isEmpty()}">
-      <p>Zaloguj się</p>
+    <div th:if="${session.isEmpty()}" class="text-center">
+      <h5>Zaloguj się</h5>
     </div>
     <div th:unless="${session.isEmpty()}">
       <div class="text-center">
@@ -60,7 +60,7 @@
       </div>
     </div>
   </aside>
-  <section class="section px-5" th:insert="${content}">
+  <section class="section px-5 py-3" th:insert="${content}">
   </section>
   <footer class="footer mt-auto py-3">
     <div class="container text-center">
