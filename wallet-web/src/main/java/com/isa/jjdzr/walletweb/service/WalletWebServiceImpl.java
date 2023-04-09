@@ -78,7 +78,8 @@ public class WalletWebServiceImpl implements WalletWebService{
     public Long sell(SellInfoDto sellInfo) {
         WalletAsset walletAsset = walletAssetServiceImpl.find(sellInfo.getWalletAssetId());
         walletServiceImpl.addCashFromTransaction(walletAsset.getWalletId(), sellInfo.getQuantityToSell(), walletAsset.getCurrentPrice());
-        return walletAssetServiceImpl.sellWalletAsset(sellInfo.getWalletAssetId(), sellInfo.getQuantityToSell());
+        walletAssetServiceImpl.sellWalletAsset(sellInfo.getWalletAssetId(), sellInfo.getQuantityToSell());
+        return walletAsset.getWalletId();
     }
 
     public String checkPossibilityToBuy(BuyInfoDto buyInfo) {
