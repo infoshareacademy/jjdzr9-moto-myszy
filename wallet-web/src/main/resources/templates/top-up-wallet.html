@@ -7,8 +7,11 @@
                 <label for="cash">Podaj kwotę jaką chcesz zasilić portfel:</label>
                 <br>
                 <p style="color:red" th:errors="*{cash}"></p>
-                <input type="text" id="cash" th:field="*{cash}">
-                <input type="submit" class="btn btn-outline-dark" value="Zasil">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-text">$$</div>
+                    <input class="form-control" type="text" id="cash" th:field="*{cash}">
+                    <input type="submit" class="btn btn-outline-dark" value="Zasil">
+                </div>
             </form>
         </div>
     </section>
