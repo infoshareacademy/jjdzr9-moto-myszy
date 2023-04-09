@@ -129,7 +129,7 @@ public class WalletWebServiceImpl implements WalletWebService{
         if (result.getPurchasePrice().compareTo(result.getCurrentPrice()) >= 0) {
             profit = result.getCurrentPrice().divide(result.getPurchasePrice(), 4, RoundingMode.CEILING).subtract(new BigDecimal(1));
         } else {
-            profit = new BigDecimal(1).subtract(result.getPurchasePrice().divide(result.getCurrentPrice(), 4, RoundingMode.CEILING));
+            profit = result.getCurrentPrice().divide(result.getPurchasePrice(), 4, RoundingMode.CEILING).subtract(new BigDecimal(1));
         }
         result.setProfit(profit);
         return result;
