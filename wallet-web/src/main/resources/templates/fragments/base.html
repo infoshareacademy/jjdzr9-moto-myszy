@@ -9,57 +9,60 @@
 </head>
 <body class="p-3 mb-2 bg-body-secondary">
 <div class="layout">
-  <header class="header">
-    <div>
-      <h1 class="h1">WalletApp by moto-myszy </h1>
+  <header class="header d-flex bd-highlight mb-3">
+    <div class="me-auto p-2 bd-highlight align-self-center">
+      <img th:src="@{images/stonks.jpg}" height="200" alt="">
     </div>
-    <div>
+    <div class="p-2 bd-highlight align-self-center">
+      <h1>WalletApp by:</h1>
+    </div>
+    <div class="p-2 bd-highlight align-self-center">
       <img src="http://s3.amazonaws.com/gt7sp-prod/decal/92/21/92/6269595626519922192_1.png" alt="logo" class="logo">
     </div>
   </header>
 
-  <nav class="nav" >
+  <nav class="nav d-flex justify-content-between">
     <div>
-      <a th:href="@{/}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">GŁÓWNA</a>
+      <a th:href="@{/}" class="btn btn-outline-dark btn-lg px-2" tabindex="-1" role="button" aria-disabled="true">GŁÓWNA</a>
     </div>
     <div>
-      <a th:href="@{/market}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">RYNEK</a>
+      <a th:href="@{/market}" class="btn btn-outline-dark btn-lg px-2" tabindex="-1" role="button" aria-disabled="true">RYNEK</a>
     </div>
     <div>
-      <a href="#" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">KURS WALUT</a>
+      <a href="#" class="btn btn-outline-dark btn-lg px-2" tabindex="-1" role="button" aria-disabled="true">KURS WALUT</a>
     </div>
     <div th:if="${session.isEmpty()}">
-      <a th:href="@{/login}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">LOGOWANIE</a>
+      <a th:href="@{/login}" class="btn btn-outline-dark btn-lg px-2" tabindex="-1" role="button" aria-disabled="true">LOGOWANIE</a>
     </div>
     <div th:unless="${session.isEmpty()}">
-      <a th:href="@{/logout}" class="btn btn-outline-dark btn-lg" tabindex="-1" role="button" aria-disabled="true">WYLOGUJ</a>
+      <a th:href="@{/logout}" class="btn btn-outline-dark btn-lg px-2" tabindex="-1" role="button" aria-disabled="true">WYLOGUJ</a>
     </div>
   </nav>
-  <aside class="aside">
+  <aside class="aside d-flex align-items-start flex-column bd-highlight mb-3">
     <div th:if="${session.isEmpty()}">
       <p>Zaloguj się</p>
     </div>
     <div th:unless="${session.isEmpty()}">
-      <div>
+      <div class="text-center">
         <h5>Side menu</h5>
       </div>
       <div class="btn-container">
-        <a th:href="@{/create-wallet}" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">STWÓRZ PORTFEL</a>
+        <a th:href="@{/create-wallet}" class="btn btn-outline-dark px-2" tabindex="-1" role="button" aria-disabled="true">STWÓRZ PORTFEL</a>
       </div>
       <div class="btn-container">
-        <a th:href="@{/load-wallet/{userId}(userId=(${session.isEmpty()} ? '-1' : ${session.user.id}))}" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">WCZYTAJ PORTFEL</a>
+        <a th:href="@{/load-wallet/{userId}(userId=(${session.isEmpty()} ? '-1' : ${session.user.id}))}" class="btn btn-outline-dark px-2" tabindex="-1" role="button" aria-disabled="true">WCZYTAJ PORTFEL</a>
       </div>
       <div class="btn-container">
-        <a th:href="@{/wallet-view/{walletId}(walletId=(${session.containsKey('wallet')} ? ${session.wallet} : '-1'))}" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">PODGLĄD PORTFELA</a>
+        <a th:href="@{/wallet-view/{walletId}(walletId=(${session.containsKey('wallet')} ? ${session.wallet} : '-1'))}" class="btn btn-outline-dark px-2" tabindex="-1" role="button" aria-disabled="true">PODGLĄD PORTFELA</a>
       </div>
       <div class="btn-container">
-        <a th:href="@{/top-up-wallet}" class="btn btn-outline-dark" tabindex="-1" role="button" aria-disabled="true">DODAJ GOTÓWKĘ</a>
+        <a th:href="@{/top-up-wallet}" class="btn btn-outline-dark px-2" tabindex="-1" role="button" aria-disabled="true">DODAJ GOTÓWKĘ</a>
       </div>
     </div>
   </aside>
-  <section class="section" th:insert="${content}">
+  <section class="section px-5" th:insert="${content}">
   </section>
-  <footer class="footer mt-auto py-3 bg-light">
+  <footer class="footer mt-auto py-3">
     <div class="container text-center">
       <span class="text-muted">Copyright © 2023 WalletApp</span>
     </div>
