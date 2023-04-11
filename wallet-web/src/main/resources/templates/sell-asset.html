@@ -27,6 +27,14 @@
                 <form method="post" th:object="${sellInfo}" th:action="@{/handle-sell}" >
 
                     <br>
+                    <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'not_sufficient_quantity'">
+                        <span class="btn btn-outline-danger btn-lg">NIEWYSTARCZAJACA ILOŚĆ W PORTFELU</span>
+                        <br>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'wrong_input'">
+                        <span class="btn btn-outline-danger btn-lg">NIEWŁAŚCIWA WARTOŚĆ</span>
+                        <br>
+                    </div>
                     <p style="color:red" th:errors="*{quantityToSell}"></p>
                     <div class="input-group input-group-lg">
                         <div class="input-group-text">Ilość: </div>
