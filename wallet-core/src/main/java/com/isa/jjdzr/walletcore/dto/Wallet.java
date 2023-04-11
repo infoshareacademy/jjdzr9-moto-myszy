@@ -2,10 +2,10 @@ package com.isa.jjdzr.walletcore.dto;
 
 
 import com.isa.jjdzr.walletcore.common.BaseEntity;
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +24,6 @@ public class Wallet implements BaseEntity {
 
     @Min(value = 0, message = "Wartość nie może być ujemna")
     @Max(value = 1000000, message = "Zbyt duża wartość")
-    @NotBlank(message = "Kwota nie może być pusta")
+    @NotNull(message = "Kwota nie może być pusta")
     private BigDecimal cash;
 }

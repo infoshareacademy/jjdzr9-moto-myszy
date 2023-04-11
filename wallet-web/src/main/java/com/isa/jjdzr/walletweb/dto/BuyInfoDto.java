@@ -1,6 +1,7 @@
 package com.isa.jjdzr.walletweb.dto;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -13,5 +14,6 @@ public class BuyInfoDto {
     private BigDecimal price;
 
     @Min(value = 0)
+    @NotNull
     private BigDecimal quantity;
 }

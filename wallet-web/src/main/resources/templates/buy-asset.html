@@ -22,7 +22,14 @@
             <div>
                 <form method="post" th:object="${buyInfo}" th:action="@{/handle-buy}">
                     <br>
-                    <p style="color:red" th:errors="*{quantity}"></p>
+                    <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'not_enough_money'">
+                        <span class="btn btn-outline-danger btn-lg">NIEWYSTARCZAJĄCA ILOŚĆ PIENIĘDZY W PORTFELU</span>
+                        <br>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'wrong_input'">
+                        <span class="btn btn-outline-danger btn-lg">NIEWŁAŚCIWA WARTOŚĆ</span>
+                        <br>
+                    </div>
                     <div class="input-group input-group-lg">
                         <div class="input-group-text">Ilość: </div>
                         <input class="form-control" type="text" id="quantity" th:field="*{quantity}"/>

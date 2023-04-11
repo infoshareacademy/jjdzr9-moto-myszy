@@ -2,7 +2,7 @@ package com.isa.jjdzr.walletweb.dto;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 public class TopUpDto {
     @Min(value = 0, message = "Wartość nie może być ujemna")
     @Max(value = 1000000, message = "Zbyt duża wartość")
-    @NotBlank(message = "Kwota nie może być pusta")
-    //TODO: messenge when cannot create object (eg. when wrong input)
+    @NotNull(message = "Pole nie może być puste")
     private BigDecimal cash;
 }

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'register')">
     <section class="section">
         <div class="d-flex align-items-center justify-content-center">
-            <form method="Put" th:object="${topUpDto}" th:action="@{/handleTopUp/{walletId}(walletId = ${session.wallet})}">
+            <form method="post" th:object="${topUpDto}" th:action="@{/handleTopUp/{walletId}(walletId = ${session.wallet})}">
                 <div class="d-flex justify-content-center">
                     <h4>Zasilenie portfela</h4>
                 </div>
