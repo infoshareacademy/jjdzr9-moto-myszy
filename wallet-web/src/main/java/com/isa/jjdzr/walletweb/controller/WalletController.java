@@ -146,10 +146,6 @@ public class WalletController {
             redirectAttributes.addFlashAttribute("status", status);
             return "redirect:/buy-asset/" + buyInfo.getAssetId() + "/" + buyInfo.getPrice() + "/" + buyInfo.getWalletId();
         }
-        if (result.hasErrors()) {
-            redirectAttributes.addFlashAttribute("status", status);
-            return "redirect:/buy-asset/" + buyInfo.getAssetId() + "/" + buyInfo.getPrice() + "/" + buyInfo.getWalletId();
-        }
         Long walletId = walletWebServiceImpl.handleBuy(buyInfo);
         redirectAttributes.addFlashAttribute("status", status);
         return "redirect:/wallet-view/" + walletId;
