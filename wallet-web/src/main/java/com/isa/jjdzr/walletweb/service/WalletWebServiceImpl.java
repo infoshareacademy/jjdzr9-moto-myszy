@@ -9,6 +9,7 @@ import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletService;
 import com.isa.jjdzr.walletweb.dto.*;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -103,7 +104,7 @@ public class WalletWebServiceImpl implements WalletWebService{
         List<Asset> availableAssets = market.availableAssets();
         List<Asset> result = new ArrayList<>();
         for (Asset asset : availableAssets) {
-            if (asset.getId() != null && asset.getId().contains(filterInput.getFilterInput())) {
+            if (asset.getId() != null && StringUtils.containsIgnoreCase(asset.getId(), filterInput.getFilterInput())) {
                 result.add(asset);
             }
         }
