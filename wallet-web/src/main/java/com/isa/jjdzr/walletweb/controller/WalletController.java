@@ -37,7 +37,7 @@ public class WalletController {
 
     @GetMapping("/wallet-view/{walletId}")
     public String showWallet(@PathVariable("walletId") Long walletId, Model model) {
-        if (walletId == -1L) return "redirect:/create-wallet";
+        if (walletId == Constants.NOT_IN_SESSION) return "redirect:/create-wallet";
         Wallet wallet = walletWebServiceImpl.find(walletId);
         List<DetailedWalletAssetDto> walletAssets = walletWebServiceImpl.prepareDetailedWalletAssetDtos(walletId);
         walletWebServiceImpl.createWalletChart(walletAssets, wallet);
@@ -48,7 +48,7 @@ public class WalletController {
 
     @GetMapping("/load-wallet/{userId}")
     public String loadWallet(Model model, @PathVariable("userId") Long userId) {
-        if (userId == -1L) return "redirect:/login";
+        if (userId == Constants.NOT_IN_SESSION) return "redirect:/login";
         List<Wallet> walletList = walletWebServiceImpl.getUserWallets(userId);
         model.addAttribute(walletList);
         return "load-wallet";
@@ -72,8 +72,9 @@ public class WalletController {
         return "redirect:/wallet-view/" + walletId;
     }
 
-    @GetMapping("/top-up-wallet")
-    public String topUpWallet(Model model) {
+    @GetMapping("/top-up-wallet/{walletId}")
+    public String topUpWallet(@PathVariable("walletId") Long walletId, Model model) {
+        if (walletId == Constants.NOT_IN_SESSION) return "redirect:/create-wallet";
         model.addAttribute("topUpDto", new TopUpDto());
         return "top-up-wallet";
     }
@@ -113,6 +114,7 @@ public class WalletController {
     @GetMapping("/buy-asset/{id}/{price}/{walletId}")
     public String getBuyAsset(@PathVariable("id") String id, @PathVariable("price") BigDecimal price,
                               @PathVariable("walletId") Long walletId, Model model) {
+        if (walletId == Constants.NOT_IN_SESSION) return "redirect:/create-wallet";
         BuyInfoDto buyInfo = new BuyInfoDto();
         buyInfo.setAssetId(id);
         buyInfo.setWalletId(walletId);

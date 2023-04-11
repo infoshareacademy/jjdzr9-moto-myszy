@@ -50,13 +50,13 @@
         <a th:href="@{/create-wallet}" class="btn btn-outline-dark px-2" tabindex="-1" role="button" aria-disabled="true">STWÓRZ PORTFEL</a>
       </div>
       <div class="btn-container">
-        <a th:href="@{/load-wallet/{userId}(userId=(${session.isEmpty()} ? '-1' : ${session.user.id}))}" class="btn btn-outline-dark px-2" tabindex="-1" role="button" aria-disabled="true">WCZYTAJ PORTFEL</a>
+        <a th:href="@{/load-wallet/{userId}(userId=(${session.user != null} ? ${session.user.id} : '-10'))}" class="btn btn-outline-dark px-2" tabindex="-1" role="button" aria-disabled="true">WCZYTAJ PORTFEL</a>
       </div>
       <div class="btn-container">
-        <a th:href="@{/wallet-view/{walletId}(walletId=(${session.containsKey('wallet')} ? ${session.wallet} : '-1'))}" class="btn btn-outline-dark px-2" tabindex="-1" role="button" aria-disabled="true">PODGLĄD PORTFELA</a>
+        <a th:href="@{/wallet-view/{walletId}(walletId=(${session.wallet != null} ? ${session.wallet} : '-10'))}" class="btn btn-outline-dark px-2" tabindex="-1" role="button" aria-disabled="true">PODGLĄD PORTFELA</a>
       </div>
       <div class="btn-container">
-        <a th:href="@{/top-up-wallet}" class="btn btn-outline-dark px-2" tabindex="-1" role="button" aria-disabled="true">DODAJ GOTÓWKĘ</a>
+        <a th:href="@{/top-up-wallet/{walletId}(walletId=(${session.wallet != null} ? ${session.wallet} : '-10'))}" class="btn btn-outline-dark px-2" tabindex="-1" role="button" aria-disabled="true">DODAJ GOTÓWKĘ</a>
       </div>
     </div>
   </aside>
