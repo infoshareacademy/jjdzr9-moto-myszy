@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'log-in')">
     <section class="section">
         <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'success'">
-            <span class="btn btn-outline-success">REJESTRACJA ZAKOŃCZONA SUKCESEM</span>
+            <span class="btn btn-outline-success btn-lg">REJESTRACJA ZAKOŃCZONA SUKCESEM</span>
         </div>
         <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'logout_successful'">
-            <span class="btn btn-outline-success">WYLOGOWANO</span>
+            <span class="btn btn-outline-success btn-lg">WYLOGOWANO</span>
         </div>
         <div class="d-flex align-items-center justify-content-center">
             <form method="post" th:action="@{/handleLogin}" th:object="${user}">

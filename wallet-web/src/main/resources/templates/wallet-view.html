@@ -2,10 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'log-in')">
 <section class="section">
     <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'success'">
-        <span class="btn btn-outline-success">UTWORZONO NOWY PORTFEL</span>
+        <span class="btn btn-outline-success btn-lg">UTWORZONO NOWY PORTFEL</span>
     </div>
     <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'top_up_success'">
-        <span class="btn btn-outline-success">ZASILENIE PORTFELA ZAKONCZONO SUKCESEM</span>
+        <span class="btn btn-outline-success btn-lg">ZASILENIE PORTFELA ZAKONCZONO SUKCESEM</span>
+    </div>
+    <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'sell_possible'">
+        <span class="btn btn-outline-success btn-lg">SPRZEDAŻ ZAKOŃCZONA SUKCESEM</span>
+    </div>
+    <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'buy_possible'">
+        <span class="btn btn-outline-success btn-lg">ZAKUP ZAKOŃCZONY SUKCESEM</span>
     </div>
     <div>
         <div class="d-flex justify-content-between">
