@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'market')">
+        <section class="section">
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-nowrap">#</th>
+                            <th class="text-nowrap">Waluta</th>
+                            <th class="text-nowrap">Kod</th>
+                            <th class="text-nowrap">Cena</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="rate, state : ${exchangeRates}">
+                        <td th:text="${state.count}"></td>
+                        <td th:text="${rate.get('currency')}"></td>
+                        <td th:text="${rate.get('code')}"></td>
+                        <td th:text="${#numbers.formatCurrency(rate.get('mid'))}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+</html>
