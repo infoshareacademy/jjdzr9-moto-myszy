@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,8 +54,11 @@ public class ChartsServiceImpl implements ChartsService {
         int width = 640;
         int height = 480;
 //        Path path = Path.of("wallet-web","src","main","resources","static","images", "piechart.jpeg");
-        Path path = Path.of("wallet-web","target","classes","static","images", "piechart.jpeg");
-        File pieChart = new File( path.toUri());
+//        Path path = Path.of("wallet-web","target","classes","static","images", "piechart.jpeg");
+//        Path path = Path.of("classes","static","images", "piechart.jpeg");
+        Path path = Paths.get("/home", "michal", "Desktop", "jjdzr9-moto-myszy", "wallet-web", "src", "main", "resources", "static", "images", "piechart.jpeg");
+        System.out.println(path);
+        File pieChart = new File(path.toString());
         try {
             ChartUtils.saveChartAsJPEG( pieChart , chart , width , height );
         } catch (IOException e) {

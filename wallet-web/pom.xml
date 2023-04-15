@@ -15,6 +15,7 @@
 	<description>wallet-web</description>
 	<properties>
 		<java.version>17</java.version>
+		<start-class>com.isa.jjdzr.walletweb.WalletWebApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -88,8 +89,117 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<classifier>exec</classifier>
+				</configuration>
+				<executions>
+					<execution>
+						<configuration>
+							<mainClass>com.isa.jjdzr.walletweb.WalletWebApplication</mainClass>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+								target/libs
+							</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.3.0</version>
+				<executions>
+					<execution>
+						<id>copy-resource-one</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/data/market</outputDirectory>
+							<resources>
+								<resource>
+									<directory>data/market</directory>
+									<includes>
+										<include>*.txt</include>
+										<include>*.json</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-resource-two</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/data/User</outputDirectory>
+							<resources>
+								<resource>
+									<directory>data/User</directory>
+									<includes>
+										<include>*.txt</include>
+										<include>*.json</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-resource-three</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/data/Wallet</outputDirectory>
+							<resources>
+								<resource>
+									<directory>data/Wallet</directory>
+									<includes>
+										<include>*.txt</include>
+										<include>*.json</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-resource-four</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/data/WalletAsset</outputDirectory>
+							<resources>
+								<resource>
+									<directory>data/WalletAsset</directory>
+									<includes>
+										<include>*.txt</include>
+										<include>*.json</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
