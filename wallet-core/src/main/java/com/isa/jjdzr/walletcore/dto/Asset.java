@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class Asset {
     private String id;
+    private String name;
     private BigDecimal currentPrice;
 
 }
