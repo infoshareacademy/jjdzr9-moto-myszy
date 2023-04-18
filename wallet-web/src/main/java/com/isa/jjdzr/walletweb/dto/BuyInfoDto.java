@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 public class BuyInfoDto {
 
     private String assetId;
+    private String assetName;
     private Long walletId;
     private BigDecimal price;
 

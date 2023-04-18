@@ -17,4 +17,7 @@ public class Market {
     }
 
 
+    public Asset findById(String id) {
+        return repository.findById(id);
+    }
 }

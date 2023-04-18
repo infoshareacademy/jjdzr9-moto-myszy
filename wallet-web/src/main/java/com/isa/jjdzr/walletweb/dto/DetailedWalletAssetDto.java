@@ -12,6 +12,7 @@ public class DetailedWalletAssetDto {
     private Long id;
     private Long walletId;
     private String assetId;
+    private String assetName;
     private BigDecimal purchasePrice;
     private BigDecimal currentPrice;
     private BigDecimal quantity;

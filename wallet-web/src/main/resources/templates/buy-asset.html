@@ -7,6 +7,7 @@
                 <thead>
                 <tr>
                     <th class="text-nowrap">#</th>
+                    <th class="text-nowrap">Id</th>
                     <th class="text-nowrap">Nazwa</th>
                     <th class="text-nowrap">Cena zakupu</th>
                 </tr>
@@ -15,6 +16,7 @@
                 <tr th:object="${buyInfo}">
                     <td></td>
                     <td th:text="*{assetId}"></td>
+                    <td th:text="*{assetName}"></td>
                     <td th:text="*{#numbers.formatCurrency(price)}"></td>
                 </tr>
                 </tbody>
@@ -34,6 +36,7 @@
                         <div class="input-group-text">Ilość: </div>
                         <input class="form-control" type="text" id="quantity" th:field="*{quantity}"/>
                         <input type="hidden" th:field="*{assetId}"/>
+                        <input type="hidden" th:field="*{assetName}"/>
                         <input type="hidden" th:field="*{price}"/>
                         <input type="hidden" th:field="*{walletId}"/>
                         <br><br>

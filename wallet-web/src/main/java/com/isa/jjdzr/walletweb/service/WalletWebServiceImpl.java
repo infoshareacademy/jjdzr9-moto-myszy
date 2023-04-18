@@ -122,6 +122,7 @@ public class WalletWebServiceImpl implements WalletWebService{
         result.setId(wa.getId());
         result.setWalletId(wa.getWalletId());
         result.setAssetId(wa.getAssetId());
+        result.setAssetName(wa.getAssetName());
         result.setPurchasePrice(wa.getPurchasePrice());
         result.setCurrentPrice(wa.getCurrentPrice());
         result.setQuantity(wa.getQuantity());
@@ -140,6 +141,7 @@ public class WalletWebServiceImpl implements WalletWebService{
     private WalletAsset createWalletAsset(BuyInfoDto buyInfo) {
         WalletAsset walletAsset = new WalletAsset();
         walletAsset.setAssetId(buyInfo.getAssetId());
+        walletAsset.setAssetName(buyInfo.getAssetName());
         walletAsset.setWalletId(buyInfo.getWalletId());
         walletAsset.setQuantity(buyInfo.getQuantity());
         walletAsset.setPurchasePrice(buyInfo.getPrice());

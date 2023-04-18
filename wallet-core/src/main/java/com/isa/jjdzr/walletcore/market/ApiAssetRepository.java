@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,6 +24,15 @@ public class ApiAssetRepository implements AssetRepository {
     @Override
     public List<Asset> retrieveAssets() {
         return cryptoRates;
+    }
+
+    @Override
+    public Asset findById(String id) {
+
+        return cryptoRates.stream()
+                .filter(c -> c.getId().equals(id))
+                .findFirst()
+                .orElse(new Asset("Złe id", "Złe id", new BigDecimal(0)));
     }
 
     private Asset getCryptoRate(String cryptoCode, String currencyCode, String apiKey) {
@@ -50,8 +60,10 @@ public class ApiAssetRepository implements AssetRepository {
 
     private void prepareCryptoRates() {
         cryptoRates = new ArrayList<>();
-        List<String> cryptoCodes = List.of("BTC","ETH", "USDT", "BNB", "BUSD", "ADA", "SOL",
-                "DOGE", "DOT", "SHIB", "AVAX", "LTC", "XLM", "BCH");
+        List<String> cryptoCodes = List.of("BTC");
+
+        //"ETH", "USDT", "BNB", "BUSD", "ADA", "SOL",
+        //                "DOGE", "DOT", "SHIB", "AVAX", "LTC", "XLM", "BCH"
 
 
         for (String code: cryptoCodes) {

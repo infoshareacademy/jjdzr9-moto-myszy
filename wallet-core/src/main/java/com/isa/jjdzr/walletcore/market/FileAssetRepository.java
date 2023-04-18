@@ -41,4 +41,9 @@ final class FileAssetRepository implements AssetRepository {
         return retrievedAssetsList;
     }
 
+    @Override
+    public Asset findById(String id) {
+        return null;
+    }
+
 }
