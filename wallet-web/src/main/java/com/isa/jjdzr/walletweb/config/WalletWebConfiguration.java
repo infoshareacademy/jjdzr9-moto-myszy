@@ -1,6 +1,8 @@
 package com.isa.jjdzr.walletweb.config;
 
 import com.isa.jjdzr.walletcore.market.Market;
+import com.isa.jjdzr.walletcore.repositories.WalletAssetRepository;
+import com.isa.jjdzr.walletcore.repositories.WalletRepository;
 import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletAssetServiceImpl;
 import com.isa.jjdzr.walletcore.service.WalletService;
@@ -17,12 +19,22 @@ public class WalletWebConfiguration {
     }
 
     @Bean
-    public WalletService walletService() {
-        return new WalletServiceImpl();
+    public WalletService walletService(WalletRepository walletRepository, WalletAssetService walletAssetService) {
+        return new WalletServiceImpl(walletRepository, walletAssetService);
     }
 
     @Bean
-    public WalletAssetService walletAssetService() {
-        return new WalletAssetServiceImpl();
+    public WalletAssetService walletAssetService(WalletAssetRepository walletAssetRepository, Market market) {
+        return new WalletAssetServiceImpl(walletAssetRepository, market);
+    }
+
+    @Bean
+    public WalletRepository walletRepository() {
+        return new WalletRepository();
+    }
+
+    @Bean
+    public WalletAssetRepository walletAssetRepository() {
+        return new WalletAssetRepository();
     }
 }

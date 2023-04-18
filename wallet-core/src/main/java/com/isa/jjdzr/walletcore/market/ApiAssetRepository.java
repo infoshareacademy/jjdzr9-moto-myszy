@@ -10,14 +10,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ApiAssetRepository implements AssetRepository {
 
     private List<Asset> cryptoRates;
 
+    public ApiAssetRepository() {
+        prepareCryptoRates();
+    }
+
     @Override
     public List<Asset> retrieveAssets() {
-        return null;
+        return cryptoRates;
     }
 
     private Asset getCryptoRate(String cryptoCode, String currencyCode, String apiKey) {
@@ -34,6 +39,7 @@ public class ApiAssetRepository implements AssetRepository {
             result.setId(cryptoRate.getString("1. From_Currency Code"));
             result.setName(cryptoRate.getString("2. From_Currency Name"));
             result.setCurrentPrice(cryptoRate.getBigDecimal("5. Exchange Rate"));
+            System.out.println(result);
             return result;
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,10 +50,17 @@ public class ApiAssetRepository implements AssetRepository {
 
     private void prepareCryptoRates() {
         cryptoRates = new ArrayList<>();
-        List<String> cryptoCodes = new ArrayList<>();
+        List<String> cryptoCodes = List.of("BTC","ETH", "USDT", "BNB", "BUSD", "ADA", "SOL",
+                "DOGE", "DOT", "SHIB", "AVAX", "LTC", "XLM", "BCH");
+
 
         for (String code: cryptoCodes) {
             cryptoRates.add(getCryptoRate(code, "PLN", "4B32OSF9BSXQXZ8W"));
+            try {
+                TimeUnit.SECONDS.sleep(20);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
     }
 
@@ -59,7 +72,6 @@ public class ApiAssetRepository implements AssetRepository {
             HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
-
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line;
             while ((line = reader.readLine()) != null) {

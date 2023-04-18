@@ -9,7 +9,7 @@ public class Market {
     private final AssetRepository repository;
 
     public Market() {
-        this.repository = new FileAssetRepository();
+        this.repository = new ApiAssetRepository();
     }
 
     public List<Asset> availableAssets() {

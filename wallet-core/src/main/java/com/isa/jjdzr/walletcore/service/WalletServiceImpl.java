@@ -3,13 +3,15 @@ package com.isa.jjdzr.walletcore.service;
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.repositories.WalletRepository;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@RequiredArgsConstructor
 public class WalletServiceImpl implements WalletService{
     private final WalletRepository walletRepository;
-    private final WalletAssetServiceImpl walletAssetServiceImpl;
+    private final WalletAssetService walletAssetServiceImpl;
 
 
     public WalletServiceImpl() {
