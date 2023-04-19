@@ -36,10 +36,9 @@ public class MenuController {
     public String logout(HttpSession session, RedirectAttributes redirectAttributes) {
         session.invalidate();
         String status = Constants.LOGOUT_SUCCESSFUL;
-        redirectAttributes.addFlashAttribute("status", status);
+        redirectAttributes.addFlashAttribute(Constants.STATUS, status);
         return "redirect:/login";
     }
-
 
     @GetMapping("/market")
     public String getMarket(Model model) {
