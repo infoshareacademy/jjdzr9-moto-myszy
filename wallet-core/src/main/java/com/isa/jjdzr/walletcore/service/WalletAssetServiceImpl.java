@@ -4,6 +4,7 @@ import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.repositories.WalletAssetRepository;
+import com.isa.jjdzr.walletcore.repositories.WalletAssetRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
@@ -16,7 +17,7 @@ public class WalletAssetServiceImpl implements WalletAssetService{
     private final Market market;
 
     public WalletAssetServiceImpl() {
-        this.walletAssetRepository = new WalletAssetRepository();
+        this.walletAssetRepository = new WalletAssetRepositoryImpl();
         this.market = new Market();
     }
 

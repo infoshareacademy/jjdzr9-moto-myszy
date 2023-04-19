@@ -1,7 +1,13 @@
 package com.isa.jjdzr.walletcore.repositories;
 
-import com.isa.jjdzr.walletcore.common.FileRepository;
 import com.isa.jjdzr.walletcore.dto.Wallet;
 
-public class WalletRepository extends FileRepository<Wallet> {
+import java.util.List;
+
+public interface WalletRepository {
+
+    Wallet save(Wallet wallet);
+    Wallet find(Long id);
+    List<Wallet> getAll();
+    void delete(Long id);
 }
