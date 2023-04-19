@@ -14,4 +14,5 @@ public class Constants {
     public static final String NOT_ENOUGH_MONEY = "not_enough_money";
     public static final String BUY_POSSIBLE = "buy_possible";
     public static final String WRONG_INPUT = "wrong_input";
+    public static final String STATUS = "status";
 }

@@ -3,6 +3,7 @@ package com.isa.jjdzr.walletcore.service;
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.repositories.WalletRepository;
+import com.isa.jjdzr.walletcore.repositories.WalletRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
@@ -15,7 +16,7 @@ public class WalletServiceImpl implements WalletService{
 
 
     public WalletServiceImpl() {
-        this.walletRepository = new WalletRepository();
+        this.walletRepository = new WalletRepositoryImpl();
         this.walletAssetServiceImpl = new WalletAssetServiceImpl();
     }
 
