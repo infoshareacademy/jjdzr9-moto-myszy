@@ -7,4 +7,6 @@ import java.util.List;
 
 interface AssetRepository {
     List<Asset> retrieveAssets();
+
+    Asset findById(String id);
 }

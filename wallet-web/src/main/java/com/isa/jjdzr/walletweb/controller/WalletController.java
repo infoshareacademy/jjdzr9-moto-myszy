@@ -1,8 +1,10 @@
 package com.isa.jjdzr.walletweb.controller;
 
 import com.isa.jjdzr.walletcore.common.Constants;
+import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
+import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletweb.dto.BuyInfoDto;
 import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
 import com.isa.jjdzr.walletweb.dto.SellInfoDto;
@@ -28,6 +30,7 @@ import java.util.List;
 public class WalletController {
 
     private final WalletWebService walletWebServiceImpl;
+    private final Market market;
 
     @GetMapping("/create-wallet")
     public String createWallet(Model model) {
@@ -121,14 +124,16 @@ public class WalletController {
 
     }
 
-    @GetMapping("/buy-asset/{id}/{price}/{walletId}")
-    public String getBuyAsset(@PathVariable("id") String id, @PathVariable("price") BigDecimal price,
+    @GetMapping("/buy-asset/{id}/{walletId}")
+    public String getBuyAsset(@PathVariable("id") String id,
                               @PathVariable("walletId") Long walletId, Model model) {
         if (walletId == Constants.NOT_IN_SESSION) return "redirect:/create-wallet";
         BuyInfoDto buyInfo = new BuyInfoDto();
+        Asset asset = market.findById(id);
         buyInfo.setAssetId(id);
+        buyInfo.setAssetName(asset.getName());
         buyInfo.setWalletId(walletId);
-        buyInfo.setPrice(price);
+        buyInfo.setPrice(asset.getCurrentPrice());
         model.addAttribute("buyInfo", buyInfo);
         return "buy-asset";
     }

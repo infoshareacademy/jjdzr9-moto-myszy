@@ -15,6 +15,7 @@
                     <thead>
                         <tr>
                             <th class="text-nowrap">#</th>
+                            <th class="text-nowrap">Id</th>
                             <th class="text-nowrap">Nazwa</th>
                             <th class="text-nowrap">Cena zakupu</th>
                             <th class="text-nowrap">Historia</th>
@@ -25,9 +26,10 @@
                         <tr th:each="asset, state: ${market}">
                             <td th:text="${state.count}"></td>
                             <td th:text="${asset.id}"></td>
+                            <td th:text="${asset.name}"></td>
                             <td th:text="${#numbers.formatCurrency(asset.currentPrice)}"></td>
-                            <td><a class="btn btn-outline-dark btn-sm">Historia</a></td>
-                            <td><a th:href="@{/buy-asset/{id}/{price}/{walletId}(id=${asset.id}, price=${asset.currentPrice}, walletId=(${session.wallet != null} ? ${session.wallet} : '-10'))}"
+                            <td><a class="btn btn-outline-dark btn-sm disabled">Historia</a></td>
+                            <td><a th:href="@{/buy-asset/{id}/{walletId}(id=${asset.id}, walletId=(${session.wallet != null} ? ${session.wallet} : '-10'))}"
                                    th:attr="class=${session.user != null} ? 'btn btn-outline-dark btn-sm' : 'btn btn-outline-dark btn-sm disabled'" >Kup</a></td>
                         </tr>
                     </tbody>

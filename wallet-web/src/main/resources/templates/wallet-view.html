@@ -29,6 +29,7 @@
                 <thead>
                 <tr>
                     <th class="text-nowrap">#</th>
+                    <th class="text-nowrap">Id</th>
                     <th class="text-nowrap">Nazwa</th>
                     <th class="text-nowrap">Cena zakupu</th>
                     <th class="text-nowrap">ilość</th>
@@ -43,6 +44,7 @@
                 <tr th:each="asset, state: ${walletAssets}">
                     <td th:text="${state.count}"></td>
                     <td th:text="${asset.assetId}"></td>
+                    <td th:text="${asset.assetName}"></td>
                     <td th:text="${#numbers.formatCurrency(asset.purchasePrice)}"></td>
                     <td th:text="${asset.quantity}"></td>
                     <td th:text="${#numbers.formatCurrency(asset.currentPrice)}"></td>

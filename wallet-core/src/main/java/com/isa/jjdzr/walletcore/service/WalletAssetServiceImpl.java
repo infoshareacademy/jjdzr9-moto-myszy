@@ -4,11 +4,12 @@ import com.isa.jjdzr.walletcore.dto.Asset;
 import com.isa.jjdzr.walletcore.dto.WalletAsset;
 import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.repositories.WalletAssetRepository;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
-
+@RequiredArgsConstructor
 public class WalletAssetServiceImpl implements WalletAssetService{
 
     private final WalletAssetRepository walletAssetRepository;
@@ -18,6 +19,7 @@ public class WalletAssetServiceImpl implements WalletAssetService{
         this.walletAssetRepository = new WalletAssetRepository();
         this.market = new Market();
     }
+
 
     @Override
     public WalletAsset save(WalletAsset walletAsset) {
@@ -41,7 +43,7 @@ public class WalletAssetServiceImpl implements WalletAssetService{
         Asset asset = availableAssets.stream()
                 .filter(a -> assetId.equals(a.getId()))
                 .findFirst()
-                .orElse(new Asset("wrong id", new BigDecimal(0)));
+                .orElse(new Asset("wrong id","wrong name" ,new BigDecimal(0)));
         walletAsset.setCurrentPrice(asset.getCurrentPrice());
         walletAssetRepository.save(walletAsset);
         return walletAsset;
