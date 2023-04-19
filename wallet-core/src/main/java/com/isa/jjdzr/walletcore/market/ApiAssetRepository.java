@@ -9,9 +9,14 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 public class ApiAssetRepository implements AssetRepository {
 
@@ -65,9 +70,9 @@ public class ApiAssetRepository implements AssetRepository {
         //"ETH", "USDT", "BNB", "BUSD", "ADA", "SOL",
         //                "DOGE", "DOT", "SHIB", "AVAX", "LTC", "XLM", "BCH"
 
-
+        String apiKey = getApiKeyFromFile();
         for (String code: cryptoCodes) {
-            cryptoRates.add(getCryptoRate(code, "PLN", "4B32OSF9BSXQXZ8W"));
+            cryptoRates.add(getCryptoRate(code, "PLN", apiKey));
             try {
                 TimeUnit.SECONDS.sleep(20);
             } catch (InterruptedException e) {
@@ -97,6 +102,21 @@ public class ApiAssetRepository implements AssetRepository {
         }
 
         return json;
+    }
+
+    private String getApiKeyFromFile() {
+        Path path = Path.of("data", "apikey.txt");
+        StringBuilder builder = new StringBuilder();
+
+        try (Stream<String> stream = Files.lines(Paths.get(path.toUri()), StandardCharsets.UTF_8)) {
+            stream.forEach(builder::append);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        String result = builder.toString();
+
+        return result;
+
     }
 
 
