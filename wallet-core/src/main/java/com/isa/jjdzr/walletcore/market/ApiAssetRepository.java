@@ -1,6 +1,7 @@
 package com.isa.jjdzr.walletcore.market;
 
 import com.isa.jjdzr.walletcore.dto.Asset;
+import com.isa.jjdzr.walletcore.market.api.ApiUTIL;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -21,6 +22,7 @@ import java.util.stream.Stream;
 public class ApiAssetRepository implements AssetRepository {
 
     private List<Asset> cryptoRates;
+
 
     public ApiAssetRepository() {
         prepareCryptoRates();
@@ -46,7 +48,7 @@ public class ApiAssetRepository implements AssetRepository {
                 +cryptoCode+"&to_currency=" + currencyCode + "&apikey=" + apiKey;
 
         try {
-            String json = getJsonFromUrl(url);
+            String json = ApiUTIL.getJsonFromUrl(url);
             JSONObject jsonObject = new JSONObject(json);
             JSONObject cryptoRate = jsonObject.getJSONObject("Realtime Currency Exchange Rate");
 
@@ -54,7 +56,6 @@ public class ApiAssetRepository implements AssetRepository {
             result.setId(cryptoRate.getString("1. From_Currency Code"));
             result.setName(cryptoRate.getString("2. From_Currency Name"));
             result.setCurrentPrice(cryptoRate.getBigDecimal("5. Exchange Rate"));
-            System.out.println(result);
             return result;
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,10 +68,11 @@ public class ApiAssetRepository implements AssetRepository {
         cryptoRates = new ArrayList<>();
         List<String> cryptoCodes = List.of("BTC");
 
+        //TODO: add this codes to cryptoCodes list after getting better API key
         //"ETH", "USDT", "BNB", "BUSD", "ADA", "SOL",
         //                "DOGE", "DOT", "SHIB", "AVAX", "LTC", "XLM", "BCH"
 
-        String apiKey = getApiKeyFromFile();
+        String apiKey = ApiUTIL.getApiKeyFromFile();
         for (String code: cryptoCodes) {
             cryptoRates.add(getCryptoRate(code, "PLN", apiKey));
             try {
@@ -81,43 +83,9 @@ public class ApiAssetRepository implements AssetRepository {
         }
     }
 
-    //TODO: put this in some UTIL class
-    private String getJsonFromUrl(String url) {
-        String json = "";
-        try {
-            URL apiUrl = new URL(url);
-            HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
-            connection.setRequestMethod("GET");
-            connection.connect();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                json += line;
-            }
 
-            reader.close();
-            connection.disconnect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        return json;
-    }
 
-    private String getApiKeyFromFile() {
-        Path path = Path.of("data", "apikey.txt");
-        StringBuilder builder = new StringBuilder();
-
-        try (Stream<String> stream = Files.lines(Paths.get(path.toUri()), StandardCharsets.UTF_8)) {
-            stream.forEach(builder::append);
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-        String result = builder.toString();
-
-        return result;
-
-    }
 
 
 }
