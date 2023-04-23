@@ -1,6 +1,8 @@
 package com.isa.jjdzr.walletweb.controller;
 
 import com.isa.jjdzr.walletcore.dto.Asset;
+import com.isa.jjdzr.walletcore.dto.HistoricalDataDto;
+import com.isa.jjdzr.walletcore.market.HistoricalMarket;
 import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.common.Constants;
 import com.isa.jjdzr.walletweb.dto.FilterInputDto;
@@ -11,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -20,6 +23,7 @@ import java.util.List;
 public class MenuController {
     private final Market market;
     private final WalletWebService walletWebServiceImpl;
+    private final HistoricalMarket historicalMarket;
 
     @GetMapping("/")
     public String getHomepage(Model model) {
@@ -54,6 +58,13 @@ public class MenuController {
         model.addAttribute("market", matchingAssets);
         model.addAttribute("filterInput", new FilterInputDto());
         return "market";
+    }
+
+    @GetMapping("/market/history/{id}")
+    public String getHistoricalData(@PathVariable("id") String id, Model model) {
+        List<HistoricalDataDto> history = historicalMarket.getMonthlyData(id);
+        model.addAttribute("history", history);
+        return "historical-data";
     }
 
 }

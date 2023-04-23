@@ -1,5 +1,6 @@
 package com.isa.jjdzr.walletweb.config;
 
+import com.isa.jjdzr.walletcore.market.HistoricalMarket;
 import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.repositories.WalletAssetRepository;
 import com.isa.jjdzr.walletcore.repositories.WalletAssetRepositoryImpl;
@@ -38,5 +39,10 @@ public class WalletWebConfiguration {
     @Bean
     public WalletAssetRepository walletAssetRepository() {
         return new WalletAssetRepositoryImpl();
+    }
+
+    @Bean
+    public HistoricalMarket historicalMarket() {
+        return new HistoricalMarket();
     }
 }

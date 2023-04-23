@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'market')">
+
+        <section class="section">
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-nowrap">#</th>
+                            <th class="text-nowrap">Id</th>
+                            <th class="text-nowrap">Nazwa</th>
+                            <th class="text-nowrap">Data</th>
+                            <th class="text-nowrap">Open</th>
+                            <th class="text-nowrap">High</th>
+                            <th class="text-nowrap">Low</th>
+                            <th class="text-nowrap">Close</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="asset, state: ${history}">
+                            <td th:text="${state.count}"></td>
+                            <td th:text="${asset.id}"></td>
+                            <td th:text="${asset.name}"></td>
+                            <td th:text="${asset.date}"></td>
+                            <td th:text="${asset.open}"></td>
+                            <td th:text="${asset.high}"></td>
+                            <td th:text="${asset.low}"></td>
+                            <td th:text="${asset.close}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+</html>
