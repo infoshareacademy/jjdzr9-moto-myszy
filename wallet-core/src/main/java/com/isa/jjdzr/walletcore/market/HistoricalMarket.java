@@ -37,6 +37,7 @@ public class HistoricalMarket {
                 historicalData.setHigh(dailyData.getBigDecimal("2a. high (PLN)"));
                 historicalData.setLow(dailyData.getBigDecimal("3a. low (PLN)"));
                 historicalData.setClose(dailyData.getBigDecimal("4a. close (PLN)"));
+                historicalData.setVolume(dailyData.getBigDecimal("5. volume"));
                 result.add(historicalData);
             }
             return result;

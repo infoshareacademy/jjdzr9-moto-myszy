@@ -3,12 +3,13 @@
 
         <section class="section">
             <div>
+                <h5>Dane z ostatnich 30 dni dla: <span th:text="${history.get(0).name}"></span></h5>
+            </div>
+            <div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th class="text-nowrap">#</th>
-                            <th class="text-nowrap">Id</th>
-                            <th class="text-nowrap">Nazwa</th>
                             <th class="text-nowrap">Data</th>
                             <th class="text-nowrap">Open</th>
                             <th class="text-nowrap">High</th>
@@ -19,13 +20,11 @@
                     <tbody>
                         <tr th:each="asset, state: ${history}">
                             <td th:text="${state.count}"></td>
-                            <td th:text="${asset.id}"></td>
-                            <td th:text="${asset.name}"></td>
                             <td th:text="${asset.date}"></td>
-                            <td th:text="${asset.open}"></td>
-                            <td th:text="${asset.high}"></td>
-                            <td th:text="${asset.low}"></td>
-                            <td th:text="${asset.close}"></td>
+                            <td th:text="${#numbers.formatCurrency(asset.open)}"></td>
+                            <td th:text="${#numbers.formatCurrency(asset.high)}"></td>
+                            <td th:text="${#numbers.formatCurrency(asset.low)}"></td>
+                            <td th:text="${#numbers.formatCurrency(asset.close)}"></td>
                         </tr>
                     </tbody>
                 </table>

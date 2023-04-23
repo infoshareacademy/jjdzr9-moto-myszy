@@ -17,4 +17,5 @@ public class HistoricalDataDto {
     private BigDecimal high;
     private BigDecimal low;
     private BigDecimal close;
+    private BigDecimal volume;
 }
