@@ -24,10 +24,10 @@ public class HistoricalMarket {
             JSONObject jsonObject = new JSONObject(json);
             JSONObject metaData = jsonObject.getJSONObject("Meta Data");
             String name = metaData.getString("3. Digital Currency Name");
+            JSONObject timeSeriesData = jsonObject.getJSONObject("Time Series (Digital Currency Daily)");
             for (LocalDate d: days) {
                 String date = ApiUTIL.formatDate(d);
-                JSONObject dailyData = jsonObject.getJSONObject("Time Series (Digital Currency Daily)")
-                        .getJSONObject(date);
+                JSONObject dailyData = timeSeriesData.getJSONObject(date);
 
                 HistoricalDataDto historicalData = new HistoricalDataDto();
                 historicalData.setId(id);
