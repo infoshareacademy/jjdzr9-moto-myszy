@@ -1,23 +1,12 @@
 package com.isa.jjdzr.walletcore.market;
 
 import com.isa.jjdzr.walletcore.dto.Asset;
-import com.isa.jjdzr.walletcore.market.api.ApiUTIL;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Stream;
 
 public class ApiAssetRepository implements AssetRepository {
 

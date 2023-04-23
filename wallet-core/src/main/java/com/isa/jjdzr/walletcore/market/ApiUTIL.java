@@ -1,4 +1,4 @@
-package com.isa.jjdzr.walletcore.market.api;
+package com.isa.jjdzr.walletcore.market;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,6 +9,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class ApiUTIL {
@@ -47,5 +51,20 @@ public class ApiUTIL {
         }
 
         return json;
+    }
+
+    public static List<LocalDate> getLastMonthDates() {
+        List<LocalDate> result = new ArrayList<>();
+        LocalDate day = LocalDate.now();
+        while (result.size() < 30) {
+            result.add(day);
+            day = day.minusDays(1);
+        }
+        return result;
+    }
+
+    public static String formatDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return date.format(formatter);
     }
 }
