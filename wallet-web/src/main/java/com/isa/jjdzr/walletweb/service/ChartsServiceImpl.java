@@ -2,6 +2,8 @@ package com.isa.jjdzr.walletweb.service;
 
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
+import com.isa.jjdzr.walletweb.service.fileuploader.FileUploader;
+import lombok.RequiredArgsConstructor;
 import org.jfree.chart.ChartFactory;
 
 import org.jfree.chart.ChartUtils;
@@ -18,7 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class ChartsServiceImpl implements ChartsService {
+
+    private final FileUploader fileUploader;
 
     @Override
     public void createWalletChart(List<DetailedWalletAssetDto> walletAssets, Wallet wallet) {
@@ -54,9 +59,10 @@ public class ChartsServiceImpl implements ChartsService {
         int height = 480;
 //        Path path = Path.of("wallet-web","src","main","resources","static","images", "piechart.jpeg");
         Path path = Path.of("wallet-web","target","classes","static","images", "piechart.jpeg");
-        File pieChart = new File( path.toUri());
+        File pieChart = new File(path.toUri());
         try {
             ChartUtils.saveChartAsJPEG( pieChart , chart , width , height );
+            fileUploader.uploadChart(path.toString(), "piechart.jpeg");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
