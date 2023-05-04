@@ -80,11 +80,18 @@
 			<version>0.0.20131108.vaadin1</version>
 			<scope>compile</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>com.isa.jjdzr9</groupId>
 			<artifactId>wallet-core</artifactId>
 			<version>1.0-SNAPSHOT</version>
 			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.minio</groupId>
+			<artifactId>minio</artifactId>
+			<version>8.5.2</version>
 		</dependency>
 
 	</dependencies>
