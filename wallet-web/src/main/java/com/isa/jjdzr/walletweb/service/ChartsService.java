@@ -1,5 +1,6 @@
 package com.isa.jjdzr.walletweb.service;
 
+import com.isa.jjdzr.walletcore.dto.HistoricalDataDto;
 import com.isa.jjdzr.walletcore.dto.Wallet;
 import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
 
@@ -8,5 +9,6 @@ import java.util.List;
 
 public interface ChartsService {
     void createWalletChart(List<DetailedWalletAssetDto> walletAssets, Wallet wallet);
+    void createCandleStickChart(List<HistoricalDataDto> data);
 
 }
