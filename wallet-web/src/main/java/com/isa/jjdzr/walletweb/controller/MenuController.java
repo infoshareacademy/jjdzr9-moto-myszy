@@ -7,6 +7,7 @@ import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.common.Constants;
 import com.isa.jjdzr.walletweb.dto.FilterInputDto;
 import com.isa.jjdzr.walletweb.dto.User;
+import com.isa.jjdzr.walletweb.service.ChartsService;
 import com.isa.jjdzr.walletweb.service.WalletWebService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class MenuController {
     private final Market market;
     private final WalletWebService walletWebServiceImpl;
     private final HistoricalMarket historicalMarket;
+    private final ChartsService chartsService;
 
     @GetMapping("/")
     public String getHomepage(Model model) {
@@ -63,6 +65,7 @@ public class MenuController {
     @GetMapping("/market/history/{id}")
     public String getHistoricalData(@PathVariable("id") String id, Model model) {
         List<HistoricalDataDto> history = historicalMarket.getMonthlyData(id);
+        chartsService.createCandleStickChart(history);
         model.addAttribute("history", history);
         return "historical-data";
     }
