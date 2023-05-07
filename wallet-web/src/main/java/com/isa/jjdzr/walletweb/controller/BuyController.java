@@ -45,9 +45,8 @@ public class BuyController {
         }
         String status = walletWebServiceImpl.checkPossibilityToBuy(buyInfo);
         if (status.equals(Constants.NOT_ENOUGH_MONEY)) {
-            result.rejectValue("quantity", "", "Niewystarczające środki na zakup tej ilości");
             redirectAttributes.addFlashAttribute(Constants.STATUS, status);
-            return "redirect:/buy-asset/" + buyInfo.getAssetId() + "/" + buyInfo.getPrice() + "/" + buyInfo.getWalletId();
+            return "redirect:/buy-asset/" + buyInfo.getAssetId() + "/" + buyInfo.getWalletId();
         }
         Long walletId = walletWebServiceImpl.handleBuy(buyInfo);
         redirectAttributes.addFlashAttribute(Constants.STATUS, status);
