@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en" th:replace="fragments/base::layout(~{::section}, 'index')">
 <body>
     <section class="section">
+
         <div th:if="${status} == 'login_successful'">
             <div class="alert alert-success d-flex mb-3 fade show" role="alert">
                 <div class="p-2">

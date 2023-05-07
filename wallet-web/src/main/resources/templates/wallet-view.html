@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'log-in')">
 <section class="section">
-    <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'success'">
-        <span class="btn btn-outline-success btn-lg">UTWORZONO NOWY PORTFEL</span>
+    <div th:if="${status} == 'success'">
+        <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+            <div class="p-2">
+                UTWORZONO NOWY PORTFEL
+            </div>
+            <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
-    <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'top_up_success'">
-        <span class="btn btn-outline-success btn-lg">ZASILENIE PORTFELA ZAKONCZONO SUKCESEM</span>
+    <div th:if="${status} == 'top_up_success'">
+        <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+            <div class="p-2">
+                ZASILENIE PORTEFLA ZAKOŃCZONO SUKCESEM
+            </div>
+            <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
-    <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'sell_possible'">
-        <span class="btn btn-outline-success btn-lg">SPRZEDAŻ ZAKOŃCZONA SUKCESEM</span>
+    <div th:if="${status} == 'sell_possible'">
+        <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+            <div class="p-2">
+                SPRZEDAŻ ZAKOŃCZONA SUKCESEM
+            </div>
+            <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
-    <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'buy_possible'">
-        <span class="btn btn-outline-success btn-lg">ZAKUP ZAKOŃCZONY SUKCESEM</span>
+    <div th:if="${status} == 'buy_possible'">
+        <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+            <div class="p-2">
+                ZAKUP ZAKOŃCZONY SUKCESEM
+            </div>
+            <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
     <div>
         <div class="d-flex justify-content-between">

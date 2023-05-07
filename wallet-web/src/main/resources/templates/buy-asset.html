@@ -27,17 +27,19 @@
                     <div th:if="${status} == 'not_enough_money'">
                         <div class="alert alert-success d-flex mb-3 fade show" role="alert">
                             <div class="p-2">
-                                NIEWYSTARCZAJĄCA ILOŚĆ ŚRODKÓW W PORTFELU
+                                NIEWYSTARCZAJĄCA ILOŚĆ PIENIĘDZY W PORTFELU
                             </div>
+                            <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
-                            <div th:if="${status} == 'wrong_input'">
-                                <div class="alert alert-success d-flex mb-3 fade show" role="alert">
-                                    <div class="p-2">
-                                        NIEPOPRAWNA WARTOŚĆ
-                                    </div>
-                                </div>
+                    <div th:if="${status} == 'wrong_input'">
+                        <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+                            <div class="p-2">
+                                NIEWŁAŚCIWA WARTOŚĆ
                             </div>
+                            <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
                     <div class="input-group input-group-lg">
                         <div class="input-group-text">Ilość: </div>
                         <input class="form-control" type="text" id="quantity" th:field="*{quantity}"/>

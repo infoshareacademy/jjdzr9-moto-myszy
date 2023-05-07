@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'log-in')">
     <section class="section">
-        <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'success'">
-            <span class="btn btn-outline-success btn-lg">REJESTRACJA ZAKOŃCZONA SUKCESEM</span>
+        <div th:if="${status} == 'success'">
+            <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+                <div class="p-2">
+                    REJESTRACJA ZAKOŃCZONA SUKCESEM
+                </div>
+                <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         </div>
-        <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'logout_successful'">
-            <span class="btn btn-outline-success btn-lg">WYLOGOWANO</span>
+        <div th:if="${status} == 'logout_successful'">
+            <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+                <div class="p-2">
+                    WYLOGOWANO
+                </div>
+                <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         </div>
         <div class="d-flex align-items-center justify-content-center">
             <form method="post" th:action="@{/handleLogin}" th:object="${user}">
