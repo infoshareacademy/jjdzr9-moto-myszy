@@ -24,13 +24,21 @@
             <div>
                 <form method="post" th:object="${buyInfo}" th:action="@{/handle-buy}">
                     <br>
-                    <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'not_enough_money'">
-                        <span class="btn btn-outline-danger btn-lg">NIEWYSTARCZAJĄCA ILOŚĆ PIENIĘDZY W PORTFELU</span>
-                        <br>
+                    <div th:if="${status} == 'not_enough_money'">
+                        <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+                            <div class="p-2">
+                                NIEWYSTARCZAJĄCA ILOŚĆ PIENIĘDZY W PORTFELU
+                            </div>
+                            <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     </div>
-                    <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'wrong_input'">
-                        <span class="btn btn-outline-danger btn-lg">NIEWŁAŚCIWA WARTOŚĆ</span>
-                        <br>
+                    <div th:if="${status} == 'wrong_input'">
+                        <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+                            <div class="p-2">
+                                NIEWŁAŚCIWA WARTOŚĆ
+                            </div>
+                            <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     </div>
                     <div class="input-group input-group-lg">
                         <div class="input-group-text">Ilość: </div>
