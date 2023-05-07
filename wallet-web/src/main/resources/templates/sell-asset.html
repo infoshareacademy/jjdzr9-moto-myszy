@@ -30,7 +30,7 @@
 
                     <br>
                     <div th:if="${status} == 'not_sufficient_quantity'">
-                        <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+                        <div class="alert alert-danger d-flex mb-3 fade show" role="alert">
                             <div class="p-2">
                                 NIEWYSTARCZAJĄCA ILOŚĆ W PORTFELU
                             </div>
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div th:if="${status} == 'wrong_input'">
-                        <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+                        <div class="alert alert-danger d-flex mb-3 fade show" role="alert">
                             <div class="p-2">
                                 NIEWAŁAŚCIWA WARTOŚĆ
                             </div>

@@ -25,7 +25,7 @@
                 <form method="post" th:object="${buyInfo}" th:action="@{/handle-buy}">
                     <br>
                     <div th:if="${status} == 'not_enough_money'">
-                        <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+                        <div class="alert alert-danger d-flex mb-3 fade show" role="alert">
                             <div class="p-2">
                                 NIEWYSTARCZAJĄCA ILOŚĆ PIENIĘDZY W PORTFELU
                             </div>
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div th:if="${status} == 'wrong_input'">
-                        <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+                        <div class="alert alert-danger d-flex mb-3 fade show" role="alert">
                             <div class="p-2">
                                 NIEWŁAŚCIWA WARTOŚĆ
                             </div>
