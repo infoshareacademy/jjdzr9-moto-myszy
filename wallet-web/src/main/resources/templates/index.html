@@ -2,8 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en" th:replace="fragments/base::layout(~{::section}, 'index')">
 <body>
     <section class="section">
-        <div class="d-flex align-items-center justify-content-center" th:if="${status} == 'login_successful'">
-            <span class="btn btn-outline-success btn-lg">LOGOWANIE ZAKOŃCZONE SUKCESEM</span>
+        <div th:if="${status} == 'login_successful'">
+            <div class="alert alert-success d-flex mb-3 fade show" role="alert">
+                <div class="p-2">
+                    ZALOGOWANO
+                </div>
+                <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         </div>
         <div>
             <h1>Handluj akcjami, walutami i więcej z naszą aplikacją</h1>
