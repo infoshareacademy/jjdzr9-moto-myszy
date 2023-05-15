@@ -22,6 +22,36 @@ public class Transaction {
     @Column(name = "type", nullable = false)
     private String type;
 
-    // getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public WalletAsset getWalletAsset() {
+        return walletAsset;
+    }
+
+    public void setWalletAsset(WalletAsset walletAsset) {
+        this.walletAsset = walletAsset;
+    }
+
+    public BigDecimal getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
 
