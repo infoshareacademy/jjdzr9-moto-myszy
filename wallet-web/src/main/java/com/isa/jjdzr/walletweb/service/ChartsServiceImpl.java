@@ -109,7 +109,7 @@ public class ChartsServiceImpl implements ChartsService {
         int width = 640;
         int height = 480;
 //        Path path = Path.of("wallet-web","src","main","resources","static","images", name);
-        Path path = Path.of("wallet-web","target","classes","static","images", name);
+        Path path = Path.of("data", name);
         File pieChart = new File(path.toUri());
         try {
             ChartUtils.saveChartAsJPEG( pieChart , chart , width , height );
