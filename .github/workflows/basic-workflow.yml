@@ -1,7 +1,7 @@
 name: CI workflow
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "feature/*" ]
   pull_request:
     branches: [ "develop" ]
 jobs:
