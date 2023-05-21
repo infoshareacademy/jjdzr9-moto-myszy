@@ -16,7 +16,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Validate the compilation process
-        run: mvn -B compile --file ./pom.xml
+        run: mvn -B compile --file ./wallet-web/pom.xml
   unit_tests:
     needs: build_and_compile
     runs-on: ubuntu-latest
@@ -29,7 +29,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Run unit tests
-        run: mvn -B test --file ./pom.xml
+        run: mvn -B test --file ./wallet-web/pom.xml
   integration_tests:
     needs: unit_tests
     runs-on: ubuntu-latest
@@ -42,4 +42,4 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Run integration tests
-        run: mvn -B verify --file ./pom.xml
+        run: mvn -B verify --file ./wallet-web/pom.xml
