@@ -31,7 +31,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Run unit tests
-        run: mvn -B test --file ./wallet-web/pom.xml
+        run: |
+          mvn install --file ./wallet-core/pom.xml
+          mvn -B test --file ./wallet-web/pom.xml
   integration_tests:
     needs: unit_tests
     runs-on: ubuntu-latest
@@ -44,4 +46,6 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Run integration tests
-        run: mvn -B verify --file ./wallet-web/pom.xml
+        run: |
+          mvn install --file ./wallet-core/pom.xml
+          mvn -B verify --file ./wallet-web/pom.xml
