@@ -17,7 +17,7 @@ jobs:
           cache: maven
       - name: Validate the compilation process
         run: |
-          mvn install --file .wallet-core/pom.xml
+          mvn install --file ./wallet-core/pom.xml
           mvn -B compile --file ./wallet-web/pom.xml
   unit_tests:
     needs: build_and_compile
