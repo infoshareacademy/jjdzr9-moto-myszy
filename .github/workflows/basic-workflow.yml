@@ -5,7 +5,20 @@ on:
   pull_request:
     branches: [ "develop" ]
 jobs:
-  build_and_compile:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Installing core package
+        run: mvn install --file ./wallet-core/pom.xml
+  compile:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,10 +29,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Validate the compilation process
-      - run: mvn install --file ./wallet-core/pom.xml
-      - run: mvn -B compile --file ./wallet-web/pom.xml
+        run: mvn -B compile --file ./wallet-web/pom.xml
   unit_tests:
-    needs: build_and_compile
+    needs: compile
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -30,7 +42,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Run unit tests
-        run: mvn -B test --file ./wallet-core/pom.xml
+        run: mvn -B test --file ./wallet-web/pom.xml
   integration_tests:
     needs: unit_tests
     runs-on: ubuntu-latest
@@ -43,4 +55,4 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Run integration tests
-        run: mvn -B verify --file ./wallet-core/pom.xml
+        run: mvn -B verify --file ./wallet-web/pom.xml
