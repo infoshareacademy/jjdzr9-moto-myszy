@@ -1,7 +1,7 @@
 package com.isa.jjdzr.walletweb.service;
 
 import com.isa.jjdzr.walletcore.common.Constants;
-import com.isa.jjdzr.walletweb.dto.User;
+import com.isa.jjdzr.walletweb.dto.UserDto;
 import com.isa.jjdzr.walletweb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,40 +16,40 @@ public class UserServiceImpl implements UserService {
     private final UserRepository fileUserRepository;
 
     @Override
-    public List<User> getAll() {
+    public List<UserDto> getAll() {
         return fileUserRepository.getAll();
     }
 
     @Override
-    public User addUser(User user) {
-        return fileUserRepository.save(user);
+    public UserDto addUser(UserDto userDto) {
+        return fileUserRepository.save(userDto);
     }
 
     @Override
-    public boolean checkUserName(User user) {
-        for (User u : fileUserRepository.getAll()) {
-            if (user.getUsername().equals(u.getUsername())) return true;
+    public boolean checkUserName(UserDto userDto) {
+        for (UserDto u : fileUserRepository.getAll()) {
+            if (userDto.getUsername().equals(u.getUsername())) return true;
         }
         return false;
     }
 
     @Override
-    public Long login(User user) {
-        List<User> allUsers = getAll();
-        User existingUser = allUsers.stream()
-                .filter(u -> u.getUsername().equals(user.getUsername()))
+    public Long login(UserDto userDto) {
+        List<UserDto> allUserDtos = getAll();
+        UserDto existingUserDto = allUserDtos.stream()
+                .filter(u -> u.getUsername().equals(userDto.getUsername()))
                 .findAny()
                 .orElse(null);
-        if (isNull(existingUser)) return Constants.WRONG_USERNAME;
-        if (existingUser.getPassword().equals(user.getPassword())) {
-            return existingUser.getId();
+        if (isNull(existingUserDto)) return Constants.WRONG_USERNAME;
+        if (existingUserDto.getPassword().equals(userDto.getPassword())) {
+            return existingUserDto.getId();
         } else {
             return Constants.WRONG_PASSWORD;
         }
     }
 
     @Override
-    public User find(Long userId) {
+    public UserDto find(Long userId) {
         return fileUserRepository.find(userId);
     }
 }
