@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -22,4 +23,11 @@ public class Wallet {
 
     @Column(name = "cash", nullable = false)
     private BigDecimal cash;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany
+    private List<WalletAsset> walletAsset;
 }
