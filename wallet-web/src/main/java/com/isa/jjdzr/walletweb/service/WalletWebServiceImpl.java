@@ -117,23 +117,19 @@ public class WalletWebServiceImpl implements WalletWebService{
     }
 
     private DetailedWalletAssetDto createDetailedWalletAssetDto(WalletAsset wa) {
-        DetailedWalletAssetDto result = new DetailedWalletAssetDto();
-        //TODO: remake in constructor
-        result.setId(wa.getId());
-        result.setWalletId(wa.getWalletId());
-        result.setAssetId(wa.getAssetId());
-        result.setAssetName(wa.getAssetName());
-        result.setPurchasePrice(wa.getPurchasePrice());
-        result.setCurrentPrice(wa.getCurrentPrice());
-        result.setQuantity(wa.getQuantity());
-        result.setPurchaseValue(result.getPurchasePrice().multiply(result.getQuantity()));
-        result.setCurrentValue(result.getCurrentPrice().multiply(result.getQuantity()));
+        DetailedWalletAssetDto result = DetailedWalletAssetDto.builder()
+                .id(wa.getId())
+                .walletId(wa.getWalletId())
+                .assetId(wa.getAssetId())
+                .assetName(wa.getAssetName())
+                .purchasePrice(wa.getPurchasePrice())
+                .currentPrice(wa.getCurrentPrice())
+                .quantity(wa.getQuantity())
+                .purchaseValue(wa.getPurchasePrice().multiply(wa.getQuantity()))
+                .currentValue(wa.getCurrentPrice().multiply(wa.getQuantity()))
+                .build();
         BigDecimal profit;
-        if (result.getPurchasePrice().compareTo(result.getCurrentPrice()) >= 0) {
-            profit = result.getCurrentPrice().divide(result.getPurchasePrice(), 4, RoundingMode.CEILING).subtract(new BigDecimal(1));
-        } else {
-            profit = result.getCurrentPrice().divide(result.getPurchasePrice(), 4, RoundingMode.CEILING).subtract(new BigDecimal(1));
-        }
+        profit = result.getCurrentPrice().divide(result.getPurchasePrice(), 4, RoundingMode.CEILING).subtract(new BigDecimal(1));
         result.setProfit(profit);
         return result;
     }

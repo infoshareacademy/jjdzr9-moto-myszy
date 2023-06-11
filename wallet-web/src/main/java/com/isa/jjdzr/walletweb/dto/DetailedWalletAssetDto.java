@@ -1,13 +1,14 @@
 package com.isa.jjdzr.walletweb.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class DetailedWalletAssetDto {
     private Long id;
     private Long walletId;
