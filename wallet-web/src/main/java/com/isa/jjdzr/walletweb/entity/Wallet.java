@@ -26,7 +26,7 @@ public class Wallet {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity userEntity;
 
     @OneToMany
     private List<WalletAsset> walletAsset;
