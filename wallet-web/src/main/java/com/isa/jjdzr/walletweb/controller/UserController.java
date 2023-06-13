@@ -1,7 +1,7 @@
 package com.isa.jjdzr.walletweb.controller;
 
 import com.isa.jjdzr.walletcore.common.Constants;
-import com.isa.jjdzr.walletweb.dto.User;
+import com.isa.jjdzr.walletweb.dto.UserDto;
 import com.isa.jjdzr.walletweb.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -19,32 +19,32 @@ public class UserController {
 
     @GetMapping("/register")
     public String getRegpage(Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("userDto", new UserDto());
         return "register";
     }
 
     @PostMapping("/handleReg")
-    public String register(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
-        if (!user.getPassword().equals(user.getConfirmPassword())) result.rejectValue("password","",
+    public String register(@Valid UserDto userDto, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (!userDto.getPassword().equals(userDto.getConfirmPassword())) result.rejectValue("password","",
                 "Oba pola muszą być identyczne");
-        if (userService.checkUserName(user)) result.rejectValue("username","","Nazwa użytkownika zajęta");
+        if (userService.checkUserName(userDto)) result.rejectValue("username","","Nazwa użytkownika zajęta");
         if (result.hasErrors()) return "register";
-        userService.addUser(user);
+        userService.addUser(userDto);
         String status = Constants.SUCCESS_STATUS;
         redirectAttributes.addFlashAttribute("status", status);
         return "redirect:/login";
     }
 
     @PostMapping("/handleLogin")
-    public String login(User user, BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
-        Long userId = userService.login(user);
+    public String login(UserDto userDto, BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
+        Long userId = userService.login(userDto);
         if (userId == Constants.WRONG_USERNAME) result.rejectValue("username", "", "Użytkownik nie istnieje");
         if (userId == Constants.WRONG_PASSWORD) result.rejectValue("password", "", "Niepoprawne hasło");
         if (result.hasErrors()) return "log-in";
-        User currentUser = userService.find(userId);
+        UserDto currentUserDto = userService.find(userId);
         String status = Constants.LOGIN_SUCCESSFUL;
         redirectAttributes.addFlashAttribute("status", status);
-        session.setAttribute("user", currentUser);
+        session.setAttribute("user", currentUserDto);
         return "redirect:/";
     }
 }

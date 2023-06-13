@@ -6,7 +6,7 @@ import com.isa.jjdzr.walletcore.market.HistoricalMarket;
 import com.isa.jjdzr.walletcore.market.Market;
 import com.isa.jjdzr.walletcore.common.Constants;
 import com.isa.jjdzr.walletweb.dto.FilterInputDto;
-import com.isa.jjdzr.walletweb.dto.User;
+import com.isa.jjdzr.walletweb.dto.UserDto;
 import com.isa.jjdzr.walletweb.service.ChartsService;
 import com.isa.jjdzr.walletweb.service.WalletWebService;
 import jakarta.servlet.http.HttpSession;
@@ -34,7 +34,7 @@ public class MenuController {
 
     @GetMapping("/login")
     public String getLogin(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("userDto", new UserDto());
         return "log-in";
     }
 

@@ -1,15 +1,15 @@
 package com.isa.jjdzr.walletweb.service;
 
-import com.isa.jjdzr.walletweb.dto.User;
+import com.isa.jjdzr.walletweb.dto.UserDto;
 
 import java.util.List;
 
 public interface UserService {
 
-    List<User> getAll();
-    User addUser(User user);
-    boolean checkUserName(User user);
-    Long login(User user);
-    User find(Long userId);
+    List<UserDto> getAll();
+    UserDto addUser(UserDto userDto);
+    boolean checkUserName(UserDto userDto);
+    Long login(UserDto userDto);
+    UserDto find(Long userId);
 
 }
