@@ -24,6 +24,6 @@ public class UserEntity {
     private String password;
 
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
-    private List<Wallet> wallet;
+    private List<WalletEntity> walletEntity;
 
 }

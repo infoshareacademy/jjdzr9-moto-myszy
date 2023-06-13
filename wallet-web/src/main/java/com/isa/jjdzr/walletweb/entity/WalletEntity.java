@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Wallet {
+public class WalletEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,5 +29,5 @@ public class Wallet {
     private UserEntity userEntity;
 
     @OneToMany
-    private List<WalletAsset> walletAsset;
+    private List<WalletAssetEntity> walletAssetEntity;
 }
