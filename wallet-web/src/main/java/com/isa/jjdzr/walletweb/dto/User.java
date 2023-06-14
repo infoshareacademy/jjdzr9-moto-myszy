@@ -19,5 +19,4 @@ public class User implements BaseEntity {
     private String password;
     private String confirmPassword;
 
-
 }
