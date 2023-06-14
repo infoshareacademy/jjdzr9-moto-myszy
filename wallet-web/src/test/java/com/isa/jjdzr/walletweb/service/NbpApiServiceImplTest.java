@@ -1,12 +1,13 @@
 package com.isa.jjdzr.walletweb.service;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 import static org.junit.Assert.*;
 
-public class NbpApiServiceImplTest {
+class NbpApiServiceImplTest {
     @Test
-    public void testGetExchangeRates() {
+    void testGetExchangeRates() {
         // Given
         NbpApiService nbpApiService = new NbpApiServiceImpl();
 
@@ -14,13 +15,13 @@ public class NbpApiServiceImplTest {
         List<Map<String, Object>> exchangeRates = nbpApiService.getExchangeRates();
 
         // Then
-        assertNotNull(exchangeRates);
-        assertFalse(exchangeRates.isEmpty());
+        Assertions.assertNotNull(exchangeRates);
+        Assertions.assertFalse(exchangeRates.isEmpty());
 
         for (Map<String, Object> rateMap : exchangeRates) {
-            assertTrue(rateMap.containsKey("currency"));
-            assertTrue(rateMap.containsKey("code"));
-            assertTrue(rateMap.containsKey("mid"));
+            Assertions.assertTrue(rateMap.containsKey("currency"));
+            Assertions.assertTrue(rateMap.containsKey("code"));
+            Assertions.assertTrue(rateMap.containsKey("mid"));
         }
     }
 }

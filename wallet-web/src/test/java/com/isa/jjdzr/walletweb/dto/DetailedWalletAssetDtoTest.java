@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-public class DetailedWalletAssetDtoTest {
+class DetailedWalletAssetDtoTest {
     @Test
-    public void testConstructorAndGetters() {
+    void testConstructorAndGetters() {
         // GIVEN
         Long id = 1L;
         Long walletId = 2L;
@@ -40,7 +40,7 @@ public class DetailedWalletAssetDtoTest {
     }
 
     @Test
-    public void testSetters() {
+    void testSetters() {
         // GIVRN
         DetailedWalletAssetDto dto = new DetailedWalletAssetDto();
         Long id = 1L;
