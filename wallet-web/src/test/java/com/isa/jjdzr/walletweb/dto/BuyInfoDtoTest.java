@@ -1,12 +1,7 @@
 package com.isa.jjdzr.walletweb.dto;
 
-import org.junit.Before;
 import org.junit.Test;
-
-
 import java.math.BigDecimal;
-import java.util.Set;
-
 import static org.junit.Assert.*;
 
 public class BuyInfoDtoTest {
@@ -54,9 +49,9 @@ public class BuyInfoDtoTest {
         buyInfoDto3.setPrice(new BigDecimal("19.99"));
 
         // WHEN & THEN
-        assertTrue(buyInfoDto1.equals(buyInfoDto2));
-        assertTrue(buyInfoDto2.equals(buyInfoDto1));
-        assertFalse(buyInfoDto1.equals(buyInfoDto3));
-        assertFalse(buyInfoDto3.equals(buyInfoDto1));
+        assertEquals(buyInfoDto1, buyInfoDto2);
+        assertEquals(buyInfoDto2, buyInfoDto1);
+        assertNotEquals(buyInfoDto1, buyInfoDto3);
+        assertNotEquals(buyInfoDto3, buyInfoDto1);
     }
 }
