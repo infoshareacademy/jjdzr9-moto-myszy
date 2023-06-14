@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.Set;
 
-public class SellInfoDtoTest {
+class SellInfoDtoTest {
     private final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = validatorFactory.getValidator();
 
     @Test
-    public void testValidSellInfoDto() {
+    void testValidSellInfoDto() {
         // Given
         Long walletAssetId = 1L;
         BigDecimal quantityToSell = new BigDecimal("5");
@@ -32,7 +32,7 @@ public class SellInfoDtoTest {
     }
 
     @Test
-    public void testInvalidSellInfoDto() {
+    void testInvalidSellInfoDto() {
         // Given
         Long walletAssetId = 1L;
         BigDecimal quantityToSell = new BigDecimal("-10");
@@ -52,7 +52,7 @@ public class SellInfoDtoTest {
     }
 
     @Test
-    public void testNegativeQuantityToSell() {
+    void testNegativeQuantityToSell() {
         // Given
         Long walletAssetId = 1L;
 
@@ -71,7 +71,7 @@ public class SellInfoDtoTest {
     }
 
     @Test
-    public void testMissingQuantityToSell() {
+    void testMissingQuantityToSell() {
         // Given
         Long walletAssetId = 1L;
 

@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.Set;
 
-public class TopUpDtoTest {
+class TopUpDtoTest {
     private final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = validatorFactory.getValidator();
 
     @Test
-    public void testValidTopUpDto() {
+    void testValidTopUpDto() {
         // Given
         BigDecimal cash = new BigDecimal("500");
 
@@ -30,7 +30,7 @@ public class TopUpDtoTest {
     }
 
     @Test
-    public void testNegativeCashValue() {
+    void testNegativeCashValue() {
         // Given
         BigDecimal cash = new BigDecimal("-100");
 
@@ -48,7 +48,7 @@ public class TopUpDtoTest {
     }
 
     @Test
-    public void testExcessiveCashValue() {
+    void testExcessiveCashValue() {
         // Given
         BigDecimal cash = new BigDecimal("2000000");
 
@@ -66,7 +66,7 @@ public class TopUpDtoTest {
     }
 
     @Test
-    public void testNullCashValue() {
+    void testNullCashValue() {
         // Given
         TopUpDto topUpDto = new TopUpDto();
         topUpDto.setCash(null);
@@ -82,7 +82,7 @@ public class TopUpDtoTest {
     }
 
     @Test
-    public void testMissingCashValue() {
+    void testMissingCashValue() {
         // Given
         TopUpDto topUpDto = new TopUpDto();
 
