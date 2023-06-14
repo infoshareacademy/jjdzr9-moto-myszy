@@ -28,12 +28,14 @@ public class UserTest {
 
     @Test
     public void testInvalidUsername() {
+        //Given
         User user = new User();
         user.setUsername("j");
         user.setPassword("password123");
         user.setConfirmPassword("password123");
-
+        //When
         Set<ConstraintViolation<User>> violations = validator.validate(user);
+        //Then
         Assertions.assertEquals(1, violations.size());
         ConstraintViolation<User> violation = violations.iterator().next();
         Assertions.assertEquals("Nazwa użytkownika jest zbyt krótka", violation.getMessage());
@@ -41,12 +43,14 @@ public class UserTest {
 
     @Test
     public void testInvalidPassword() {
+        //Given
         User user = new User();
         user.setUsername("johnDoe");
         user.setPassword("pass");
         user.setConfirmPassword("pass");
-
+        //When
         Set<ConstraintViolation<User>> violations = validator.validate(user);
+        //Then
         Assertions.assertEquals(1, violations.size());
         ConstraintViolation<User> violation = violations.iterator().next();
         Assertions.assertEquals("Hasło jest za krótkie", violation.getMessage());
