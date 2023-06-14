@@ -72,16 +72,16 @@ public class SellInfoDtoTest {
 
     @Test
     public void testMissingQuantityToSell() {
-        // Arrange
+        // Given
         Long walletAssetId = 1L;
 
         SellInfoDto sellInfoDto = new SellInfoDto();
         sellInfoDto.setWalletAssetId(walletAssetId);
 
-        // Act
+        // When
         Set<ConstraintViolation<SellInfoDto>> violations = validator.validate(sellInfoDto);
 
-        // Assert
+        // Then
         Assertions.assertEquals(1, violations.size());
         ConstraintViolation<SellInfoDto> violation = violations.iterator().next();
         Assertions.assertEquals("must not be null", violation.getMessage());
