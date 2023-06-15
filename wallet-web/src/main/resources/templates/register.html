@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'register')">
     <section class="section">
         <div class="d-flex align-items-center justify-content-center">
-            <form method="post" th:object="${user}" th:action="@{/handleReg}">
+            <form method="post" th:object="${userDto}" th:action="@{/handleReg}">
                 <div class="d-flex justify-content-center">
                     <h4>REJESTRACJA</h4>
                 </div>

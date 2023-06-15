@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class User implements BaseEntity {
+public class UserDto implements BaseEntity {
     private Long id;
     @NotBlank(message="Nazwa użytkownika nie może być pusta")
     @Size(min=4, message="Nazwa użytkownika jest zbyt krótka")

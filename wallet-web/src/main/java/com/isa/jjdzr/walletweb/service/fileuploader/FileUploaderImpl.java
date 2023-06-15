@@ -1,9 +1,7 @@
 package com.isa.jjdzr.walletweb.service.fileuploader;
 
-import io.minio.BucketExistsArgs;
-import io.minio.MakeBucketArgs;
-import io.minio.MinioClient;
-import io.minio.UploadObjectArgs;
+import com.isa.jjdzr.walletweb.webcommons.WebConstants;
+import io.minio.*;
 import io.minio.errors.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -24,6 +22,7 @@ public class FileUploaderImpl implements FileUploader{
             if (!found) {
                 creteNewBucket();
             }
+            setBucketConfig();
             uploadFile(filepath, filename);
 
         } catch (ErrorResponseException e) {
@@ -47,10 +46,24 @@ public class FileUploaderImpl implements FileUploader{
         }
     }
 
+    private void setBucketConfig() throws ErrorResponseException, InsufficientDataException, InternalException, InvalidKeyException, InvalidResponseException, IOException, NoSuchAlgorithmException, ServerException, XmlParserException {
+        minioClient.setBucketPolicy(SetBucketPolicyArgs.builder()
+                .bucket(WebConstants.FILE_UPLOADER_BUCKET)
+                .config(loadPolicy())
+                .build());
+    }
+
+    private String loadPolicy() {
+        return "{\"Statement\":[{\"Action\":\"s3:GetObject\",\"Effect\":\"Allow\",\"Principal\":"
+                + "\"*\",\"Resource\":\"arn:aws:s3:::"
+                + WebConstants.FILE_UPLOADER_BUCKET
+                + "/*\"}],\"Version\": \"2012-10-17\"}";
+    }
+
     private void uploadFile(String filepath, String filename) throws ErrorResponseException, InsufficientDataException, InternalException, InvalidKeyException, InvalidResponseException, IOException, NoSuchAlgorithmException, ServerException, XmlParserException {
         minioClient.uploadObject(
                 UploadObjectArgs.builder()
-                        .bucket("moto-myszy")
+                        .bucket(WebConstants.FILE_UPLOADER_BUCKET)
                         .object(filename)
                         .filename(filepath)
                         .build()
@@ -60,14 +73,14 @@ public class FileUploaderImpl implements FileUploader{
     private void creteNewBucket() throws ErrorResponseException, InsufficientDataException, InternalException, InvalidKeyException, InvalidResponseException, IOException, NoSuchAlgorithmException, ServerException, XmlParserException {
         minioClient.makeBucket(MakeBucketArgs
                 .builder()
-                .bucket("moto-myszy")
+                .bucket(WebConstants.FILE_UPLOADER_BUCKET)
                 .build());
     }
 
     private boolean checkIfBucketExists() throws ErrorResponseException, InsufficientDataException, InternalException, InvalidKeyException, InvalidResponseException, IOException, NoSuchAlgorithmException, ServerException, XmlParserException {
         return minioClient.bucketExists(BucketExistsArgs
                 .builder()
-                .bucket("moto-myszy")
+                .bucket(WebConstants.FILE_UPLOADER_BUCKET)
                 .build());
     }
 }

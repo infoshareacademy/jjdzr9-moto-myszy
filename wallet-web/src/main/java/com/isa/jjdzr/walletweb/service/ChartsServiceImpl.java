@@ -2,6 +2,7 @@ package com.isa.jjdzr.walletweb.service;
 
 import com.isa.jjdzr.walletcore.dto.HistoricalDataDto;
 import com.isa.jjdzr.walletcore.dto.Wallet;
+import com.isa.jjdzr.walletweb.webcommons.WebConstants;
 import com.isa.jjdzr.walletweb.dto.DetailedWalletAssetDto;
 import com.isa.jjdzr.walletweb.service.fileuploader.FileUploader;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.Path;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,33 +32,16 @@ public class ChartsServiceImpl implements ChartsService {
 
     @Override
     public void createWalletChart(List<DetailedWalletAssetDto> walletAssets, Wallet wallet) {
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        Map<String, BigDecimal> chartData = preparePieChartData(walletAssets);
-        for (String key: chartData.keySet()) {
-            dataset.setValue(key, chartData.get(key).setScale(2, RoundingMode.CEILING));
-        }
-        dataset.setValue("Gotówka: \n"+ wallet.getCash() + "PLN", wallet.getCash().setScale(2, RoundingMode.CEILING));
-
-        JFreeChart chart = ChartFactory.createPieChart(
-                wallet.getWalletName(),
-                dataset,
-                true,
-                true,
-                false);
-        saveWalletChart(chart, "piechart.jpeg");
-
+        DefaultPieDataset dataset = preparePieChartDataset(walletAssets, wallet);
+        JFreeChart chart = preparePieChart(wallet.getWalletName(), dataset);
+        saveWalletChart(chart, WebConstants.PIE_CHART_FILE);
     }
 
     public void createCandleStickChart(List<HistoricalDataDto> data) {
         DefaultHighLowDataset dataset = prepareCandleStickDataSet(data);
-        JFreeChart chart = ChartFactory.createCandlestickChart(
-                data.get(1).getName(),
-                "Data",
-                "Cena",
-                dataset,
-                true
-        );
-        saveWalletChart(chart, "candle.jpeg");
+        String assetName = data.get(0).getName();
+        JFreeChart chart = prepareCandleStickChart(assetName, dataset);
+        saveWalletChart(chart, WebConstants.CANDLE_CHART_FILE);
     }
 
     private DefaultHighLowDataset prepareCandleStickDataSet(List<HistoricalDataDto> data) {
@@ -80,8 +63,36 @@ public class ChartsServiceImpl implements ChartsService {
             volume[i] = Double.parseDouble(dto.getVolume().toString());
         }
 
-        return new DefaultHighLowDataset("",date,high, low,open,close, volume);
+        return new DefaultHighLowDataset("", date, high, low, open, close, volume);
 
+    }
+
+    private JFreeChart prepareCandleStickChart(String assetName, DefaultHighLowDataset dataset) {
+        return ChartFactory.createCandlestickChart(
+                assetName,
+                "Data",
+                "Cena",
+                dataset,
+                true
+        );
+    }
+
+    private DefaultPieDataset preparePieChartDataset(List<DetailedWalletAssetDto> walletAssets, Wallet wallet) {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        Map<String, BigDecimal> chartData = preparePieChartData(walletAssets);
+        for (String key: chartData.keySet()) {
+            dataset.setValue(key, chartData.get(key).setScale(2, RoundingMode.CEILING));
+        }
+        dataset.setValue("Gotówka: \n"+ wallet.getCash() + "PLN", wallet.getCash().setScale(2, RoundingMode.CEILING));
+        return dataset;
+    }
+    private JFreeChart preparePieChart(String walletName, DefaultPieDataset dataset) {
+        return ChartFactory.createPieChart(
+                walletName,
+                dataset,
+                true,
+                true,
+                false);
     }
 
     private Map<String, BigDecimal> preparePieChartData(List<DetailedWalletAssetDto> walletAssets) {
@@ -98,7 +109,7 @@ public class ChartsServiceImpl implements ChartsService {
         int width = 640;
         int height = 480;
 //        Path path = Path.of("wallet-web","src","main","resources","static","images", name);
-        Path path = Path.of("wallet-web","target","classes","static","images", name);
+        Path path = Path.of("data", name);
         File pieChart = new File(path.toUri());
         try {
             ChartUtils.saveChartAsJPEG( pieChart , chart , width , height );

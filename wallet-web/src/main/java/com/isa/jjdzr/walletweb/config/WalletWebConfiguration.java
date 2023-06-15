@@ -10,6 +10,7 @@ import com.isa.jjdzr.walletcore.service.WalletAssetService;
 import com.isa.jjdzr.walletcore.service.WalletAssetServiceImpl;
 import com.isa.jjdzr.walletcore.service.WalletService;
 import com.isa.jjdzr.walletcore.service.WalletServiceImpl;
+import com.isa.jjdzr.walletweb.webcommons.WebConstants;
 import io.minio.MinioClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,8 +51,8 @@ public class WalletWebConfiguration {
     @Bean
     public MinioClient minioClient() {
         return MinioClient.builder()
-                .endpoint("https://play.min.io")
-                .credentials("Q3AM3UQ867SPQQA43P2F", "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG")
+                .endpoint(WebConstants.FILE_UPLOADER)
+                .credentials(WebConstants.FILE_UPLOADER_LOGIN, WebConstants.FILE_UPLOADER_PASS)
                 .build();
     }
 }

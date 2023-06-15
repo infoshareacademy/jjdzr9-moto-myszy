@@ -1,55 +1,67 @@
 package com.isa.jjdzr.walletweb.service;
 
 import com.isa.jjdzr.walletcore.common.Constants;
-import com.isa.jjdzr.walletweb.dto.User;
-import com.isa.jjdzr.walletweb.repository.UserRepository;
+import com.isa.jjdzr.walletweb.mapper.UserMapper;
+import com.isa.jjdzr.walletweb.dto.UserDto;
+import com.isa.jjdzr.walletweb.entity.UserEntity;
+import com.isa.jjdzr.walletweb.repository.DBUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
 
 @Component
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private final UserRepository fileUserRepository;
+
+    private final DBUserRepository dbUserRepository;
+
 
     @Override
-    public List<User> getAll() {
-        return fileUserRepository.getAll();
+    public List<UserDto> getAll() {
+        List<UserEntity> userEntities = dbUserRepository.findAll();
+        return userEntities.stream()
+                .map(UserMapper.MAPPER::entityToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public User addUser(User user) {
-        return fileUserRepository.save(user);
+    public UserDto addUser(UserDto userDto) {
+        UserEntity userEntity = UserMapper.MAPPER.dtoToEntity(userDto);
+        userEntity = dbUserRepository.save(userEntity);
+        return UserMapper.MAPPER.entityToDto(userEntity);
     }
 
     @Override
-    public boolean checkUserName(User user) {
-        for (User u : fileUserRepository.getAll()) {
-            if (user.getUsername().equals(u.getUsername())) return true;
+    public boolean checkUserName(UserDto userDto) {
+        for (UserDto u : getAll()) {
+            if (userDto.getUsername().equals(u.getUsername())) return true;
         }
         return false;
     }
 
     @Override
-    public Long login(User user) {
-        List<User> allUsers = getAll();
-        User existingUser = allUsers.stream()
-                .filter(u -> u.getUsername().equals(user.getUsername()))
+    public Long login(UserDto userDto) {
+        List<UserDto> allUsers = getAll();
+        UserDto existingUserDto = allUsers.stream()
+                .filter(u -> u.getUsername().equals(userDto.getUsername()))
                 .findAny()
                 .orElse(null);
-        if (isNull(existingUser)) return Constants.WRONG_USERNAME;
-        if (existingUser.getPassword().equals(user.getPassword())) {
-            return existingUser.getId();
+        if (isNull(existingUserDto)) return Constants.WRONG_USERNAME;
+        if (existingUserDto.getPassword().equals(userDto.getPassword())) {
+            return existingUserDto.getId();
         } else {
             return Constants.WRONG_PASSWORD;
         }
     }
 
     @Override
-    public User find(Long userId) {
-        return fileUserRepository.find(userId);
+    public UserDto find(Long userId) {
+        UserEntity userEntity = dbUserRepository.findUserById(userId);
+        return UserMapper.MAPPER.entityToDto(userEntity);
     }
 }
