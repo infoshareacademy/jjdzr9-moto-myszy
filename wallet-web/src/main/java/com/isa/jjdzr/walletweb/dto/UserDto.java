@@ -19,5 +19,4 @@ public class UserDto implements BaseEntity {
     private String password;
     private String confirmPassword;
 
-
 }
