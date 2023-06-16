@@ -30,7 +30,7 @@
                             <td th:text="${#numbers.formatCurrency(asset.currentPrice)}"></td>
                             <td><a th:href="@{/market/history/{id}(id=${asset.id})}" class="btn btn-outline-dark btn-sm">Historia</a></td>
                             <td><a th:href="@{/buy-asset/{id}/{walletId}(id=${asset.id}, walletId=(${session.wallet != null} ? ${session.wallet} : '-10'))}"
-                                   th:attr="class=${session.userDto != null} ? 'btn btn-outline-dark btn-sm' : 'btn btn-outline-dark btn-sm disabled'" >Kup</a></td>
+                                   th:attr="class=${session.user != null} ? 'btn btn-outline-dark btn-sm' : 'btn btn-outline-dark btn-sm disabled'" >Kup</a></td>
                         </tr>
                     </tbody>
                 </table>

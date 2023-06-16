@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/base::layout(~{::section}, 'register')">
     <section class="section">
         <div class="d-flex align-items-center justify-content-center">
-            <form method="post" th:object="${wallet}" th:action="@{/handle-wallet-creation/{userId}(userId=(${session.isEmpty()} ? '-1' : ${session.userDto.id}))}">
+            <form method="post" th:object="${wallet}" th:action="@{/handle-wallet-creation/{userId}(userId=(${session.isEmpty()} ? '-1' : ${session.user.id}))}">
                 <div class="d-flex justify-content-center">
                     <h4>UTWÓRZ NOWY PORTFEL</h4>
                 </div>
