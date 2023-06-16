@@ -1,6 +1,6 @@
 package com.isa.jjdzr.walletweb.controller;
 
-import com.isa.jjdzr.walletweb.dto.User;
+import com.isa.jjdzr.walletweb.dto.UserDto;
 import com.isa.jjdzr.walletweb.service.UserService;
 import com.isa.jjdzr.walletcore.common.Constants;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,12 +45,12 @@ class UserControllerTest {
     void testGetRegpage() {
         String viewName = userController.getRegpage(model);
         assertEquals("register", viewName);
-        verify(model, times(1)).addAttribute(eq("user"), any(User.class));
+        verify(model, times(1)).addAttribute(eq("userDto"), any(UserDto.class));
     }
 
     @Test
     void testRegister() {
-        User user = new User();
+        UserDto user = new UserDto();
         user.setPassword("password");
         user.setConfirmPassword("password");
         when(userService.checkUserName(user)).thenReturn(false);
@@ -62,9 +62,9 @@ class UserControllerTest {
 
     @Test
     void testLogin() {
-        User user = new User();
+        UserDto user = new UserDto();
         when(userService.login(user)).thenReturn(1L);
-        User currentUser = new User();
+        UserDto currentUser = new UserDto();
         when(userService.find(1L)).thenReturn(currentUser);
         String viewName = userController.login(user, result, redirectAttributes, session);
         assertEquals("redirect:/", viewName);
