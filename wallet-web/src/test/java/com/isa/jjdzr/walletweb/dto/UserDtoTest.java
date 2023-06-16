@@ -9,12 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-public class UserTest {
+class UserDtoTest {
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = factory.getValidator();
 
     @Test
-    public void testValidUser() {
+    void testValidUser() {
         //Given
         UserDto user = new UserDto();
         user.setUsername("johnDoe");
@@ -27,7 +27,7 @@ public class UserTest {
     }
 
     @Test
-    public void testInvalidUsername() {
+    void testInvalidUsername() {
         //Given
         UserDto user = new UserDto();
         user.setUsername("j");
@@ -42,7 +42,7 @@ public class UserTest {
     }
 
     @Test
-    public void testInvalidPassword() {
+    void testInvalidPassword() {
         //Given
         UserDto user = new UserDto();
         user.setUsername("johnDoe");
