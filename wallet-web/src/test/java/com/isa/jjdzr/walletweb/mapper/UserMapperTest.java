@@ -22,7 +22,7 @@ public class UserMapperTest {
     }
 
     @Test
-    public void testEntityToDto() {
+    void testEntityToDto() {
 
         UserEntity userEntity = new UserEntity();
         userEntity.setId(1L);
