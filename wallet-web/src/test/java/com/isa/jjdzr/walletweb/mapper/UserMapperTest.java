@@ -4,10 +4,10 @@ import com.isa.jjdzr.walletweb.entity.UserEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class UserMapperTest {
+class UserMapperTest {
 
     @Test
-    public void testDtoToEntity() {
+    void testDtoToEntity() {
 
         UserDto userDto = new UserDto();
         userDto.setId(1L);
