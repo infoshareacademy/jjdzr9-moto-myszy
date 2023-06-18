@@ -25,10 +25,16 @@ public class UserController {
 
     @PostMapping("/handleReg")
     public String register(@Valid UserDto userDto, BindingResult result, RedirectAttributes redirectAttributes) {
-        if (!userDto.getPassword().equals(userDto.getConfirmPassword())) result.rejectValue("password","",
-                "Oba pola muszą być identyczne");
-        if (userService.checkUserName(userDto)) result.rejectValue("username","","Nazwa użytkownika zajęta");
-        if (result.hasErrors()) return "register";
+        if (!userDto.getPassword().equals(userDto.getConfirmPassword())) {
+            result.rejectValue("password", "",
+                    "Oba pola muszą być identyczne");
+        }
+        if (userService.checkUserName(userDto)) {
+            result.rejectValue("username", "", "Nazwa użytkownika zajęta");
+        }
+        if (result.hasErrors()) {
+            return "register";
+        }
         userService.addUser(userDto);
         String status = Constants.SUCCESS_STATUS;
         redirectAttributes.addFlashAttribute("status", status);
@@ -38,9 +44,12 @@ public class UserController {
     @PostMapping("/handleLogin")
     public String login(UserDto userDto, BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
         Long userId = userService.login(userDto);
-        if (userId == Constants.WRONG_USERNAME) result.rejectValue("username", "", "Użytkownik nie istnieje");
-        if (userId == Constants.WRONG_PASSWORD) result.rejectValue("password", "", "Niepoprawne hasło");
-        if (result.hasErrors()) return "log-in";
+        if (userId == Constants.WRONG_USERNAME || userId == Constants.WRONG_PASSWORD) {
+            result.rejectValue("username", "", "Nieprawidłowe dane logowania");
+        }
+        if (result.hasErrors()) {
+            return "log-in";
+        }
         UserDto currentUserDto = userService.find(userId);
         String status = Constants.LOGIN_SUCCESSFUL;
         redirectAttributes.addFlashAttribute("status", status);
