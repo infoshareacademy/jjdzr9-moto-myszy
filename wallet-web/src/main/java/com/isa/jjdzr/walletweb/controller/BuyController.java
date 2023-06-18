@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Objects;
+
 @Controller
 @RequiredArgsConstructor
 public class BuyController {
@@ -28,6 +30,7 @@ public class BuyController {
         if (walletId == Constants.NOT_IN_SESSION) return "redirect:/create-wallet";
         BuyInfoDto buyInfo = new BuyInfoDto();
         Asset asset = market.findById(id);
+        if (Objects.equals(asset.getId(), "Złe id")) { return "market"; }
         buyInfo.setAssetId(id);
         buyInfo.setAssetName(asset.getName());
         buyInfo.setWalletId(walletId);
@@ -41,7 +44,7 @@ public class BuyController {
         if (result.hasErrors()) {
             String status = Constants.WRONG_INPUT;
             redirectAttributes.addFlashAttribute(Constants.STATUS, status);
-            return "redirect:/buy-asset/" + buyInfo.getAssetId() + "/" + buyInfo.getPrice() + "/" + buyInfo.getWalletId();
+            return "redirect:/buy-asset/" + buyInfo.getAssetId() + "/" + buyInfo.getWalletId();
         }
         String status = walletWebServiceImpl.checkPossibilityToBuy(buyInfo);
         if (status.equals(Constants.NOT_ENOUGH_MONEY)) {

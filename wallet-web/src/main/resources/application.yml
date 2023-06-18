@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    username: moto-myszy
+    password: moto-myszy
+    url: jdbc:mysql://mysql:3306/wallet-app
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
