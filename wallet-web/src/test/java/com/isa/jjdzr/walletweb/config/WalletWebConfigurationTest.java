@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class WalletWebConfigurationTest {
+class WalletWebConfigurationTest {
 
     @InjectMocks
     private WalletWebConfiguration walletWebConfiguration;
