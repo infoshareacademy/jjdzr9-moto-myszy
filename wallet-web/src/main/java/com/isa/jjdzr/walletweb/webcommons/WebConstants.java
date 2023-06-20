@@ -9,4 +9,11 @@ public final class WebConstants {
     public static final String FILE_UPLOADER_BUCKET = "moto-myszy";
     public static final String PIE_CHART_FILE = "piechart.jpeg";
     public static final String CANDLE_CHART_FILE = "candle.jpeg";
+    public static final String BUY_ASSET = "buy-asset";
+    public static final String MARKET = "market";
+    public static final String REDIRECT_CREATE_WALLET = "redirect:/create-wallet";
+    public static final String MODEL_BUY_INFO = "buyInfo";
+    public static final String REDIRECT_BUY_ASSET = "redirect:/buy-asset/";
+    public static final String REDIRECT_WALLET_VIEW = "redirect:/wallet-view/";
+    public static final String WRONG_ID = "Złe id";
 }
