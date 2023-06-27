@@ -35,7 +35,7 @@ public class MenuController {
 
     @GetMapping("/login")
     public String getLogin(Model model) {
-        model.addAttribute(USER_DTO, new UserDto());
+        model.addAttribute(MODEL_USER_DTO, new UserDto());
         return LOG_IN;
     }
 
