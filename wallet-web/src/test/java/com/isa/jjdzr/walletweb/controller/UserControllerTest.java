@@ -3,6 +3,7 @@ package com.isa.jjdzr.walletweb.controller;
 import com.isa.jjdzr.walletweb.dto.UserDto;
 import com.isa.jjdzr.walletweb.service.UserService;
 import com.isa.jjdzr.walletcore.common.Constants;
+import com.isa.jjdzr.walletweb.webcommons.WebConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -69,7 +70,7 @@ class UserControllerTest {
         String viewName = userController.login(user, result, redirectAttributes, session);
         assertEquals("redirect:/", viewName);
         verify(userService, times(1)).find(1L);
-        verify(redirectAttributes, times(1)).addFlashAttribute("status", Constants.LOGIN_SUCCESSFUL);
+        verify(redirectAttributes, times(1)).addFlashAttribute("status", WebConstants.LOGIN_SUCCESSFUL);
         verify(session, times(1)).setAttribute("user", currentUser);
     }
 }

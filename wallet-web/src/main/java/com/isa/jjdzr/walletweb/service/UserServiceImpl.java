@@ -1,12 +1,11 @@
 package com.isa.jjdzr.walletweb.service;
 
-import com.isa.jjdzr.walletcore.common.Constants;
 import com.isa.jjdzr.walletweb.mapper.UserMapper;
 import com.isa.jjdzr.walletweb.dto.UserDto;
 import com.isa.jjdzr.walletweb.entity.UserEntity;
 import com.isa.jjdzr.walletweb.repository.DBUserRepository;
+import com.isa.jjdzr.walletweb.webcommons.WebConstants;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -51,11 +50,11 @@ public class UserServiceImpl implements UserService {
                 .filter(u -> u.getUsername().equals(userDto.getUsername()))
                 .findAny()
                 .orElse(null);
-        if (isNull(existingUserDto)) return Constants.WRONG_USERNAME;
+        if (isNull(existingUserDto)) return WebConstants.WRONG_USERNAME;
         if (existingUserDto.getPassword().equals(userDto.getPassword())) {
             return existingUserDto.getId();
         } else {
-            return Constants.WRONG_PASSWORD;
+            return WebConstants.WRONG_PASSWORD;
         }
     }
 
