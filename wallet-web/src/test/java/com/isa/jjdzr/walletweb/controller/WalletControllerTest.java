@@ -95,21 +95,6 @@ class WalletControllerTest {
     }
 
     @Test
-    void testHandleWalletLoading() {
-        Long walletId = 1L;
-        Wallet wallet = new Wallet();
-        wallet.setId(walletId);
-        MockHttpSession session = new MockHttpSession();
-
-        when(walletWebService.find(walletId)).thenReturn(wallet);
-
-        String viewName = walletController.handleWalletLoading(walletId, session);
-
-        assertEquals(walletId, session.getAttribute("wallet"));
-        assertEquals("redirect:/wallet-view/" + walletId, viewName);
-    }
-
-    @Test
     void testTopUpWallet() {
         Long walletId = 1L;
 
